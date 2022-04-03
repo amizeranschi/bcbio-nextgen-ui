@@ -1,0 +1,24 @@
+# choose to install bcbio from scratch or from an existing install
+existing_version: no
+# path_to_existing: no
+development_branch: stable
+total_cores: 32
+# TODO add comment restriction or restrict to installation in home
+install_path: /export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen
+upgrade: yes
+annotated_species: yes
+genome_fasta: /export/home/acs/stud/m/maria.nastase0912/variantCallingScripts/yeast/GTF/sacCer3_BRF.fa
+transcriptome_gtf: /export/home/acs/stud/m/maria.nastase0912/variantCallingScripts/yeast/GTF/sacCer3_bcbio_lncRNA_BRF.gtf 
+species: Scerevisiae
+genome: sacCer3
+workflow: variant_calling
+# choose if download samples or get them from local system
+download_samples: yes
+# id of the samples to download
+samples: SRR6059150 SRR6059151 SRR6783014 SRR6783015 SRR6783016 SRR6784354
+samples_fastq: 500-F-Rep3.fastq 500-I-Rep3.fastq 500-I-Rep1.fastq 500-F-Rep2.fastq 500-I-Rep2.fastq 500-F-Rep1.fastq
+# csv_file_path: 
+# use_old_version: yes/no
+
+# workflow: variant-calling
+# do_cannon: yes
