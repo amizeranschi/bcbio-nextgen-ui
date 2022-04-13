@@ -1,4 +1,7 @@
 #!/bin/bash
+
+#######TEMPORARY
+curr_dir="/export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen_usability_improvements/bcbio_wrapper_scripts"
 # PARSE THE INPUT YAML CONFIG FILE
 
 ## Function for reading from a simple YAML file, adapted from: https://stackoverflow.com/questions/5014632/how-can-i-parse-a-yaml-file-from-a-linux-shell-script/21189044#21189044
@@ -34,13 +37,13 @@ parse_yaml $1 "bcbio_"
 
 bcbio_runs="${HOME}/bcbio_runs/"
 workflow_name="workflow_${bcbio_workflow}"
-bcbio_workflow="${bcbio_runs}${workflow_name%?}"
+bcbio_workflow_dir="${bcbio_runs}${workflow_name%?}"
 bcbio_runs_input="${bcbio_runs}${workflow_name%?}/input"
 bcbio_runs_config="${bcbio_runs}${workflow_name%?}/config"
 bcbio_runs_work="${bcbio_runs}${workflow_name%?}/work"
 bcbio_runs_final="${bcbio_runs}${workflow_name%?}/final"
 
-cd ${bcbio_workflow}
+cd ${bcbio_workflow_dir}
 
 # SAMPLES MODULE
 ## if user wants to download data 
@@ -54,40 +57,45 @@ if [[ ${bcbio_download_samples%?} == "yes" ]]; then
   for sample in ${sample_list[@]}
   do
         echo "$sample"
-       # fasterq-dump --split-files -O . -t . ${sample}
+      # fasterq-dump --split-files -O . -t . ${sample}
         ## TODO figure out a way to automatically change names or determine the types of the samples
         ## TODO rename and gzip the samples, then remove the .fastq files
   done
 
-  ## for now renaming manually
-  mv SRR6059150.fastq 500-F-Rep3.fastq
+#   ## for now renaming manually
+#    echo " --- [$(date +"%F %R")] Renaming the samples"
 
-    gzip -c 500-F-Rep3.fastq > 500-F-Rep3.fastq.gz
+#    mv SRR6059150.fastq 500-F-Rep3.fastq
 
-    mv SRR6059151.fastq 500-I-Rep3.fastq
+#    gzip -c 500-F-Rep3.fastq > 500-F-Rep3.fastq.gz
 
-    gzip -c 500-I-Rep3.fastq > 500-I-Rep3.fastq.gz
+#    mv SRR6059151.fastq 500-I-Rep3.fastq
 
-    mv SRR6783014.fastq 500-I-Rep1.fastq
+#    gzip -c 500-I-Rep3.fastq > 500-I-Rep3.fastq.gz
 
-    gzip -c 500-I-Rep1.fastq > 500-I-Rep1.fastq.gz
+#    mv SRR6783014.fastq 500-I-Rep1.fastq
 
-    mv SRR6783015.fastq 500-F-Rep2.fastq
+#    gzip -c 500-I-Rep1.fastq > 500-I-Rep1.fastq.gz
 
-    gzip -c 500-F-Rep2.fastq > 500-F-Rep2.fastq.gz
+#    mv SRR6783015.fastq 500-F-Rep2.fastq
 
-    mv SRR6783016.fastq 500-I-Rep2.fastq
+#    gzip -c 500-F-Rep2.fastq > 500-F-Rep2.fastq.gz
 
-    gzip -c 500-I-Rep2.fastq > 500-I-Rep2.fastq.gz
+#    mv SRR6783016.fastq 500-I-Rep2.fastq
 
-    mv SRR6784354.fastq 500-F-Rep1.fastq
+#    gzip -c 500-I-Rep2.fastq > 500-I-Rep2.fastq.gz
 
-    gzip -c 500-F-Rep1.fastq > 500-F-Rep1.fastq.gz
+#    mv SRR6784354.fastq 500-F-Rep1.fastq
 
-    rm *.fastq
+#    gzip -c 500-F-Rep1.fastq > 500-F-Rep1.fastq.gz
 
-    echo " --- [$(date +"%F %R")] Preparing configuration files for bcbio_nextgen in ${bcbio_workflow%?}/config"
+#    rm *.fastq
 
+   echo " --- [$(date +"%F %R")] Preparing configuration files for bcbio_nextgen in ${bcbio_workflow_dir}/config"
+
+   if [[ ${bcbio_workflow%?} == "variant_calling" ]]; then
+      bash ${curr_dir}/config_module.sh ${curr_dir}/infos.yaml
+   fi
     # TODO Go to config directory and get template yaml file
     # TODO copy .csv file provided by user to config
     # TODO config yaml file for the exisiting set of samples

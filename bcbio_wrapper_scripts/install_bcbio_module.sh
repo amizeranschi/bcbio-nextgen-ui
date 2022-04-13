@@ -68,26 +68,27 @@ if [[ ${bcbio_existing_version%?} = "no" ]]; then
    
    # CREATE BCBIO ENVIRONMENT: install bcbio and genomes, if required
    ## install bcbio in bcbio_nexgen directory with no data
+   ## Restriction: use a shorter path yada yada
 
-   python3 bcbio_nextgen_install.py ${HOME}/bcbio_nextgen --tooldir=${HOME}/bcbio_nextgen/tools --nodata --mamba
+   python3 bcbio_nextgen_install.py ${bcbio_install_path%?} --tooldir=${bcbio_install_path%?}/tools --nodata --mamba
 
    ## create symlink for bcbio
-   echo "export PATH=${HOME}/bcbio_nextgen/anaconda/bin:${HOME}/bcbio_nextgen/tools/bin:\$PATH" >> ~/.bashrc
+   echo "export PATH=${bcbio_install_path%?}/anaconda/bin:${bcbio_install_path%?}/tools/bin:\$PATH" >> ~/.bashrc
    source ~/.bashrc
 
    ## upgrade bcbio if requested
-   bcbio_nexgen.py upgrade -u ${bcbio_development_branch%?} --tools
+   bcbio_nextgen.py upgrade -u ${bcbio_development_branch%?} --tools
 
    ## make sure to have a recent samtools in the main conda environment
-   mamba install -c bioconda "samtools>=1.13" --yes
+   # mamba install -c bioconda "samtools=1.13" --yes
 
    ## install genomic data as described in the config file
    if [[ ${bcbio_annotated_species%?} = "yes" ]]; then
       # TODO check the arguments
       echo " --- [$(date +"%F %R")] Installing bcbio_nextgen into the directory: ${bcbio_install_path%?}"
 
-      bcbio_nexgen.py upgrade -u skip --genomes ${bcbio_genome%?} --datatarget variation --datatarget rnaseq --datatarget smallrna \
-			  --aligners bwa --aligners bowtie2 --aligners star --isolate --cores ${bcbio_total_cores%?} --mamba
+      bcbio_nextgen.py upgrade -u skip --genomes ${bcbio_genome%?} --datatarget variation --datatarget rnaseq --datatarget smallrna \
+			  --aligners bwa --aligners bowtie2 --aligners star --isolate --cores ${bcbio_total_cores%?}
    else
       # install from custom genome, bcbio needs to have an already installed genome in order to install a custom genome
       echo " --- [$(date +"%F %R")] Installing Bcbio-nextgen with genome and transcriptome annotations for the sacCer3 reference"
@@ -110,33 +111,33 @@ fi
 ## create a separate Python3 environment for aditional packages for downstream
 ## analysis and other
 
-echo " --- [$(date +"%F %R")] Setting up a Python3 environment for utility packages"
+# echo " --- [$(date +"%F %R")] Setting up a Python3 environment for utility packages"
 
-cd ${HOME}
+# cd ${HOME}
 
-bash Miniconda3-latest-Linux-x86_64.sh -b -p ${bcbio_install_path%?}/extra3
+# bash Miniconda3-latest-Linux-x86_64.sh -b -p ${bcbio_install_path%?}/extra3
 
-ln -s ${bcbio_install_path%?}/extra3/bin/conda ${bcbio_install_path%?}/extra3/bin/conda_extra3
+# ln -s ${bcbio_install_path%?}/extra3/bin/conda ${bcbio_install_path%?}/extra3/bin/conda_extra3
 
-${bcbio_install_path%?}/extra3/bin/conda_extra3 install --yes -c conda-forge -c bioconda mamba
+# ${bcbio_install_path%?}/extra3/bin/conda_extra3 install --yes -c conda-forge -c bioconda mamba
 
-ln -s ${bcbio_install_path%?}/extra3/bin/mamba ${bcbio_install_path%?}/extra3/bin/mamba_extra3
+# ln -s ${bcbio_install_path%?}/extra3/bin/mamba ${bcbio_install_path%?}/extra3/bin/mamba_extra3
 
-## installing packages
-${bcbio_install_path%?}/extra3/bin/mamba_extra3 install --yes -c conda-forge -c bioconda wget git bedops vcftools sra-tools perl-net-ssleay entrez-direct tassel beagle plink
-echo "export PATH=${bcbio_install_path%?}/extra3/bin:\$PATH" >> ~/.bashrc
-source ~/.bashrc
-# TODO create symlinks for some packages
+# ## installing packages
+# ${bcbio_install_path%?}/extra3/bin/mamba_extra3 install --yes -c conda-forge -c bioconda wget git bedops vcftools sra-tools perl-net-ssleay entrez-direct tassel beagle plink
+# echo "export PATH=${bcbio_install_path%?}/extra3/bin:\$PATH" >> ~/.bashrc
+# source ~/.bashrc
+# # TODO create symlinks for some packages
 
-## create a Python2 env for bcbio-monitor pytz and python-dateutil and faststructure
-echo " --- [$(date +"%F %R")] Setting up a Python2 environment for legacy utility packages"
-bash Miniconda2-latest-Linux-x86_64.sh -b -p ${bcbio_install_path%?}/extra2
-ln -s ${bcbio_install_path%?}/extra2/bin/conda ${bcbio_install_path%?}/extra2/bin/extra_conda2
+# ## create a Python2 env for bcbio-monitor pytz and python-dateutil and faststructure
+# echo " --- [$(date +"%F %R")] Setting up a Python2 environment for legacy utility packages"
+# bash Miniconda2-latest-Linux-x86_64.sh -b -p ${bcbio_install_path%?}/extra2
+# ln -s ${bcbio_install_path%?}/extra2/bin/conda ${bcbio_install_path%?}/extra2/bin/extra_conda2
 
-${bcbio_install_path%?}/extra2/bin/extra_conda2 install --yes -c conda-forge -c bioconda mamba
-ln -s ${bcbio_install_path%?}/extra2/bin/mamba ${bcbio_install_path%?}/extra2/bin/mamba_extra2
+# ${bcbio_install_path%?}/extra2/bin/extra_conda2 install --yes -c conda-forge -c bioconda mamba
+# ln -s ${bcbio_install_path%?}/extra2/bin/mamba ${bcbio_install_path%?}/extra2/bin/mamba_extra2
 
-${bcbio_install_path%?}/extra2/bin/pip install bcbio-monitor pytz python-dateutil
+# ${bcbio_install_path%?}/extra2/bin/pip install bcbio-monitor pytz python-dateutil
 # ${bcbio_install_path%?}/extra2/bin/mamba_extra2 install --yes -c conda-forge -c bioconda faststructure
 
 # TODO:
@@ -153,30 +154,30 @@ ${bcbio_install_path%?}/extra2/bin/pip install bcbio-monitor pytz python-dateuti
 # PATH=$old_PATH
 
 # GENERATE TREE: bcbio_runs/workflow_name_project/-> input, config, work, final
-echo " --- [$(date +"%F %R")] Creating analysis environment for ${bcbio_workflow%?} workflow analysis"
+# echo " --- [$(date +"%F %R")] Creating analysis environment for ${bcbio_workflow%?} workflow analysis"
 
-bcbio_runs="${HOME}/bcbio_runs/"
-workflow_name="workflow_${bcbio_workflow}"
-bcbio_workflow="${bcbio_runs}${workflow_name%?}"
-bcbio_runs_input="${bcbio_runs}${workflow_name%?}/input"
-bcbio_runs_config="${bcbio_runs}${workflow_name%?}/config"
-bcbio_runs_work="${bcbio_runs}${workflow_name%?}/work"
-bcbio_runs_final="${bcbio_runs}${workflow_name%?}/final"
+# bcbio_runs="${HOME}/bcbio_runs/"
+# workflow_name="workflow_${bcbio_workflow}"
+# bcbio_workflow="${bcbio_runs}${workflow_name%?}"
+# bcbio_runs_input="${bcbio_runs}${workflow_name%?}/input"
+# bcbio_runs_config="${bcbio_runs}${workflow_name%?}/config"
+# bcbio_runs_work="${bcbio_runs}${workflow_name%?}/work"
+# bcbio_runs_final="${bcbio_runs}${workflow_name%?}/final"
 
-mkdir ${bcbio_runs}
-mkdir ${bcbio_workflow}
-mkdir ${bcbio_runs_input}
-mkdir ${bcbio_runs_config}
-mkdir ${bcbio_runs_work}
-mkdir ${bcbio_runs_final}
+# mkdir ${bcbio_runs}
+# mkdir ${bcbio_workflow}
+# mkdir ${bcbio_runs_input}
+# mkdir ${bcbio_runs_config}
+# mkdir ${bcbio_runs_work}
+# mkdir ${bcbio_runs_final}
 
-cd ${bcbio_workflow}
+# cd ${bcbio_workflow}
 
 # SAMPLES MODULE
 ## if user wants to download data 
-if [[ ${bcbio_download_samples%?} == "yes" ]]; then
-   echo "${bcbio_samples%?}"
-fi
+# if [[ ${bcbio_download_samples%?} == "yes" ]]; then
+#    echo "${bcbio_samples%?}"
+# fi
 # TODO 5    
 # TODO 6    GENERATE TREE FOR WORKFLOW WORKSPACE
 # TODO 7
