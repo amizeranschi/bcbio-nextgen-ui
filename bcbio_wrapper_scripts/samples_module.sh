@@ -1,104 +1,85 @@
 #!/bin/bash
 
-#######TEMPORARY
-curr_dir="/export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen_usability_improvements/bcbio_wrapper_scripts"
-# PARSE THE INPUT YAML CONFIG FILE
+##########################################################################################################################################################################################
+                                                                            # SAMPLES MODULE #
+##########################################################################################################################################################################################
 
-## Function for reading from a simple YAML file, adapted from: https://stackoverflow.com/questions/5014632/how-can-i-parse-a-yaml-file-from-a-linux-shell-script/21189044#21189044
-## Modified the printf line in the awk script code below to add the word "export ", such that it creates environment variables accessible from the rest of the analysis scripts
-function parse_yaml {
-   local prefix=$2
-   local s='[[:space:]]*' w='[a-zA-Z0-9_]*' fs=$(echo @|tr @ '\034')
-   sed -ne "s|^\($s\):|\1|" \
-        -e "s|^\($s\)\($w\)$s:$s[\"']\(.*\)[\"']$s\$|\1$fs\2$fs\3|p" \
-        -e "s|^\($s\)\($w\)$s:$s\(.*\)$s\$|\1$fs\2$fs\3|p"  $1 |
-   awk -F$fs '{
-      indent = length($1)/2;
-      vname[indent] = $2;
-      for (i in vname) {if (i > indent) {delete vname[i]}}
-      if (length($3) > 0) {
-         vn=""; for (i=0; i<indent; i++) {vn=(vn)(vname[i])("_")}
-         printf("export %s%s%s=\"%s\"\n", "'$prefix'",vn, $2, $3);
-      }
-   }'
-}
+## create a list of sample IDs
+IFS=', ' read -r -a sample_list <<< ${bcbio_samples%?}
+## create a list of name samples
+IFS=', ' read -r -a sample_name_list <<< ${bcbio_samples_fastq%?}
 
-echo "using configuration file: " $1
+## get list lengths to determine from the user if the sample is multiple
+count_samples="${#sample_list[@]}"
+count_user_name_samples="${#sample_name_list[@]}"
 
+## get the number of samples from fastq
+number_of_samples=$((${count_user_name_samples}/${count_samples}))
 
-## read the config file and create the variables using the "bcbio_" prefix
-eval $(parse_yaml $1 "bcbio_")
-
-echo "" 
-echo "## printing the whole contents of the file:"
-
-parse_yaml $1 "bcbio_"
-
-
-bcbio_runs="${HOME}/bcbio_runs/"
-workflow_name="workflow_${bcbio_workflow}"
-bcbio_workflow_dir="${bcbio_runs}${workflow_name%?}"
-bcbio_runs_input="${bcbio_runs}${workflow_name%?}/input"
-bcbio_runs_config="${bcbio_runs}${workflow_name%?}/config"
-bcbio_runs_work="${bcbio_runs}${workflow_name%?}/work"
-bcbio_runs_final="${bcbio_runs}${workflow_name%?}/final"
-
-cd ${bcbio_workflow_dir}
-
-# SAMPLES MODULE
 ## if user wants to download data 
-if [[ ${bcbio_download_samples%?} == "yes" ]]; then
+if [[ ${bcbio_download_samples%?} = "yes" ]]; then
 
-    ## create a list of sample IDs
-  IFS=', ' read -r -a sample_list <<< ${bcbio_samples%?}
-  ## download samples in input directory
-  cd ${bcbio_runs_input}
-  
+   ## download samples in input directory  
+   cd ${bcbio_runs_input}
+   ## counter to store the index
+   cnt=0
+   ## download, rename and gzip
+   echo " --- [$(date +"%F %R")] Downloading samples using sra-tools in ${bcbio_runs_input}."
+   echo " --- [$(date +"%F %R")] Renaming and bgzipping files."
+
   for sample in ${sample_list[@]}
   do
-        echo "$sample"
-      # fasterq-dump --split-files -O . -t . ${sample}
-        ## TODO figure out a way to automatically change names or determine the types of the samples
-        ## TODO rename and gzip the samples, then remove the .fastq files
-  done
+      fasterq-dump --split-files -O . -t . ${sample}
+      if [[ ${number_of_samples} = 1 ]]; then
+         ## rename samples as user input
+         mv ${sample}.fastq ${sample_name_list[${cnt}]}.fastq
+         ## bgzip the samples
+         bgzip -c ${sample_name_list[cnt]}.fastq > ${sample_name_list[${cnt}]}.fastq.gz
+      fi
+      if [[ ${number_of_samples} = 2 ]]; then
+         ## rename samples as user input
+         mv ${sample}_1.fastq ${sample_name_list[$((${cnt}*2))]}.fastq
+         mv ${sample}_2.fastq ${sample_name_list[$((${cnt}*2+1))]}.fastq
+         ## bgzip the samples
+         bgzip -c ${sample_name_list[$((${cnt}*2))]}.fastq > ${sample_name_list[$((${cnt}*2))]}.fastq.gz
+         bgzip -c ${sample_name_list[$((${cnt}*2+1))]}.fastq > ${sample_name_list[$((${cnt}*2+1))]}.fastq.gz
+      fi
 
-#   ## for now renaming manually
-#    echo " --- [$(date +"%F %R")] Renaming the samples"
+      ## TODO compute for 3 samples
 
-#    mv SRR6059150.fastq 500-F-Rep3.fastq
+      cnt=$((${cnt} + 1))
+   done
+   
+   ## cleanup
+   rm *.fastq
 
-#    gzip -c 500-F-Rep3.fastq > 500-F-Rep3.fastq.gz
+fi
 
-#    mv SRR6059151.fastq 500-I-Rep3.fastq
+# for data already on the disk
+if [[ ${bcbio_download_samples%?} = "no" ]]; then
+   ## go to source path where the samples are stored on the system
+   cd ${bcbio_path_to_samples_on_sys%?}
+   ## create symlinks in the input directory for the samples
+   echo "--- [$(date +"%F %R")] Create symlinks in the input directory for the samples. "
+   for FILE in *
+   do
+      file_name=$(echo "${FILE}" | cut -f 1 -d '.')
+      for val in ${sample_name_list[@]}
+      do
+         if [[ ${file_name} = ${val} ]]; then
+         echo "${FILE}"
+         cp ${FILE} ${bcbio_runs_input}
+         # ln -s ${FILE} ${bcbio_runs_input}.fastq.gz
+         fi
+      done
+   done
+fi
+echo "--- [$(date +"%F %R")] Preparing configuration files for bcbio_nextgen in ${bcbio_workflow_dir}"
 
-#    gzip -c 500-I-Rep3.fastq > 500-I-Rep3.fastq.gz
-
-#    mv SRR6783014.fastq 500-I-Rep1.fastq
-
-#    gzip -c 500-I-Rep1.fastq > 500-I-Rep1.fastq.gz
-
-#    mv SRR6783015.fastq 500-F-Rep2.fastq
-
-#    gzip -c 500-F-Rep2.fastq > 500-F-Rep2.fastq.gz
-
-#    mv SRR6783016.fastq 500-I-Rep2.fastq
-
-#    gzip -c 500-I-Rep2.fastq > 500-I-Rep2.fastq.gz
-
-#    mv SRR6784354.fastq 500-F-Rep1.fastq
-
-#    gzip -c 500-F-Rep1.fastq > 500-F-Rep1.fastq.gz
-
-#    rm *.fastq
-
-   echo " --- [$(date +"%F %R")] Preparing configuration files for bcbio_nextgen in ${bcbio_workflow_dir}/config"
-
-   if [[ ${bcbio_workflow%?} == "variant_calling" ]]; then
-      bash ${curr_dir}/config_module.sh ${curr_dir}/infos.yaml
-   fi
-    # TODO Go to config directory and get template yaml file
-    # TODO copy .csv file provided by user to config
-    # TODO config yaml file for the exisiting set of samples
-    # TODO check for .bed file, if none, create one using bcbio genome
-    # TODO exclusion of low compatibility regions
+if [[ ${bcbio_workflow%?} = "variant_calling" ]]; then
+   bash ${path_to_scripts}/config_module.sh 
+   # echo "Am ajuns aici intr-un final"
+fi
+if [[ ${bcbio_workflow%?} = "atac_seq" ]]; then
+   bash ${path_to_scripts}/config_module.sh
 fi
