@@ -7,9 +7,9 @@
 #####################################################################################################################################################
 
 if [[ ${bcbio_existing_version%?} = "yes" ]]; then
-    bcbio_install_path="${bcbio_path_to_existing}"
+    export bcbio_install_path="${bcbio_path_to_existing}"
 fi
-export ${bcbio_install_path%?}
+# export ${bcbio_install_path%?}
 # path to all workflow analyses on the system
 export bcbio_runs="${HOME}/bcbio_runs/"
 # path to the current workflow directory
@@ -70,7 +70,3 @@ else
     curl -L -C - -O ${miniconda2}
     curl -L -C - -O ${install_script_bcbio}
 fi
-
-
-
-# echo "${bcbio_install_path} AICIIIIIIIIIIIIIIIIIIIIIIIIIIIIII!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"

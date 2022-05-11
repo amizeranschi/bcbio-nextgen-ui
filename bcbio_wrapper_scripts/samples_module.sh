@@ -69,7 +69,7 @@ if [[ ${bcbio_download_samples%?} = "no" ]]; then
          if [[ ${file_name} = ${val} ]]; then
          echo "${FILE}"
          cp ${FILE} ${bcbio_runs_input}
-         # ln -s ${FILE} ${bcbio_runs_input}.fastq.gz
+         # ln -s ${FILE} ${bcbio_runs_input}/${file_name}.fastq.gz
          fi
       done
    done

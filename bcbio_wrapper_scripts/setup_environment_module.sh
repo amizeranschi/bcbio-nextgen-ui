@@ -65,7 +65,6 @@ fi
 if [[ ${bcbio_existing_version%?} = "no" ]]; then
    echo " --- [$(date +"%F %R")] bcbio_nextgen not on the system."
    echo " --- [$(date +"%F %R")] bcbio_nextgen will start installation."
-   echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!n ai ce cauta aici"
 
    bash install_bcbio_nextgen.sh
 fi
@@ -117,14 +116,14 @@ if [[ ! -d ${bcbio_install_path%?}/extra2 ]]; then
    ## create a Python2 env for bcbio-monitor pytz and python-dateutil and faststructure
 
    echo " --- [$(date +"%F %R")] Setting up a Python2 environment for legacy utility packages"
-   bash ${path_to_scripts}/Miniconda2-latest-Linux-x86_64.sh -b -p ${bcbio_install_path%?}/extra2
+   bash ${path_to_scripts}/Miniconda2*.sh -b -p ${bcbio_install_path%?}/extra2
    ln -s ${bcbio_install_path%?}/extra2/bin/conda ${bcbio_install_path%?}/extra2/bin/extra_conda2
 
-   ${bcbio_install_path%?}/extra2/bin/extra_conda2 install --yes -c conda-forge -c bioconda mamba
-   ln -s ${bcbio_install_path%?}/extra2/bin/mamba ${bcbio_install_path%?}/extra2/bin/mamba_extra2
+   # ${bcbio_install_path%?}/extra2/bin/extra_conda2 install --yes -c conda-forge -c bioconda mamba
+   # ln -s ${bcbio_install_path%?}/extra2/bin/mamba ${bcbio_install_path%?}/extra2/bin/mamba_extra2
 
    ${bcbio_install_path%?}/extra2/bin/pip install bcbio-monitor pytz python-dateutil
-   ${bcbio_install_path%?}/extra2/bin/mamba_extra2 install --yes -c conda-forge -c bioconda faststructure
+   ${bcbio_install_path%?}/extra2/bin/extra_conda2 install --yes -c conda-forge -c bioconda faststructure
 
 fi
 # ## set up a temporary PATH variable to include the previously installed python; keep a backup of the old $PATH
@@ -156,6 +155,5 @@ rm ${path_to_scripts}/Miniconda2-*.sh*
 
 ## GO TO SAMPLES MODULE
 ## Handle the samples for the upcoming analysis
-# echo "${bcbio_install_path%?}AICIIIIIIIIIIIIIIIIIIIIIIIIIIIIII!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 bash ${path_to_scripts}/samples_module.sh
 

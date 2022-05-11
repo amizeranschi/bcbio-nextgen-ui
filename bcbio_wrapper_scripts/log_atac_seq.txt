@@ -1,0 +1,144 @@
+using configuration file:  infos.yaml
+
+## printing the whole contents of the file:
+"xport bcbio_existing_version="yes
+"xport bcbio_path_to_existing="/home/maria/bcbio_nextgen
+"xport bcbio_development_branch="development
+"xport bcbio_total_cores="32
+"xport bcbio_main_cores="32
+"xport bcbio_install_path="/home/maria/bcbio_nextgen
+"xport bcbio_upgrade="yes
+"xport bcbio_annotated_species="yes
+"xport bcbio_genome_fasta="/export/home/acs/stud/m/maria.nastase0912/variantCallingScripts/yeast/GTF/sacCer3_BRF.fa
+"xport bcbio_transcriptome_gtf="/export/home/acs/stud/m/maria.nastase0912/variantCallingScripts/yeast/GTF/sacCer3_bcbio_lncRNA_BRF.gtf 
+"xport bcbio_species="Scerevisiae
+"xport bcbio_genome="sacCer3
+"xport bcbio_vep_species="Saccharomyces_cerevisiae
+"xport bcbio_vep_assembly="R64-1-1
+"xport bcbio_ensembl_ver="105
+"xport bcbio_workflow="atac_seq
+"xport bcbio_variant_annotation="yes
+"xport bcbio_download_samples="no
+"xport bcbio_path_to_samples_on_sys="/home/maria/bcbio_runs/workflow_variant_calling/input
+"xport bcbio_samples="SRR6059151 SRR6783014 SRR6783016 
+"xport bcbio_samples_fastq="500-I-Rep3 500-I-Rep1 500-I-Rep2
+"xport bcbio_csv_file_path="/home/maria/bcbio_nextgen_usability_improvements/bcbio_wrapper_scripts/atac_seq.csv
+ --- [2022-05-12 00:37] Downloading utilitaries for bcbio_nexgen and miniconda installation
+--- [2022-05-12 00:37] Create symlinks in the input directory for the samples. 
+500-I-Rep1.fastq.gz
+500-I-Rep2.fastq.gz
+500-I-Rep3.fastq.gz
+--- [2022-05-12 00:37] Preparing configuration files for bcbio_nextgen in /home/maria/bcbio_runs/workflow_atac_seq
+--2022-05-12 00:37:50--  http://s3.amazonaws.com/bcbio-nextgen/atac_userstory_data/atac-example.yaml
+Resolving s3.amazonaws.com (s3.amazonaws.com)... 52.217.197.16
+Connecting to s3.amazonaws.com (s3.amazonaws.com)|52.217.197.16|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 186 [binary/octet-stream]
+Saving to: ‘atac-example.yaml’
+
+atac-example.yaml                                    100%[=====================================================================================================================>]     186  --.-KB/s    in 0,001s  
+
+2022-05-12 00:37:50 (251 KB/s) - ‘atac-example.yaml’ saved [186/186]
+
+--- [2022-05-12 00:37] Configuring yaml template file for the ATAC-seq workflow
+Requirement already satisfied: pyyaml in /home/maria/bcbio_nextgen/extra3/lib/python3.7/site-packages (6.0)
+--- [2022-05-12 00:37] Copying csv  file provided by the user for the ATAC-seq workflow
+--- [2022-05-12 00:37] For ChIP-seq, bcbio_nextgen requires batch and phenotype in the csv columns for the ATAC-seq workflow
+
+--- [2022-05-12 00:37] Starting the ATAC-seq workflow
+--- [2022-05-12 00:37] Using Python version: Python 3.7.12
+--- [2022-05-12 00:37] Current PATH variable: /home/maria/bcbio_nextgen/extra3/bin:/home/maria/bcbio_nextgen/anaconda/bin:/home/maria/bcbio_nextgen/tools/bin:/export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen/extra3/bin:/export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen/anaconda/bin:/export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen/tools/bin:/home/maria/sra-tools/anaconda/bin:/home/maria/bcbio-env-licenta/bcbio/anaconda/bin:/home/maria/bcbio-env-licenta/bcbio/tools/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+--- [2022-05-12 00:37] Using configuration file: 
+--- [2022-05-12 00:37] Configuring yaml template file for the samples in /home/maria/bcbio_runs/workflow_atac_seq/input ATAC-seq workflow
+
+Configuration file created at: /home/maria/bcbio_runs/workflow_atac_seq/input/atac_seq/config/atac_seq.yaml
+Edit to finalize and run with:
+  cd /home/maria/bcbio_runs/workflow_atac_seq/input/atac_seq/work
+  bcbio_nextgen.py ../config/atac_seq.yaml
+--- [2022-05-12 00:37] Running analysis for ATAC-seq workflow
+Running bcbio version: 1.2.9
+global config: /home/maria/bcbio_runs/workflow_atac_seq/input/atac_seq/work/bcbio_system.yaml
+run info config: /home/maria/bcbio_runs/workflow_atac_seq/input/atac_seq/config/atac_seq.yaml
+[2022-05-11T21:37Z] System YAML configuration: /home/maria/bcbio_nextgen/galaxy/bcbio_system.yaml.
+[2022-05-11T21:37Z] Locale set to C.UTF-8.
+[2022-05-11T21:37Z] Resource requests: bwa, picard; memory: 4.00, 4.00; cores: 16, 16
+[2022-05-11T21:37Z] Configuring 1 jobs to run, using 3 cores each with 14.9g of memory reserved for each job
+[2022-05-11T21:37Z] Timing: organize samples
+[2022-05-11T21:37Z] multiprocessing: organize_samples
+[2022-05-11T21:37Z] Using input YAML configuration: /home/maria/bcbio_runs/workflow_atac_seq/input/atac_seq/config/atac_seq.yaml
+[2022-05-11T21:37Z] Checking sample YAML configuration: /home/maria/bcbio_runs/workflow_atac_seq/input/atac_seq/config/atac_seq.yaml
+[2022-05-11T21:38Z] Retreiving program versions from /home/maria/bcbio_nextgen/manifest/python-packages.yaml.
+[2022-05-11T21:38Z] Retreiving program versions from /home/maria/bcbio_nextgen/manifest/r-packages.yaml.
+[2022-05-11T21:38Z] Testing minimum versions of installed programs
+[2022-05-11T21:38Z] Timing: alignment
+[2022-05-11T21:38Z] multiprocessing: prepare_sample
+[2022-05-11T21:38Z] Preparing Rep1-500-I
+[2022-05-11T21:38Z] Preparing Rep2-500-I
+[2022-05-11T21:38Z] Preparing Rep3-500-I
+[2022-05-11T21:38Z] multiprocessing: trim_sample
+[2022-05-11T21:38Z] Skipping trimming of Rep1-500-I.
+[2022-05-11T21:38Z] Skipping trimming of Rep2-500-I.
+[2022-05-11T21:38Z] Skipping trimming of Rep3-500-I.
+[2022-05-11T21:38Z] multiprocessing: disambiguate_split
+[2022-05-11T21:38Z] multiprocessing: process_alignment
+[2022-05-11T21:38Z] bwa mem alignment from fastq: Rep1-500-I
+[2022-05-11T21:38Z] /home/maria/bcbio_nextgen/galaxy/../anaconda/bin/bamsormadup: symbol lookup error: /home/maria/bcbio_nextgen/anaconda/bin/../lib/libmaus2.so.2: undefined symbol: _ZTIN6snappy4SinkE
+[2022-05-11T21:38Z] Uncaught exception occurred
+Traceback (most recent call last):
+  File "/home/maria/bcbio_nextgen/anaconda/lib/python3.7/site-packages/bcbio/provenance/do.py", line 26, in run
+    _do_run(cmd, checks, log_stdout, env=env)
+  File "/home/maria/bcbio_nextgen/anaconda/lib/python3.7/site-packages/bcbio/provenance/do.py", line 106, in _do_run
+    raise subprocess.CalledProcessError(exitcode, error_msg)
+subprocess.CalledProcessError: Command 'set -o pipefail; unset JAVA_HOME && /home/maria/bcbio_nextgen/galaxy/../anaconda/bin/bwa mem -p  -c 250 -M -t 3  -R '@RG\tID:Rep1-500-I\tPL:illumina\tPU:Rep1-500-I\tSM:Rep1-500-I' -v 1 /home/maria/bcbio_nextgen/genomes/Scerevisiae/sacCer3/bwa/sacCer3.fa /home/maria/bcbio_runs/workflow_atac_seq/input/500-I-Rep1.fastq.gz   | /home/maria/bcbio_nextgen/galaxy/../anaconda/bin/bamsormadup inputformat=sam threads=3 tmpfile=/home/maria/bcbio_runs/workflow_atac_seq/input/atac_seq/work/bcbiotx/tmpxtpxse6b/Rep1-500-I-sort-sorttmp-markdup SO=coordinate indexfilename=/home/maria/bcbio_runs/workflow_atac_seq/input/atac_seq/work/bcbiotx/tmpxtpxse6b/Rep1-500-I-sort.bam.bai > /home/maria/bcbio_runs/workflow_atac_seq/input/atac_seq/work/bcbiotx/tmpxtpxse6b/Rep1-500-I-sort.bam
+/home/maria/bcbio_nextgen/galaxy/../anaconda/bin/bamsormadup: symbol lookup error: /home/maria/bcbio_nextgen/anaconda/bin/../lib/libmaus2.so.2: undefined symbol: _ZTIN6snappy4SinkE
+' returned non-zero exit status 127.
+Traceback (most recent call last):
+  File "/home/maria/bcbio_nextgen/anaconda/bin/bcbio_nextgen.py", line 245, in <module>
+    main(**kwargs)
+  File "/home/maria/bcbio_nextgen/anaconda/bin/bcbio_nextgen.py", line 46, in main
+    run_main(**kwargs)
+  File "/home/maria/bcbio_nextgen/anaconda/lib/python3.7/site-packages/bcbio/pipeline/main.py", line 50, in run_main
+    fc_dir, run_info_yaml)
+  File "/home/maria/bcbio_nextgen/anaconda/lib/python3.7/site-packages/bcbio/pipeline/main.py", line 91, in _run_toplevel
+    for xs in pipeline(config, run_info_yaml, parallel, dirs, samples):
+  File "/home/maria/bcbio_nextgen/anaconda/lib/python3.7/site-packages/bcbio/pipeline/main.py", line 384, in chipseqpipeline
+    samples = run_parallel("process_alignment", samples)
+  File "/home/maria/bcbio_nextgen/anaconda/lib/python3.7/site-packages/bcbio/distributed/multi.py", line 28, in run_parallel
+    return run_multicore(fn, items, config, parallel=parallel)
+  File "/home/maria/bcbio_nextgen/anaconda/lib/python3.7/site-packages/bcbio/distributed/multi.py", line 86, in run_multicore
+    for data in joblib.Parallel(parallel["num_jobs"], batch_size=1, backend="multiprocessing")(joblib.delayed(fn)(*x) for x in items):
+  File "/home/maria/bcbio_nextgen/anaconda/lib/python3.7/site-packages/joblib/parallel.py", line 1048, in __call__
+    if self.dispatch_one_batch(iterator):
+  File "/home/maria/bcbio_nextgen/anaconda/lib/python3.7/site-packages/joblib/parallel.py", line 866, in dispatch_one_batch
+    self._dispatch(tasks)
+  File "/home/maria/bcbio_nextgen/anaconda/lib/python3.7/site-packages/joblib/parallel.py", line 784, in _dispatch
+    job = self._backend.apply_async(batch, callback=cb)
+  File "/home/maria/bcbio_nextgen/anaconda/lib/python3.7/site-packages/joblib/_parallel_backends.py", line 208, in apply_async
+    result = ImmediateResult(func)
+  File "/home/maria/bcbio_nextgen/anaconda/lib/python3.7/site-packages/joblib/_parallel_backends.py", line 572, in __init__
+    self.results = batch()
+  File "/home/maria/bcbio_nextgen/anaconda/lib/python3.7/site-packages/joblib/parallel.py", line 263, in __call__
+    for func, args, kwargs in self.items]
+  File "/home/maria/bcbio_nextgen/anaconda/lib/python3.7/site-packages/joblib/parallel.py", line 263, in <listcomp>
+    for func, args, kwargs in self.items]
+  File "/home/maria/bcbio_nextgen/anaconda/lib/python3.7/site-packages/bcbio/utils.py", line 59, in wrapper
+    return f(*args, **kwargs)
+  File "/home/maria/bcbio_nextgen/anaconda/lib/python3.7/site-packages/bcbio/distributed/multitasks.py", line 128, in process_alignment
+    return sample.process_alignment(*args)
+  File "/home/maria/bcbio_nextgen/anaconda/lib/python3.7/site-packages/bcbio/pipeline/sample.py", line 140, in process_alignment
+    data = align_to_sort_bam(fastq1, fastq2, aligner, data)
+  File "/home/maria/bcbio_nextgen/anaconda/lib/python3.7/site-packages/bcbio/pipeline/alignment.py", line 87, in align_to_sort_bam
+    names, align_dir, data)
+  File "/home/maria/bcbio_nextgen/anaconda/lib/python3.7/site-packages/bcbio/pipeline/alignment.py", line 164, in _align_from_fastq
+    out = align_fn(fastq1, fastq2, align_ref, names, align_dir, data)
+  File "/home/maria/bcbio_nextgen/anaconda/lib/python3.7/site-packages/bcbio/ngsalign/bwa.py", line 204, in align_pipe
+    names, rg_info, data)
+  File "/home/maria/bcbio_nextgen/anaconda/lib/python3.7/site-packages/bcbio/ngsalign/bwa.py", line 225, in _align_mem
+    [do.file_nonempty(tx_out_file), do.file_reasonable_size(tx_out_file, fastq_file)])
+  File "/home/maria/bcbio_nextgen/anaconda/lib/python3.7/site-packages/bcbio/provenance/do.py", line 26, in run
+    _do_run(cmd, checks, log_stdout, env=env)
+  File "/home/maria/bcbio_nextgen/anaconda/lib/python3.7/site-packages/bcbio/provenance/do.py", line 106, in _do_run
+    raise subprocess.CalledProcessError(exitcode, error_msg)
+subprocess.CalledProcessError: Command 'set -o pipefail; unset JAVA_HOME && /home/maria/bcbio_nextgen/galaxy/../anaconda/bin/bwa mem -p  -c 250 -M -t 3  -R '@RG\tID:Rep1-500-I\tPL:illumina\tPU:Rep1-500-I\tSM:Rep1-500-I' -v 1 /home/maria/bcbio_nextgen/genomes/Scerevisiae/sacCer3/bwa/sacCer3.fa /home/maria/bcbio_runs/workflow_atac_seq/input/500-I-Rep1.fastq.gz   | /home/maria/bcbio_nextgen/galaxy/../anaconda/bin/bamsormadup inputformat=sam threads=3 tmpfile=/home/maria/bcbio_runs/workflow_atac_seq/input/atac_seq/work/bcbiotx/tmpxtpxse6b/Rep1-500-I-sort-sorttmp-markdup SO=coordinate indexfilename=/home/maria/bcbio_runs/workflow_atac_seq/input/atac_seq/work/bcbiotx/tmpxtpxse6b/Rep1-500-I-sort.bam.bai > /home/maria/bcbio_runs/workflow_atac_seq/input/atac_seq/work/bcbiotx/tmpxtpxse6b/Rep1-500-I-sort.bam
+/home/maria/bcbio_nextgen/galaxy/../anaconda/bin/bamsormadup: symbol lookup error: /home/maria/bcbio_nextgen/anaconda/bin/../lib/libmaus2.so.2: undefined symbol: _ZTIN6snappy4SinkE
+' returned non-zero exit status 127.

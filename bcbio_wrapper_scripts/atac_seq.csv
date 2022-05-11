@@ -1,7 +1,4 @@
 samplename,description,region,replicate
-500-F-Rep1.fastq.gz,Rep1-500-F,batch1,rep1
 500-I-Rep1.fastq.gz,Rep1-500-I,batch1,rep1
-500-F-Rep2.fastq.gz,Rep2-500-F,batch2,rep2
 500-I-Rep2.fastq.gz,Rep2-500-I,batch2,rep2
-500-F-Rep3.fastq.gz,Rep3-500-F,batch3,rep3
 500-I-Rep3.fastq.gz,Rep3-500-I,batch3,rep3
