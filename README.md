@@ -47,6 +47,7 @@ To run an anallysis it is required to configure the yaml configuration file info
                                         ** variant_calling for Variant calling and variant annotation <br />
                                         ** atac_seq for ATAC seq workflow <br />
 * variant_annotation:     ----> when running variant calling workflow, there is the choice of running variant annotation also <br />
+* exclude_lcr:            ----> when running variant calling workflow, there is the choice of performing exclusion of low complexity regions <br />
 * download_samples:       ----> choose if download samples or get them from local system <br />
 * path_to_samples_on_sys: ----> the choice to use locally stored samples requires the path to the samples <br />
 * samples:                ----> id of the samples to download <br />
