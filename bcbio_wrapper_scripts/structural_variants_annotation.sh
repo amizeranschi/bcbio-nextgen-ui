@@ -6,12 +6,12 @@
 
 # process structural variants, similarly to small variants (with slight differences between scenarios involving bcbio_nextgen)
 
+variant_annotation_dir="${bcbio_runs_input}/${action_name}/variant_annotation"
 target_dir=${variant_annotation_dir}
 
 if [ `ls -1 ${bcbio_runs_final}/*/*-manta.vcf.gz 2>/dev/null | wc -l ` -gt 0 ]; then
     echo "--- [$(date +"%F %R")] Performing variant annotation on structural variants."
 
-    echo "I GOT HERE!!!!!!!!!!!!!!! "
     ## copy all the manta vcf files and rename them according to their parent directory's name:
     cd ${bcbio_runs_final}
     ## iterate through all the directories (which are named according to the samples)

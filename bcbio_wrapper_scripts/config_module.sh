@@ -36,8 +36,8 @@ if [[ ${bcbio_workflow%?} == "atac_seq" ]]; then
    echo "--- [$(date +"%F %R")] Configuring yaml template file for the ATAC-seq workflow"
 
    sed -i 's/genome_build: hg38/genome_build: '${bcbio_genome}/ atac-example.yaml
-   sed -i 's/aligner: bwaa/aligner: bwa/' atac-example.yaml
-   pip3 install pyyaml
+   sed -i 's/aligner: bwaa/aligner: bowtie2/' atac-example.yaml
+   # pip3 install pyyaml
    python3 ${path_to_scripts}/add_to_yaml.py ${bcbio_runs_input}/atac-example.yaml
 
    # copy csv file from the location given in input to the config directory

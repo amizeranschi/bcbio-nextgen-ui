@@ -21,7 +21,7 @@ if [ -f  ${action_name}-small-var.vcf.gz ]; then
     bcftools view -Ov -f .,PASS ${vcf_file_name}.vcf > ${vcf_file_name}-filtered.vcf
     mv ${vcf_file_name}-filtered.vcf ${vcf_file_name}.vcf
 
-    ## reorder the samples according to the sample order from the file ${bcbio_exp_path:?}/${bcbio_exp_name}-samples.txt; generate stats, annotate variants and extract relevant columns into a tab-separated file
+    ## reorder the samples; generate stats, annotate variants and extract relevant columns into a tab-separated file
     ## create stats for each VCF file
 
     echo "--- [$(date +"%F %R")] Reordering the samples in the VCF files and generating variant statistics"
@@ -51,16 +51,18 @@ if [ -f  ${action_name}-small-var.vcf.gz ]; then
         echo "--- [$(date +"%F %R")] Variant consequences were written to the file: ${vcf_file_name}-vep.table"
     else
         # move sort to install module -----
-        rm /export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen/genomes/Scerevisiae/sacCer3/rnaseq/ref-transcripts.gtf.gz
-        sort -k 1,1 -k 4,4n -k 5,5n /export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen/genomes/Scerevisiae/sacCer3/rnaseq/ref-transcripts.gtf > /export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen/genomes/Scerevisiae/sacCer3/rnaseq/ref-transcripts_sorted.gtf 
-        
-        mv /export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen/genomes/Scerevisiae/sacCer3/rnaseq/ref-transcripts_sorted.gtf /export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen/genomes/Scerevisiae/sacCer3/rnaseq/ref-transcripts.gtf
+        # rm /export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen/genomes/Scerevisiae/sacCer3/rnaseq/ref-transcripts.gtf.gz
+        rm ${genome_dir}/rnaseq/ref-transcripts.gtf.gz
 
-        bgzip --keep /export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen/genomes/Scerevisiae/sacCer3/rnaseq/ref-transcripts.gtf
-        tabix /export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen/genomes/Scerevisiae/sacCer3/rnaseq/ref-transcripts.gtf.gz
+        sort -k 1,1 -k 4,4n -k 5,5n ${genome_dir}/rnaseq/ref-transcripts.gtf > ${genome_dir}/rnaseq/ref-transcripts_sorted.gtf 
+        
+        mv ${genome_dir}/rnaseq/ref-transcripts_sorted.gtf ${genome_dir}/Scerevisiae/sacCer3/rnaseq/ref-transcripts.gtf
+
+        bgzip --keep ${genome_dir}/rnaseq/ref-transcripts.gtf
+        tabix ${genome_dir}/rnaseq/ref-transcripts.gtf.gz
         # ---
         # TODO add custom genome scenario
-        echo "CUSTOM"
+        # echo "CUSTOM"
         ## run VEP with custom annotations from the GTF file
         echo "--- [$(date +"%F %R")] Running VEP once, with custom annotations from the GTF file: ${genome_dir}/rnaseq/ref-transcripts.gtf"
         vep --fork 4 --vcf --biotype --check_existing --distance 5000 --symbol --fasta ${genome_dir}/seq/${bcbio_genome%?}.fa --custom ${genome_dir}/rnaseq/ref-transcripts.gtf.gz,ref-transcripts,gtf,overlap,0 --input_file ${vcf_file_name}.vcf --output_file ${vcf_file_name}-vep.vcf --force_overwrite --stats_file ${vcf_file_name}-vep.stats --stats_text

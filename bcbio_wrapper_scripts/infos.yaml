@@ -1,9 +1,9 @@
 # choose to install bcbio from scratch or from an existing install
 existing_version: yes
 # the usage of an older installation of bcbio requires the path to the install
-path_to_existing: /home/maria/bcbio_nextgen
+path_to_existing: /export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen
 # choose the development branch to upgrade and install bcbio to
-development_branch: development
+development_branch: skip
 # number of cores to run bcbio with
 total_cores: 32
 main_cores: 32
@@ -34,15 +34,18 @@ ensembl_ver: 105
 # convention available:
 #                       * variant_calling for Variant calling and variant annotation
 #                       * atac_seq for ATAC seq workflow
-workflow: atac_seq
+workflow: variant_calling
 # when running variant calling workflow, there is the choice of running variant annotation also
 variant_annotation: yes
+# when running variant calling workflow, there is the choice
+# of performing exclusion of low complexity regions
+exclude_lcr: yes
 # choose if download samples or get them from local system
 download_samples: no
 # the choice to use locally stored samples requires the path to the samples
-path_to_samples_on_sys: /home/maria/bcbio_runs/workflow_variant_calling/input
+path_to_samples_on_sys: /export/home/acs/stud/m/maria.nastase0912/bcbio_runs_works/workflow_variant_calling/input
 # id of the samples to download
-samples: SRR6059151 SRR6783014 SRR6783016 
+samples: SRR6059151 SRR6783014 SRR6783016
 # name convention for each sample id in order without extension
 # if a sample has more than 1 file the names will be placed in order for _1 _2 or _3
 # if the samples are already on the system, write their names without the extension
@@ -51,5 +54,4 @@ samples_fastq: 500-I-Rep3 500-I-Rep1 500-I-Rep2
 # samples: SRR5482575 SRR5482576 SRR5482577
 # samples_fastq: AE-R1 AE-R2 RT-R1 RT-R2 AE2-R1 AE2-R2
 # the path toward the csv file for the analysis
-csv_file_path: /home/maria/bcbio_nextgen_usability_improvements/bcbio_wrapper_scripts/atac_seq.csv
-
+csv_file_path: /export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen_usability_improvements/varcall-analysis.csv

@@ -67,18 +67,17 @@ if [[ ${bcbio_download_samples%?} = "no" ]]; then
       for val in ${sample_name_list[@]}
       do
          if [[ ${file_name} = ${val} ]]; then
-         echo "${FILE}"
-         cp ${FILE} ${bcbio_runs_input}
-         # ln -s ${FILE} ${bcbio_runs_input}/${file_name}.fastq.gz
+            echo "${FILE}"
+            cp ${FILE} ${bcbio_runs_input}
          fi
       done
    done
 fi
+
 echo "--- [$(date +"%F %R")] Preparing configuration files for bcbio_nextgen in ${bcbio_workflow_dir}"
 
 if [[ ${bcbio_workflow%?} = "variant_calling" ]]; then
    bash ${path_to_scripts}/config_module.sh 
-   # echo "Am ajuns aici intr-un final"
 fi
 if [[ ${bcbio_workflow%?} = "atac_seq" ]]; then
    bash ${path_to_scripts}/config_module.sh

@@ -89,18 +89,18 @@ if [[ ! -d ${bcbio_install_path%?}/extra3 ]]; then
    ln -s ${bcbio_install_path%?}/extra3/bin/mamba ${bcbio_install_path%?}/extra3/bin/mamba_extra3
 
    ## installing packages
-   ${bcbio_install_path%?}/extra3/bin/mamba_extra3 install --yes -c conda-forge -c bioconda wget git bedops vcftools sra-tools r-xml r-base perl-net-ssleay entrez-direct tassel beagle plink openssl=1.1.1l ensembl-vep=105 "bcftools>=1.13"
+   ${bcbio_install_path%?}/extra3/bin/mamba_extra3 install --yes -c conda-forge -c bioconda wget git bedops vcftools sra-tools pyyaml r-xml r-base perl-net-ssleay entrez-direct tassel beagle plink openssl=1.1.1l ensembl-vep=105 "bcftools>=1.13" biobambam=2.0.87 
 
    echo "export PATH=${bcbio_install_path%?}/extra3/bin:\$PATH" >> ~/.bashrc
    source ~/.bashrc
 
 else 
    echo " --- [$(date +"%F %R")] Check if the PATH is set correctly for extra3 environment."
-   if [[ ":$PATH:" == *"${bcbio_install_path%?}/extra3"* ]]; then
+   if [[ ":$PATH:" == *"${bcbio_install_path%?}/extra3/bin"* ]]; then
       echo " --- [$(date +"%F %R")] The path is set correctly."
    else
-      echo " --- [$(date +"%F %R")] PATH does not contain then path to bcbio_nextgen installation."
-      echo " --- [$(date +"%F %R")] Create exports for the bcbio_nextgen path."
+      echo " --- [$(date +"%F %R")] PATH does not contain then path to the bin directory of the Python3 environment."
+      echo " --- [$(date +"%F %R")] Create exports for the Python3 environment path."
       ## create export for extra 3
       echo "export PATH=${bcbio_install_path%?}/extra3/bin:\$PATH" >> ~/.bashrc
       source ~/.bashrc
@@ -119,19 +119,27 @@ if [[ ! -d ${bcbio_install_path%?}/extra2 ]]; then
    bash ${path_to_scripts}/Miniconda2*.sh -b -p ${bcbio_install_path%?}/extra2
    ln -s ${bcbio_install_path%?}/extra2/bin/conda ${bcbio_install_path%?}/extra2/bin/extra_conda2
 
-   # ${bcbio_install_path%?}/extra2/bin/extra_conda2 install --yes -c conda-forge -c bioconda mamba
-   # ln -s ${bcbio_install_path%?}/extra2/bin/mamba ${bcbio_install_path%?}/extra2/bin/mamba_extra2
-
    ${bcbio_install_path%?}/extra2/bin/pip install bcbio-monitor pytz python-dateutil
    ${bcbio_install_path%?}/extra2/bin/extra_conda2 install --yes -c conda-forge -c bioconda faststructure
 
-fi
-# ## set up a temporary PATH variable to include the previously installed python; keep a backup of the old $PATH
-# old_PATH=$PATH
-# PATH=$PATH:${bcbio_install_path:?}/extra3/bin
+   ## create export for extra 2
+   echo "export PATH=${bcbio_install_path%?}/extra_conda2/bin:\$PATH" >> ~/.bashrc
+   source ~/.bashrc
+   
+else 
+   echo " --- [$(date +"%F %R")] Check if the PATH is set correctly for extra3 environment."
+   if [[ ":$PATH:" == *"${bcbio_install_path%?}/extra_conda2/bin"* ]]; then
+      echo " --- [$(date +"%F %R")] The path is set correctly."
+   else
+      echo " --- [$(date +"%F %R")] PATH does not contain then path to the bin directory of the Python2 environment."
+      echo " --- [$(date +"%F %R")] Create exports for the Python3 environment path."
+      ## create export for extra 2
+      echo "export PATH=${bcbio_install_path%?}/extra_conda2/bin:\$PATH" >> ~/.bashrc
+      source ~/.bashrc
 
-# ## restore PATH
-# PATH=$old_PATH
+   fi
+fi
+
 ##########################################################################################################################################################################################
                                                                          # VEP GENOME INSTALLATION #
 ##########################################################################################################################################################################################

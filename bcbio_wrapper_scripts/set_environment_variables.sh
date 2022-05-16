@@ -9,7 +9,7 @@
 if [[ ${bcbio_existing_version%?} = "yes" ]]; then
     export bcbio_install_path="${bcbio_path_to_existing}"
 fi
-# export ${bcbio_install_path%?}
+
 # path to all workflow analyses on the system
 export bcbio_runs="${HOME}/bcbio_runs/"
 # path to the current workflow directory
@@ -60,8 +60,6 @@ export install_script_bcbio="https://raw.githubusercontent.com/bcbio/bcbio-nextg
 echo " --- [$(date +"%F %R")] Downloading utilitaries for bcbio_nexgen and miniconda installation"
 
 if [ -x "$(command -v wget)" ]; then
-    # rm ${HOME}/Miniconda3-*.sh
-    # rm ${HOME}/Miniconda2-*.sh
     wget ${miniconda3}
     wget ${miniconda2}
     wget ${install_script_bcbio}

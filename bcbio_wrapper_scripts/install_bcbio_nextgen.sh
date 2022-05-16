@@ -16,12 +16,6 @@ python3 bcbio_nextgen_install.py ${bcbio_install_path%?} --tooldir=${bcbio_insta
 echo "export PATH=${bcbio_install_path%?}/anaconda/bin:${bcbio_install_path%?}/tools/bin:\$PATH" >> ~/.bashrc
 source ~/.bashrc
 
-## upgrade bcbio if requested
-bcbio_nextgen.py upgrade -u ${bcbio_development_branch%?} --tools
-
-## make sure to have a recent samtools in the main conda environment
-# mamba install -c bioconda "samtools=1.13" --yes
-
 ## install genomic data as described in the config file
 if [[ ${bcbio_annotated_species%?} = "yes" ]]; then
     # TODO check the arguments

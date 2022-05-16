@@ -32,4 +32,3 @@ source set_environment_variables.sh
 ##                      * faststructure
 
 bash setup_environment_module.sh
-# bash samples_module.sh
