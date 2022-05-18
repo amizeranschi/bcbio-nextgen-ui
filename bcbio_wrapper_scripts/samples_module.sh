@@ -79,6 +79,11 @@ echo "--- [$(date +"%F %R")] Preparing configuration files for bcbio_nextgen in 
 if [[ ${bcbio_workflow%?} = "variant_calling" ]]; then
    bash ${path_to_scripts}/config_module.sh 
 fi
+
 if [[ ${bcbio_workflow%?} = "atac_seq" ]]; then
+   bash ${path_to_scripts}/config_module.sh
+fi
+
+if [[ ${bcbio_workflow%?} = "bulk_rna_seq" ]]; then
    bash ${path_to_scripts}/config_module.sh
 fi

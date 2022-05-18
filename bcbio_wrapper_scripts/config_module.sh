@@ -50,3 +50,24 @@ if [[ ${bcbio_workflow%?} == "atac_seq" ]]; then
    bash  ${path_to_scripts}/run_atac_seq.sh
 
 fi
+
+if [[ ${bcbio_workflow%?} == "atac_seq" ]]; then
+   if [ -x "$(command -v wget)" ]; then
+      wget --no-check-certificate ${bulk_rna_seq_yaml} -O bulk_rna.yaml
+   else
+      curl -L -C - -O ${bulk_rna_seq_yaml}
+   fi
+
+   ## edit the settings in the rnaseq-seqc.yaml file, to make the analysis work for our files:
+   echo "--- [$(date +"%F %R")] Configuring yaml template file for the Bulk RNA-seq workflow"
+
+   sed -i 's/genome_build: hg38/genome_build: '${bcbio_genome}/ bulk_rna.yaml
+
+   # copy csv file from the location given in input to the config directory
+   echo "--- [$(date +"%F %R")] Copying csv  file provided by the user for the Bulk RNA-seq workflow"
+
+   cp ${bcbio_csv_file_path%?} ${bcbio_runs_input}
+
+   bash  ${path_to_scripts}/run_bulk_rna_seq.sh
+
+fi
