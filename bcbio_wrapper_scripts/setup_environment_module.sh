@@ -122,5 +122,5 @@ rm ${path_to_scripts}/Miniconda2-*.sh*
 ## GO TO SAMPLES MODULE
 ## Handle the samples for the upcoming analysis
 
-# bash ${path_to_scripts}/samples_module.sh
+bash ${path_to_scripts}/samples_module.sh
 
