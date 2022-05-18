@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# source parse_yaml.sh $1
-
 #####################################################################################################################################################
                                             # VARIABLES USED INSIDE EACH WORKFLOW FOR EASE OF ACCESS #
 #####################################################################################################################################################
@@ -50,7 +48,6 @@ export atac_seq_yaml="http://s3.amazonaws.com/bcbio-nextgen/atac_userstory_data/
 ## Store current path to the scripts
 export path_to_scripts=$PWD
 
-# miniconda3="https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh"
 export miniconda3="https://repo.anaconda.com/miniconda/Miniconda3-py37_4.11.0-Linux-x86_64.sh"
 export miniconda2="https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh"
 export install_script_bcbio="https://raw.githubusercontent.com/bcbio/bcbio-nextgen/master/scripts/bcbio_nextgen_install.py"

@@ -15,6 +15,7 @@ if [[ ${bcbio_workflow%?} == "variant_calling" ]]; then
    sed -i 's/genome_build: hg38/genome_build: '${bcbio_genome}/ gatk-variant.yaml
    sed -i 's/aligner: bwa/aligner: bowtie2/' gatk-variant.yaml
    sed -i 's/recalibrate: gatk/# recalibrate: gatk/' gatk-variant.yaml
+   sed -i "/algorithm:$/a\      effects: false" gatk-variant.yaml
 
    ## copy csv file from the location given in input to the config directory
    
@@ -38,7 +39,7 @@ if [[ ${bcbio_workflow%?} == "atac_seq" ]]; then
    sed -i 's/genome_build: hg38/genome_build: '${bcbio_genome}/ atac-example.yaml
    sed -i 's/aligner: bwaa/aligner: bowtie2/' atac-example.yaml
    # pip3 install pyyaml
-   python3 ${path_to_scripts}/add_to_yaml.py ${bcbio_runs_input}/atac-example.yaml
+   # python3 ${path_to_scripts}/add_to_yaml.py ${bcbio_runs_input}/atac-example.yaml
 
    # copy csv file from the location given in input to the config directory
    echo "--- [$(date +"%F %R")] Copying csv  file provided by the user for the ATAC-seq workflow"

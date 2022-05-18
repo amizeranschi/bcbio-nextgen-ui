@@ -1,10 +1,9 @@
 #!/bin/bash
 
 variant_annotation_dir="${bcbio_runs_input}/${action_name}/variant_annotation"
+
 echo ""
 echo "--- [$(date +"%F %R")] Starting the Variant Calling Workflow"
-echo "--- [$(date +"%F %R")] Using Python version: $(python --version)"
-# echo "--- [$(date +"%F %R")] Current PATH variable: ${PATH}"
 echo "--- [$(date +"%F %R")] Using configuration from directory: " ${path_to_scripts}
 
 ##########################################################################################################################################################################################

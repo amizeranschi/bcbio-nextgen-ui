@@ -12,9 +12,7 @@
 echo " --- [$(date +"%F %R")] Installing bcbio_nextgen into the directory: ${bcbio_install_path%?} with no data"
 python3 bcbio_nextgen_install.py ${bcbio_install_path%?} --tooldir=${bcbio_install_path%?}/tools --nodata --mamba
 
-## create symlink for bcbio
-echo "export PATH=${bcbio_install_path%?}/anaconda/bin:${bcbio_install_path%?}/tools/bin:\$PATH" >> ~/.bashrc
-source ~/.bashrc
+export PATH=${bcbio_install_path%?}/anaconda/bin:${bcbio_install_path%?}/tools/bin:${PATH}
 
 ## install genomic data as described in the config file
 if [[ ${bcbio_annotated_species%?} = "yes" ]]; then

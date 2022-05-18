@@ -2,9 +2,7 @@
 
 echo ""
 echo "--- [$(date +"%F %R")] Starting the ATAC-seq workflow"
-echo "--- [$(date +"%F %R")] Using Python version: $(python --version)"
-echo "--- [$(date +"%F %R")] Current PATH variable: ${PATH}"
-echo "--- [$(date +"%F %R")] Using configuration file: " $1
+echo "--- [$(date +"%F %R")] Using configuration from directory: " ${path_to_scripts}
 
 ##########################################################################################################################################################################################
                                                                             # ATAC-SEQ WORKFLOW #
