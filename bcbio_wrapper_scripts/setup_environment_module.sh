@@ -44,6 +44,8 @@ if [[ ${bcbio_existing_version%?} = "yes" ]]; then
    fi
 
    echo " --- [$(date +"%F %R")] The requested genome ${bcbio_genome%?} was found at ${bcbio_install_path%?}."
+   bcbio_conda install biobambam=2.0.87 -c bioconda
+
 fi
 
 ##########################################################################################################################################################################################
@@ -123,4 +125,3 @@ rm ${path_to_scripts}/Miniconda2-*.sh*
 ## Handle the samples for the upcoming analysis
 
 bash ${path_to_scripts}/samples_module.sh
-

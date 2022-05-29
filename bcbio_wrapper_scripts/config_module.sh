@@ -51,7 +51,7 @@ if [[ ${bcbio_workflow%?} == "atac_seq" ]]; then
 
 fi
 
-if [[ ${bcbio_workflow%?} == "atac_seq" ]]; then
+if [[ ${bcbio_workflow%?} == "bulk_rna_seq" ]]; then
    if [ -x "$(command -v wget)" ]; then
       wget --no-check-certificate ${bulk_rna_seq_yaml} -O bulk_rna.yaml
    else

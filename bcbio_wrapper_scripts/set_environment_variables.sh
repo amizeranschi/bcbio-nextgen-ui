@@ -41,7 +41,7 @@ export bcbio_workflow_work="${bcbio_runs_input}/${action_name}/work"
 #####################################################################################################################################################
                                                      # URLS AND USEFUL TEMPLATES #
 #####################################################################################################################################################
-# variables to store yaml template urls
+## variables to store yaml template urls
 export variant_calling_yaml="https://raw.githubusercontent.com/bcbio/bcbio-nextgen/master/config/templates/gatk-variant.yaml"
 export atac_seq_yaml="http://s3.amazonaws.com/bcbio-nextgen/atac_userstory_data/atac-example.yaml"
 export bulk_rna_seq_yaml="https://raw.githubusercontent.com/bcbio/bcbio-nextgen/master/config/examples/rnaseq-seqc.yaml"
