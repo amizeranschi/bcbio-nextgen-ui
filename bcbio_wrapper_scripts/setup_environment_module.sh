@@ -10,6 +10,13 @@ if [[ ${bcbio_existing_version%?} = "yes" ]]; then
    echo " --- [$(date +"%F %R")] bcbio_nextgen already installedy installed on the system."
    echo " --- [$(date +"%F %R")] Use bcbio_nextgen already installed version."
 
+   cd ${bcbio_install_path%?}
+   bash ${path_to_scripts}/setup_python2_env.sh
+   bash ${path_to_scripts}/setup_python3_env.sh
+   ## set the path with all the utils
+   echo " --- [$(date +"%F %R")] Setting the PATH for Python 3 and Python2 environment installation."
+   export PATH=${bcbio_install_path%?}/anaconda/bin:${bcbio_install_path%?}/tools/bin:${bcbio_install_path%?}/extra3/bin:${bcbio_install_path%?}/extra_conda2/bin${PATH}
+   echo " --- [$(date +"%F %R")] The PATH IS: ${PATH}"
 
    ## check if a genome is installed on the system
    echo " --- [$(date +"%F %R")] Check if there is any genome installed on the system"
@@ -44,8 +51,7 @@ if [[ ${bcbio_existing_version%?} = "yes" ]]; then
    fi
 
    echo " --- [$(date +"%F %R")] The requested genome ${bcbio_genome%?} was found at ${bcbio_install_path%?}."
-   bcbio_conda install biobambam=2.0.87 -c bioconda
-
+   bcbio_conda install -y biobambam=2.0.87 -c bioconda
 fi
 
 ##########################################################################################################################################################################################
@@ -55,49 +61,17 @@ fi
 if [[ ${bcbio_existing_version%?} = "no" ]]; then
    echo " --- [$(date +"%F %R")] bcbio_nextgen not on the system."
    echo " --- [$(date +"%F %R")] bcbio_nextgen will start installation."
+   mkdir ${bcbio_install_path%?}
+   cd ${bcbio_install_path%?}
+   bash ${path_to_scripts}/setup_python2_env.sh
+   bash ${path_to_scripts}/setup_python3_env.sh
+   bash ${path_to_scripts}/install_bcbio_nextgen.sh
 
-   bash install_bcbio_nextgen.sh
+   ## set the path with all the utils
+   echo " --- [$(date +"%F %R")] Setting the PATH for Python 3 and Python2 environment installation."
+   export PATH=${bcbio_install_path%?}/anaconda/bin:${bcbio_install_path%?}/tools/bin:${bcbio_install_path%?}/extra3/bin:${bcbio_install_path%?}/extra_conda2/bin${PATH}
+   echo " --- [$(date +"%F %R")] The PATH IS: ${PATH}"
 fi
-
-##########################################################################################################################################################################################
-                                                                        # PYTHON ENVIRONMENTS #
-##########################################################################################################################################################################################
-
-## create a separate Python3 environment for aditional packages
-
-if [[ ! -d ${bcbio_install_path%?}/extra3 ]]; then
-   echo "--- [$(date +"%F %R")] Setting up a Python3 environment for utility packages"
-
-   bash ${path_to_scripts}/Miniconda3-*.sh -b -p ${bcbio_install_path%?}/extra3
-   ln -s ${bcbio_install_path%?}/extra3/bin/conda ${bcbio_install_path%?}/extra3/bin/conda_extra3
-
-   ${bcbio_install_path%?}/extra3/bin/conda_extra3 install --yes -c conda-forge -c bioconda mamba
-   ln -s ${bcbio_install_path%?}/extra3/bin/mamba ${bcbio_install_path%?}/extra3/bin/mamba_extra3
-
-   ## installing packages
-   ${bcbio_install_path%?}/extra3/bin/mamba_extra3 install --yes -c conda-forge -c bioconda wget git bedops vcftools sra-tools pyyaml r-xml r-base perl-net-ssleay entrez-direct tassel beagle plink openssl=1.1.1l ensembl-vep=105 "bcftools>=1.13" biobambam=2.0.87 
-
-fi
-
-
-
-if [[ ! -d ${bcbio_install_path%?}/extra2 ]]; then
-
-   ## create a Python2 env for bcbio-monitor pytz and python-dateutil and faststructure
-
-   echo " --- [$(date +"%F %R")] Setting up a Python2 environment for legacy utility packages"
-   bash ${path_to_scripts}/Miniconda2*.sh -b -p ${bcbio_install_path%?}/extra2
-   ln -s ${bcbio_install_path%?}/extra2/bin/conda ${bcbio_install_path%?}/extra2/bin/extra_conda2s
-
-   ${bcbio_install_path%?}/extra2/bin/pip install bcbio-monitor pytz python-dateutil
-   ${bcbio_install_path%?}/extra2/bin/extra_conda2 install --yes -c conda-forge -c bioconda faststructure
-
-fi
-
-## set the path with all the utils
-echo " --- [$(date +"%F %R")] Setting the PATH for Python 3 and Python2 environment installation."
-export PATH=${bcbio_install_path%?}/extra3/bin:${bcbio_install_path%?}/extra_conda2/bin:${PATH}
-echo " --- [$(date +"%F %R")] The PATH IS: ${PATH}"
 
 ##########################################################################################################################################################################################
                                                                          # VEP GENOME INSTALLATION #

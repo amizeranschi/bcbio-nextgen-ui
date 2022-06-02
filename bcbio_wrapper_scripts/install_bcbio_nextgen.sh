@@ -10,9 +10,9 @@
 
 ## install bcbio in bcbio_nexgen directory with no data
 echo " --- [$(date +"%F %R")] Installing bcbio_nextgen into the directory: ${bcbio_install_path%?} with no data"
-python3 bcbio_nextgen_install.py ${bcbio_install_path%?} --tooldir=${bcbio_install_path%?}/tools --nodata --mamba
+python3 ${path_to_scripts}/bcbio_nextgen_install.py ${bcbio_install_path%?} --tooldir=${bcbio_install_path%?}/tools --nodata --mamba
 
-export PATH=${bcbio_install_path%?}/anaconda/bin:${bcbio_install_path%?}/tools/bin:${PATH}
+# export PATH=${bcbio_install_path%?}/anaconda/bin:${bcbio_install_path%?}/tools/bin:${PATH}
 
 ## install genomic data as described in the config file
 if [[ ${bcbio_annotated_species%?} = "yes" ]]; then
@@ -40,4 +40,4 @@ ln -s ${bcbio_install_path%?}/anaconda/bin/conda ${bcbio_install_path%?}/anacond
 ln -s ${bcbio_install_path%?}/anaconda/bin/python ${bcbio_install_path%?}/anaconda/bin/bcbio_python
 
 ## set biobambam version to be stable 
-bcbio_conda install biobambam=2.0.87 -c bioconda
+bcbio_conda install -y biobambam=2.0.87 -c bioconda
