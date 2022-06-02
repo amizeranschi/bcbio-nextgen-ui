@@ -10,9 +10,9 @@ if [[ ! -d ${bcbio_install_path%?}/extra2 ]]; then
 
    echo " --- [$(date +"%F %R")] Setting up a Python2 environment for legacy utility packages"
    bash ${path_to_scripts}/Miniconda2*.sh -b -p ${bcbio_install_path%?}/extra2
-   ln -s ${bcbio_install_path%?}/extra2/bin/conda ${bcbio_install_path%?}/extra2/bin/extra_conda2s
+   ln -s ${bcbio_install_path%?}/extra2/bin/conda ${bcbio_install_path%?}/extra2/bin/extra2
 
    ${bcbio_install_path%?}/extra2/bin/pip install bcbio-monitor pytz python-dateutil
-   ${bcbio_install_path%?}/extra2/bin/extra_conda2 install --yes -c conda-forge -c bioconda faststructure
+   ${bcbio_install_path%?}/extra2/bin/extra2 install --yes -c conda-forge -c bioconda faststructure
 
 fi

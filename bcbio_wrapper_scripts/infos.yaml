@@ -1,5 +1,5 @@
 # choose to install bcbio from scratch or from an existing install
-existing_version: no
+existing_version: yes
 # the usage of an older installation of bcbio requires the path to the install
 path_to_existing: /export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen
 # /home/maria/bcbio-env-licenta/bcbio
