@@ -69,7 +69,7 @@ if [[ ${bcbio_existing_version%?} = "no" ]]; then
 
    ## set the path with all the utils
    echo " --- [$(date +"%F %R")] Setting the PATH for Python 3 and Python2 environment installation."
-   export PATH=${bcbio_install_path%?}/anaconda/bin:${bcbio_install_path%?}/tools/bin:${bcbio_install_path%?}/extra3/bin:${bcbio_install_path%?}/extra_conda2/bin${PATH}
+   export PATH=${bcbio_install_path%?}/anaconda/bin:${bcbio_install_path%?}/tools/bin:${bcbio_install_path%?}/extra3/bin:${bcbio_install_path%?}/extra_conda2/bin$:{PATH}
    echo " --- [$(date +"%F %R")] The PATH IS: ${PATH}"
 
    ## install genomic data as described in the config file
