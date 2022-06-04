@@ -13,10 +13,12 @@ if [[ ${bcbio_existing_version%?} = "yes" ]]; then
    cd ${bcbio_install_path%?}
    bash ${path_to_scripts}/setup_python2_env.sh
    bash ${path_to_scripts}/setup_python3_env.sh
+   
    ## set the path with all the utils
    echo " --- [$(date +"%F %R")] Setting the PATH for Python 3 and Python2 environment installation."
    export PATH=${bcbio_install_path%?}/anaconda/bin:${bcbio_install_path%?}/tools/bin:${bcbio_install_path%?}/extra3/bin:${bcbio_install_path%?}/extra2/bin:${PATH}
    echo " --- [$(date +"%F %R")] The PATH IS: ${PATH}"
+   ln -s ${bcbio_install_path%?}/anaconda/envs/python2/bin/python ${bcbio_install_path%?}/tools/bin/python2
 
    ## check if a genome is installed on the system
    echo " --- [$(date +"%F %R")] Check if there is any genome installed on the system"
@@ -71,6 +73,8 @@ if [[ ${bcbio_existing_version%?} = "no" ]]; then
    echo " --- [$(date +"%F %R")] Setting the PATH for Python 3 and Python2 environment installation."
    export PATH=${bcbio_install_path%?}/anaconda/bin:${bcbio_install_path%?}/tools/bin:${bcbio_install_path%?}/extra3/bin:${bcbio_install_path%?}/extra_conda2/bin$:{PATH}
    echo " --- [$(date +"%F %R")] The PATH IS: ${PATH}"
+   
+   ln -s ${bcbio_install_path%?}/anaconda/envs/python2/bin/python ${bcbio_install_path%?}/tools/bin/python2
 
    ## install genomic data as described in the config file
    if [[ ${bcbio_annotated_species%?} = "yes" ]]; then
