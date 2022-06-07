@@ -40,4 +40,4 @@ ln -s ${bcbio_install_path%?}/anaconda/bin/conda ${bcbio_install_path%?}/anacond
 ln -s ${bcbio_install_path%?}/anaconda/bin/python ${bcbio_install_path%?}/anaconda/bin/bcbio_python
 
 ## set biobambam version to be stable 
-bcbio_conda install -y biobambam=2.0.87 -c bioconda
+${bcbio_install_path%?}/anaconda/bin/bcbio_conda install -y biobambam=2.0.87 -c bioconda

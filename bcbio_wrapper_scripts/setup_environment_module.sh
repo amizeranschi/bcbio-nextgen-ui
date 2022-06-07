@@ -16,7 +16,7 @@ if [[ ${bcbio_existing_version%?} = "yes" ]]; then
    
    ## set the path with all the utils
    echo " --- [$(date +"%F %R")] Setting the PATH for Python 3 and Python2 environment installation."
-   export PATH=${bcbio_install_path%?}/anaconda/bin:${bcbio_install_path%?}/tools/bin:${bcbio_install_path%?}/extra3/bin:${bcbio_install_path%?}/extra2/bin:${PATH}
+   export PATH="${bcbio_install_path%?}/anaconda/bin:${bcbio_install_path%?}/tools/bin:${bcbio_install_path%?}/extra3/bin:${bcbio_install_path%?}/extra2/bin${PATH:+:${PATH}}"
    echo " --- [$(date +"%F %R")] The PATH IS: ${PATH}"
    ln -s ${bcbio_install_path%?}/anaconda/envs/python2/bin/python ${bcbio_install_path%?}/tools/bin/python2
 
@@ -52,8 +52,8 @@ if [[ ${bcbio_existing_version%?} = "yes" ]]; then
 
    fi
 
-   echo " --- [$(date +"%F %R")] The requested genome ${bcbio_genome%?} was found at ${bcbio_install_path%?}."
-   bcbio_conda install -y biobambam=2.0.87 -c bioconda
+   echo " --- [$(date +"%F %R")] The requested genome ${bcbio_genome%?} found at ${bcbio_install_path%?}."
+   ${bcbio_install_path%?}/anaconda/bin/bcbio_conda install -y biobambam=2.0.87 -c bioconda
 fi
 
 ##########################################################################################################################################################################################
@@ -71,7 +71,7 @@ if [[ ${bcbio_existing_version%?} = "no" ]]; then
 
    ## set the path with all the utils
    echo " --- [$(date +"%F %R")] Setting the PATH for Python 3 and Python2 environment installation."
-   export PATH=${bcbio_install_path%?}/anaconda/bin:${bcbio_install_path%?}/tools/bin:${bcbio_install_path%?}/extra3/bin:${bcbio_install_path%?}/extra_conda2/bin$:{PATH}
+   export PATH="${bcbio_install_path%?}/anaconda/bin:${bcbio_install_path%?}/tools/bin:${bcbio_install_path%?}/extra3/bin:${bcbio_install_path%?}/extra2/bin${PATH:+:${PATH}}"
    echo " --- [$(date +"%F %R")] The PATH IS: ${PATH}"
    
    ln -s ${bcbio_install_path%?}/anaconda/envs/python2/bin/python ${bcbio_install_path%?}/tools/bin/python2
@@ -88,7 +88,7 @@ if [[ ${bcbio_existing_version%?} = "no" ]]; then
       echo " --- [$(date +"%F %R")] This uses a small amount of storage and is required for creating a baseline Bcbio-nextgen configuration"
       
       ## install custom genome
-      bcbio_nexgen.py upgrade -u skip --genomes sacCer3 --datatarget variation --datatarget rnaseq --datatarget smallrna \
+      bcbio_nextgen.py upgrade -u skip --genomes sacCer3 --datatarget variation --datatarget rnaseq --datatarget smallrna \
                --aligners bwa --aligners bowtie2 --aligners hisat2 --aligners star --isolate --cores ${bcbio_total_cores} --mamba
       
       echo " --- [$(date +"%F %R")] Installing custom genome and transcriptome annotations from the user-provided FASTA and GTF files for the ${bcbio_genome} reference"
