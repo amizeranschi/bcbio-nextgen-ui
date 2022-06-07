@@ -123,5 +123,8 @@ if [[ ${bcbio_variant_annotation%?} == "yes" ]]; then
     bash ${path_to_scripts}/structural_variants_annotation.sh $1
 fi
 
+## clean work directory
+rm -rf ${bcbio_workflow_work}
+
 ## print message for workflow completed
 echo "--- [$(date +"%F %R")] Variant calling workflow is finished."

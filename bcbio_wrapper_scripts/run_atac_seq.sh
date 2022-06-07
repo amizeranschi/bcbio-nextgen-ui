@@ -28,3 +28,6 @@ bcbio_nextgen.py ../config/${action_name}.yaml -n ${bcbio_total_cores%?}
 
 ## print message for workflow completed
 echo "--- [$(date +"%F %R")] ATAC-seq workflow is finished."
+
+## clean work directory
+rm -rf ${bcbio_workflow_work}
