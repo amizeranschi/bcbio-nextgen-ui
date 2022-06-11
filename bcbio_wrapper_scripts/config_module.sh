@@ -6,7 +6,7 @@ cd ${bcbio_runs_input}
 if [[ ${bcbio_workflow%?} == "variant_calling" ]]; then
    if [ -x "$(command -v wget)" ]; then
       rm gatk-variant.yaml
-      wget ${variant_calling_yaml}
+      wget ${variant_calling_yaml} -O gatk-variant.yaml
    else
       rm gatk-variant.yaml
       curl -L -C - -O ${variant_calling_yaml}

@@ -1,327 +1,0 @@
-using configuration file:  infos.yaml
-
-## printing the whole contents of the file:
-export bcbio_existing_version="no"
-export bcbio_development_branch="stable"
-export bcbio_total_cores="32"
-export bcbio_install_path="/export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen"
-export bcbio_upgrade="yes"
-export bcbio_annotated_species="yes"
-export bcbio_genome_fasta="/export/home/acs/stud/m/maria.nastase0912/variantCallingScripts/yeast/GTF/sacCer3_BRF.fa"
-export bcbio_transcriptome_gtf="/export/home/acs/stud/m/maria.nastase0912/variantCallingScripts/yeast/GTF/sacCer3_bcbio_lncRNA_BRF.gtf "
-export bcbio_species="Scerevisiae"
-export bcbio_genome="sacCer3"
-export bcbio_workflow="variant_calling"
- --- [2022-04-03 15:54] Setting up a Python2 environment for legacy utility packages
-PREFIX=/export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen/extra2
-Unpacking payload ...
-  0%|          | 0/37 [00:00<?, ?it/s]Extracting : python-2.7.18-h15b4118_1.conda:   0%|          | 0/37 [00:19<?, ?it/s]Extracting : python-2.7.18-h15b4118_1.conda:   3%|▎         | 1/37 [00:19<11:59, 19.99s/it]Extracting : _libgcc_mutex-0.1-main.conda:   3%|▎         | 1/37 [00:19<11:59, 19.99s/it]  Extracting : ca-certificates-2020.1.1-0.conda:   5%|▌         | 2/37 [00:19<11:39, 19.99s/it]Extracting : libstdcxx-ng-9.1.0-hdf63c60_0.conda:   8%|▊         | 3/37 [00:19<11:19, 19.99s/it]Extracting : libgcc-ng-9.1.0-hdf63c60_0.conda:  11%|█         | 4/37 [00:19<10:59, 19.99s/it]   Extracting : libffi-3.3-he6710b0_1.conda:  14%|█▎        | 5/37 [00:19<10:39, 19.99s/it]     Extracting : ncurses-6.2-he6710b0_1.conda:  16%|█▌        | 6/37 [00:23<10:19, 19.99s/it]Extracting : ncurses-6.2-he6710b0_1.conda:  19%|█▉        | 7/37 [00:23<07:05, 14.17s/it]Extracting : openssl-1.1.1g-h7b6447c_0.conda:  19%|█▉        | 7/37 [00:23<07:05, 14.17s/it]Extracting : yaml-0.1.7-had09818_2.conda:  22%|██▏       | 8/37 [00:23<06:51, 14.17s/it]    Extracting : zlib-1.2.11-h7b6447c_3.conda:  24%|██▍       | 9/37 [00:23<06:36, 14.17s/it]Extracting : libedit-3.1.20181209-hc058e9b_0.conda:  27%|██▋       | 10/37 [00:23<06:22, 14.17s/it]Extracting : readline-8.0-h7b6447c_0.conda:  30%|██▉       | 11/37 [00:23<06:08, 14.17s/it]        Extracting : tk-8.6.8-hbc83047_0.conda:  32%|███▏      | 12/37 [00:23<05:54, 14.17s/it]    Extracting : sqlite-3.31.1-h62c20be_1.conda:  35%|███▌      | 13/37 [00:23<05:40, 14.17s/it]Extracting : asn1crypto-1.3.0-py27_0.conda:  38%|███▊      | 14/37 [00:23<05:25, 14.17s/it] Extracting : certifi-2019.11.28-py27_0.conda:  41%|████      | 15/37 [00:23<05:11, 14.17s/it]Extracting : chardet-3.0.4-py27_1003.conda:  43%|████▎     | 16/37 [00:23<04:57, 14.17s/it]  Extracting : enum34-1.1.6-py27_1.conda:  46%|████▌     | 17/37 [00:23<04:43, 14.17s/it]    Extracting : futures-3.3.0-py27_0.conda:  49%|████▊     | 18/37 [00:23<04:29, 14.17s/it]Extracting : idna-2.8-py27_0.conda:  51%|█████▏    | 19/37 [00:23<04:15, 14.17s/it]     Extracting : ipaddress-1.0.23-py_0.conda:  54%|█████▍    | 20/37 [00:23<04:00, 14.17s/it]Extracting : pycosat-0.6.3-py27h7b6447c_0.conda:  57%|█████▋    | 21/37 [00:23<03:46, 14.17s/it]Extracting : pycparser-2.20-py_0.conda:  59%|█████▉    | 22/37 [00:23<03:32, 14.17s/it]         Extracting : pysocks-1.7.1-py27_0.conda:  62%|██████▏   | 23/37 [00:23<03:18, 14.17s/it]Extracting : ruamel_yaml-0.15.87-py27h7b6447c_0.conda:  65%|██████▍   | 24/37 [00:23<03:04, 14.17s/it]Extracting : six-1.13.0-py27_0.conda:  68%|██████▊   | 25/37 [00:23<02:50, 14.17s/it]                 Extracting : tqdm-4.46.0-py_0.conda:  70%|███████   | 26/37 [00:23<02:35, 14.17s/it] Extracting : cffi-1.14.0-py27he30daa8_1.conda:  73%|███████▎  | 27/37 [00:23<02:21, 14.17s/it]Extracting : conda-package-handling-1.6.0-py27h7b6447c_0.conda:  76%|███████▌  | 28/37 [00:23<02:07, 14.17s/it]Extracting : setuptools-44.0.0-py27_0.conda:  78%|███████▊  | 29/37 [00:23<01:53, 14.17s/it]                   Extracting : cryptography-2.8-py27h1ba5d50_0.conda:  81%|████████  | 30/37 [00:23<01:39, 14.17s/it]Extracting : wheel-0.33.6-py27_0.conda:  84%|████████▍ | 31/37 [00:23<01:25, 14.17s/it]            Extracting : pip-19.3.1-py27_0.conda:  86%|████████▋ | 32/37 [00:23<01:10, 14.17s/it]  Extracting : pyopenssl-19.1.0-py27_0.conda:  89%|████████▉ | 33/37 [00:23<00:56, 14.17s/it]Extracting : urllib3-1.25.7-py27_0.conda:  92%|█████████▏| 34/37 [00:23<00:42, 14.17s/it]  Extracting : requests-2.22.0-py27_1.conda:  95%|█████████▍| 35/37 [00:23<00:28, 14.17s/it]Extracting : conda-4.8.3-py27_0.tar.bz2:  97%|█████████▋| 36/37 [00:23<00:14, 14.17s/it]                                                                                          Collecting package metadata (current_repodata.json): ...working... done
-Solving environment: ...working... done
-
-## Package Plan ##
-
-  environment location: /export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen/extra2
-
-  added / updated specs:
-    - _libgcc_mutex==0.1=main
-    - asn1crypto==1.3.0=py27_0
-    - ca-certificates==2020.1.1=0
-    - certifi==2019.11.28=py27_0
-    - cffi==1.14.0=py27he30daa8_1
-    - chardet==3.0.4=py27_1003
-    - conda-package-handling==1.6.0=py27h7b6447c_0
-    - conda==4.8.3=py27_0
-    - cryptography==2.8=py27h1ba5d50_0
-    - enum34==1.1.6=py27_1
-    - futures==3.3.0=py27_0
-    - idna==2.8=py27_0
-    - ipaddress==1.0.23=py_0
-    - libedit==3.1.20181209=hc058e9b_0
-    - libffi==3.3=he6710b0_1
-    - libgcc-ng==9.1.0=hdf63c60_0
-    - libstdcxx-ng==9.1.0=hdf63c60_0
-    - ncurses==6.2=he6710b0_1
-    - openssl==1.1.1g=h7b6447c_0
-    - pip==19.3.1=py27_0
-    - pycosat==0.6.3=py27h7b6447c_0
-    - pycparser==2.20=py_0
-    - pyopenssl==19.1.0=py27_0
-    - pysocks==1.7.1=py27_0
-    - python==2.7.18=h15b4118_1
-    - readline==8.0=h7b6447c_0
-    - requests==2.22.0=py27_1
-    - ruamel_yaml==0.15.87=py27h7b6447c_0
-    - setuptools==44.0.0=py27_0
-    - six==1.13.0=py27_0
-    - sqlite==3.31.1=h62c20be_1
-    - tk==8.6.8=hbc83047_0
-    - tqdm==4.46.0=py_0
-    - urllib3==1.25.7=py27_0
-    - wheel==0.33.6=py27_0
-    - yaml==0.1.7=had09818_2
-    - zlib==1.2.11=h7b6447c_3
-
-
-The following NEW packages will be INSTALLED:
-
-  _libgcc_mutex      pkgs/main/linux-64::_libgcc_mutex-0.1-main
-  asn1crypto         pkgs/main/linux-64::asn1crypto-1.3.0-py27_0
-  ca-certificates    pkgs/main/linux-64::ca-certificates-2020.1.1-0
-  certifi            pkgs/main/linux-64::certifi-2019.11.28-py27_0
-  cffi               pkgs/main/linux-64::cffi-1.14.0-py27he30daa8_1
-  chardet            pkgs/main/linux-64::chardet-3.0.4-py27_1003
-  conda              pkgs/main/linux-64::conda-4.8.3-py27_0
-  conda-package-han~ pkgs/main/linux-64::conda-package-handling-1.6.0-py27h7b6447c_0
-  cryptography       pkgs/main/linux-64::cryptography-2.8-py27h1ba5d50_0
-  enum34             pkgs/main/linux-64::enum34-1.1.6-py27_1
-  futures            pkgs/main/linux-64::futures-3.3.0-py27_0
-  idna               pkgs/main/linux-64::idna-2.8-py27_0
-  ipaddress          pkgs/main/noarch::ipaddress-1.0.23-py_0
-  libedit            pkgs/main/linux-64::libedit-3.1.20181209-hc058e9b_0
-  libffi             pkgs/main/linux-64::libffi-3.3-he6710b0_1
-  libgcc-ng          pkgs/main/linux-64::libgcc-ng-9.1.0-hdf63c60_0
-  libstdcxx-ng       pkgs/main/linux-64::libstdcxx-ng-9.1.0-hdf63c60_0
-  ncurses            pkgs/main/linux-64::ncurses-6.2-he6710b0_1
-  openssl            pkgs/main/linux-64::openssl-1.1.1g-h7b6447c_0
-  pip                pkgs/main/linux-64::pip-19.3.1-py27_0
-  pycosat            pkgs/main/linux-64::pycosat-0.6.3-py27h7b6447c_0
-  pycparser          pkgs/main/noarch::pycparser-2.20-py_0
-  pyopenssl          pkgs/main/linux-64::pyopenssl-19.1.0-py27_0
-  pysocks            pkgs/main/linux-64::pysocks-1.7.1-py27_0
-  python             pkgs/main/linux-64::python-2.7.18-h15b4118_1
-  readline           pkgs/main/linux-64::readline-8.0-h7b6447c_0
-  requests           pkgs/main/linux-64::requests-2.22.0-py27_1
-  ruamel_yaml        pkgs/main/linux-64::ruamel_yaml-0.15.87-py27h7b6447c_0
-  setuptools         pkgs/main/linux-64::setuptools-44.0.0-py27_0
-  six                pkgs/main/linux-64::six-1.13.0-py27_0
-  sqlite             pkgs/main/linux-64::sqlite-3.31.1-h62c20be_1
-  tk                 pkgs/main/linux-64::tk-8.6.8-hbc83047_0
-  tqdm               pkgs/main/noarch::tqdm-4.46.0-py_0
-  urllib3            pkgs/main/linux-64::urllib3-1.25.7-py27_0
-  wheel              pkgs/main/linux-64::wheel-0.33.6-py27_0
-  yaml               pkgs/main/linux-64::yaml-0.1.7-had09818_2
-  zlib               pkgs/main/linux-64::zlib-1.2.11-h7b6447c_3
-
-
-Preparing transaction: ...working... done
-Executing transaction: ...working... done
-installation finished.
-Collecting package metadata (current_repodata.json): ...working... done
-Solving environment: ...working... failed with initial frozen solve. Retrying with flexible solve.
-Solving environment: ...working... failed with repodata from current_repodata.json, will retry with next repodata source.
-Collecting package metadata (repodata.json): ...working... done
-Solving environment: ...working... done
-
-
-==> WARNING: A newer version of conda exists. <==
-  current version: 4.8.3
-  latest version: 4.12.0
-
-Please update conda by running
-
-    $ conda update -n base -c defaults conda
-
-
-
-## Package Plan ##
-
-  environment location: /export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen/extra2
-
-  added / updated specs:
-    - mamba
-
-
-The following packages will be downloaded:
-
-    package                    |            build
-    ---------------------------|-----------------
-    ca-certificates-2021.10.8  |       ha878542_0         139 KB  conda-forge
-    certifi-2019.11.28         |   py27h8c360ce_1         149 KB  conda-forge
-    conda-4.8.3                |   py27h8c360ce_1         3.0 MB  conda-forge
-    libsolv-0.7.16             |       h8b12597_0         455 KB  conda-forge
-    mamba-0.1.0                |   py27hc9558a2_2          98 KB  conda-forge
-    openssl-1.1.1h             |       h516909a_0         2.1 MB  conda-forge
-    python_abi-2.7             |         1_cp27mu           4 KB  conda-forge
-    ------------------------------------------------------------
-                                           Total:         6.0 MB
-
-The following NEW packages will be INSTALLED:
-
-  libsolv            conda-forge/linux-64::libsolv-0.7.16-h8b12597_0
-  mamba              conda-forge/linux-64::mamba-0.1.0-py27hc9558a2_2
-  python_abi         conda-forge/linux-64::python_abi-2.7-1_cp27mu
-
-The following packages will be UPDATED:
-
-  ca-certificates     pkgs/main::ca-certificates-2020.1.1-0 --> conda-forge::ca-certificates-2021.10.8-ha878542_0
-  certifi              pkgs/main::certifi-2019.11.28-py27_0 --> conda-forge::certifi-2019.11.28-py27h8c360ce_1
-  conda                       pkgs/main::conda-4.8.3-py27_0 --> conda-forge::conda-4.8.3-py27h8c360ce_1
-  openssl              pkgs/main::openssl-1.1.1g-h7b6447c_0 --> conda-forge::openssl-1.1.1h-h516909a_0
-
-
-
-Downloading and Extracting Packages
-python_abi-2.7       | 4 KB      |            |   0% python_abi-2.7       | 4 KB      | ########## | 100% 
-libsolv-0.7.16       | 455 KB    |            |   0% libsolv-0.7.16       | 455 KB    | 3          |   4% libsolv-0.7.16       | 455 KB    | ########## | 100% 
-openssl-1.1.1h       | 2.1 MB    |            |   0% openssl-1.1.1h       | 2.1 MB    |            |   1% openssl-1.1.1h       | 2.1 MB    | ##8        |  29% openssl-1.1.1h       | 2.1 MB    | #####8     |  59% openssl-1.1.1h       | 2.1 MB    | ########## | 100% 
-conda-4.8.3          | 3.0 MB    |            |   0% conda-4.8.3          | 3.0 MB    |            |   1% conda-4.8.3          | 3.0 MB    | 7          |   8% conda-4.8.3          | 3.0 MB    | #          |  11% conda-4.8.3          | 3.0 MB    | #4         |  15% conda-4.8.3          | 3.0 MB    | #9         |  19% conda-4.8.3          | 3.0 MB    | ##3        |  23% conda-4.8.3          | 3.0 MB    | ##8        |  28% conda-4.8.3          | 3.0 MB    | ###2       |  32% conda-4.8.3          | 3.0 MB    | ###7       |  38% conda-4.8.3          | 3.0 MB    | ####1      |  42% conda-4.8.3          | 3.0 MB    | ####5      |  46% conda-4.8.3          | 3.0 MB    | #####1     |  51% conda-4.8.3          | 3.0 MB    | #####5     |  55% conda-4.8.3          | 3.0 MB    | ######4    |  64% conda-4.8.3          | 3.0 MB    | ######9    |  70% conda-4.8.3          | 3.0 MB    | #######7   |  78% conda-4.8.3          | 3.0 MB    | ########9  |  89% conda-4.8.3          | 3.0 MB    | ########## | 100% 
-certifi-2019.11.28   | 149 KB    |            |   0% certifi-2019.11.28   | 149 KB    | ########## | 100% 
-mamba-0.1.0          | 98 KB     |            |   0% mamba-0.1.0          | 98 KB     | #6         |  16% mamba-0.1.0          | 98 KB     | ########## | 100% 
-ca-certificates-2021 | 139 KB    |            |   0% ca-certificates-2021 | 139 KB    | ########## | 100% 
-Preparing transaction: ...working... done
-Verifying transaction: ...working... done
-Executing transaction: ...working... done
-DEPRECATION: Python 2.7 will reach the end of its life on January 1st, 2020. Please upgrade your Python as Python 2.7 won't be maintained after that date. A future version of pip will drop support for Python 2.7. More details about Python 2 support in pip, can be found at https://pip.pypa.io/en/latest/development/release-process/#python-2-support
-Processing ./.cache/pip/wheels/25/91/ef/0f980ddd08fbb2312859f366054f08575a91d08a706289bd1d/bcbio_monitor-1.0.6-cp27-none-any.whl
-Collecting pytz
-  Using cached https://files.pythonhosted.org/packages/60/2e/dec1cc18c51b8df33c7c4d0a321b084cf38e1733b98f9d15018880fb4970/pytz-2022.1-py2.py3-none-any.whl
-Collecting python-dateutil
-  Using cached https://files.pythonhosted.org/packages/36/7a/87837f39d0296e723bb9b62bbb257d0355c7f6128853c78955f57342a56d/python_dateutil-2.8.2-py2.py3-none-any.whl
-Collecting pyyaml
-  Using cached https://files.pythonhosted.org/packages/ba/d4/3cf562876e0cda0405e65d351b835077ab13990e5b92912ef2bf1a2280e0/PyYAML-5.4.1-cp27-cp27mu-manylinux1_x86_64.whl
-Processing ./.cache/pip/wheels/4a/23/7e/d1604c27f6b3952dc4888335151cd6b2e045d985790f582649/gevent-21.12.0-cp27-cp27mu-linux_x86_64.whl
-Collecting graphviz
-  Using cached https://files.pythonhosted.org/packages/86/86/89ba50ba65928001d3161f23bfa03945ed18ea13a1d1d44a772ff1fa4e7a/graphviz-0.16-py2.py3-none-any.whl
-Collecting flask>=0.10.1
-  Using cached https://files.pythonhosted.org/packages/e8/6d/994208daa354f68fd89a34a8bafbeaab26fda84e7af1e35bdaed02b667e6/Flask-1.1.4-py2.py3-none-any.whl
-Collecting paramiko
-  Using cached https://files.pythonhosted.org/packages/be/6f/f0ec5f5fb00d270ebd80946be561795c67468473eb495222794cae285d40/paramiko-2.10.3-py2.py3-none-any.whl
-Requirement already satisfied: requests in ./bcbio_nextgen/extra2/lib/python2.7/site-packages (from bcbio-monitor) (2.22.0)
-Requirement already satisfied: six>=1.5 in ./bcbio_nextgen/extra2/lib/python2.7/site-packages (from python-dateutil) (1.13.0)
-Collecting zope.interface
-  Using cached https://files.pythonhosted.org/packages/88/32/f45c09e4dc2033146f3fdfb66c96bb968805c53f64c43dcb24ee409aaa4f/zope.interface-5.4.0-cp27-cp27mu-manylinux2010_x86_64.whl
-Collecting greenlet<2.0,>=1.1.0; platform_python_implementation == "CPython"
-  Using cached https://files.pythonhosted.org/packages/ed/18/65451a0b924688ca341a71eee561adb1e9371dbd94960cd012854e9d93b8/greenlet-1.1.2-cp27-cp27mu-manylinux2010_x86_64.whl
-Collecting zope.event
-  Using cached https://files.pythonhosted.org/packages/9e/85/b45408c64f3b888976f1d5b37eed8d746b8d5729a66a49ec846fda27d371/zope.event-4.5.0-py2.py3-none-any.whl
-Requirement already satisfied: setuptools in ./bcbio_nextgen/extra2/lib/python2.7/site-packages (from gevent>=1.0->bcbio-monitor) (44.0.0.post20200106)
-Collecting itsdangerous<2.0,>=0.24
-  Using cached https://files.pythonhosted.org/packages/76/ae/44b03b253d6fade317f32c24d100b3b35c2239807046a4c953c7b89fa49e/itsdangerous-1.1.0-py2.py3-none-any.whl
-Collecting Jinja2<3.0,>=2.10.1
-  Using cached https://files.pythonhosted.org/packages/7e/c2/1eece8c95ddbc9b1aeb64f5783a9e07a286de42191b7204d67b7496ddf35/Jinja2-2.11.3-py2.py3-none-any.whl
-Collecting Werkzeug<2.0,>=0.15
-  Using cached https://files.pythonhosted.org/packages/cc/94/5f7079a0e00bd6863ef8f1da638721e9da21e5bacee597595b318f71d62e/Werkzeug-1.0.1-py2.py3-none-any.whl
-Collecting click<8.0,>=5.1
-  Using cached https://files.pythonhosted.org/packages/d2/3d/fa76db83bf75c4f8d338c2fd15c8d33fdd7ad23a9b5e57eb6c5de26b430e/click-7.1.2-py2.py3-none-any.whl
-Requirement already satisfied: cryptography>=2.5 in ./bcbio_nextgen/extra2/lib/python2.7/site-packages (from paramiko->bcbio-monitor) (2.8)
-Collecting pynacl>=1.0.1
-  Using cached https://files.pythonhosted.org/packages/de/63/bb36279da38df643c6df3a8a389f29a6ff4a8854468f4c9b9d925b27d57d/PyNaCl-1.4.0-cp27-cp27mu-manylinux1_x86_64.whl
-Collecting bcrypt>=3.1.3
-  Using cached https://files.pythonhosted.org/packages/ad/36/9a0227d048e98409f012570f7bef8a8c2373b9c9c5dfbf82963cbae05ede/bcrypt-3.1.7-cp27-cp27mu-manylinux1_x86_64.whl
-Requirement already satisfied: chardet<3.1.0,>=3.0.2 in ./bcbio_nextgen/extra2/lib/python2.7/site-packages (from requests->bcbio-monitor) (3.0.4)
-Requirement already satisfied: idna<2.9,>=2.5 in ./bcbio_nextgen/extra2/lib/python2.7/site-packages (from requests->bcbio-monitor) (2.8)
-Requirement already satisfied: urllib3!=1.25.0,!=1.25.1,<1.26,>=1.21.1 in ./bcbio_nextgen/extra2/lib/python2.7/site-packages (from requests->bcbio-monitor) (1.25.7)
-Requirement already satisfied: certifi>=2017.4.17 in ./bcbio_nextgen/extra2/lib/python2.7/site-packages (from requests->bcbio-monitor) (2019.11.28)
-Collecting MarkupSafe>=0.23
-  Using cached https://files.pythonhosted.org/packages/fb/40/f3adb7cf24a8012813c5edb20329eb22d5d8e2a0ecf73d21d6b85865da11/MarkupSafe-1.1.1-cp27-cp27mu-manylinux1_x86_64.whl
-Requirement already satisfied: enum34; python_version < "3" in ./bcbio_nextgen/extra2/lib/python2.7/site-packages (from cryptography>=2.5->paramiko->bcbio-monitor) (1.1.6)
-Requirement already satisfied: cffi!=1.11.3,>=1.8 in ./bcbio_nextgen/extra2/lib/python2.7/site-packages (from cryptography>=2.5->paramiko->bcbio-monitor) (1.14.0)
-Requirement already satisfied: ipaddress; python_version < "3" in ./bcbio_nextgen/extra2/lib/python2.7/site-packages (from cryptography>=2.5->paramiko->bcbio-monitor) (1.0.23)
-Requirement already satisfied: pycparser in ./bcbio_nextgen/extra2/lib/python2.7/site-packages (from cffi!=1.11.3,>=1.8->cryptography>=2.5->paramiko->bcbio-monitor) (2.20)
-Installing collected packages: pyyaml, zope.interface, greenlet, zope.event, gevent, graphviz, itsdangerous, MarkupSafe, Jinja2, Werkzeug, click, flask, pynacl, bcrypt, paramiko, bcbio-monitor, pytz, python-dateutil
-Successfully installed Jinja2-2.11.3 MarkupSafe-1.1.1 Werkzeug-1.0.1 bcbio-monitor-1.0.6 bcrypt-3.1.7 click-7.1.2 flask-1.1.4 gevent-21.12.0 graphviz-0.16 greenlet-1.1.2 itsdangerous-1.1.0 paramiko-2.10.3 pynacl-1.4.0 python-dateutil-2.8.2 pytz-2022.1 pyyaml-5.4.1 zope.event-4.5.0 zope.interface-5.4.0
-
-# >>>>>>>>>>>>>>>>>>>>>> ERROR REPORT <<<<<<<<<<<<<<<<<<<<<<
-
-    Traceback (most recent call last):
-      File "/export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen/extra2/lib/python2.7/site-packages/conda/exceptions.py", line 1079, in __call__
-        return func(*args, **kwargs)
-      File "/export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen/extra2/lib/python2.7/site-packages/mamba/mamba.py", line 522, in exception_converter
-        raise e
-    RuntimeError: Did not find key as expected!
-
-`$ /export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen/extra2/bin/mamba_extra2 install --yes -c conda-forge -c bioconda faststructure`
-
-  environment variables:
-                 CIO_TEST=<not set>
-               CONDA_ROOT=/export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen/extra2
-              CONDA_SHLVL=0
-                  MANPATH=::/opt/puppetlabs/puppet/share/man
-               MODULEPATH=/usr/share/Modules/modulefiles:/etc/modulefiles:/usr/share/modulefiles
-                     PATH=/export/home/acs/stud/m/maria.nastase0912/bcbio-
-                          nextgen/anaconda/bin:/export/home/acs/stud/m/maria.nastase0912/bcbio-
-                          nextgen/tools/bin:/export/home/acs/stud/m/maria.nastase0912/sra-tools/
-                          anaconda/bin:/usr/share/Modules/bin:/usr/condabin:/usr/local/bin:/usr/
-                          bin:/usr/local/sbin:/usr/sbin:/opt/puppetlabs/bin:/export/home/acs/stu
-                          d/m/maria.nastase0912/.local/bin:/export/home/acs/stud/m/maria.nastase
-                          0912/bin
-       REQUESTS_CA_BUNDLE=<not set>
-            SSL_CERT_FILE=<not set>
-       bcbio_install_path=/export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen
-
-     active environment : None
-            shell level : 0
-       user config file : /export/home/acs/stud/m/maria.nastase0912/.condarc
- populated config files : 
-          conda version : 4.8.3
-    conda-build version : not installed
-         python version : 2.7.18.final.0
-       virtual packages : __glibc=2.28
-       base environment : /export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen/extra2  (writable)
-           channel URLs : https://conda.anaconda.org/conda-forge/linux-64
-                          https://conda.anaconda.org/conda-forge/noarch
-                          https://conda.anaconda.org/bioconda/linux-64
-                          https://conda.anaconda.org/bioconda/noarch
-                          https://repo.anaconda.com/pkgs/main/linux-64
-                          https://repo.anaconda.com/pkgs/main/noarch
-                          https://repo.anaconda.com/pkgs/r/linux-64
-                          https://repo.anaconda.com/pkgs/r/noarch
-          package cache : /export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen/extra2/pkgs
-                          /export/home/acs/stud/m/maria.nastase0912/.conda/pkgs
-       envs directories : /export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen/extra2/envs
-                          /export/home/acs/stud/m/maria.nastase0912/.conda/envs
-               platform : linux-64
-             user-agent : conda/4.8.3 requests/2.22.0 CPython/2.7.18 Linux/5.4.175-1.el8.elrepo.x86_64 centos/8 glibc/2.28
-                UID:GID : 92338:9007
-             netrc file : None
-           offline mode : False
-
-
-An unexpected error has occurred. Conda has prepared the above report.
-
-
-                  __    __    __    __
-                 /  \  /  \  /  \  /  \
-                /    \/    \/    \/    \
-███████████████/  /██/  /██/  /██/  /████████████████████████
-              /  / \   / \   / \   / \  \____
-             /  /   \_/   \_/   \_/   \    o \__,
-            / _/                       \_____/  `
-            |/
-        ███╗   ███╗ █████╗ ███╗   ███╗██████╗  █████╗
-        ████╗ ████║██╔══██╗████╗ ████║██╔══██╗██╔══██╗
-        ██╔████╔██║███████║██╔████╔██║██████╔╝███████║
-        ██║╚██╔╝██║██╔══██║██║╚██╔╝██║██╔══██╗██╔══██║
-        ██║ ╚═╝ ██║██║  ██║██║ ╚═╝ ██║██████╔╝██║  ██║
-        ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝╚═════╝ ╚═╝  ╚═╝
-
-        Supported by @QuantStack
-
-        GitHub:  https://github.com/QuantStack/mamba
-        Twitter: https://twitter.com/QuantStack
-
-█████████████████████████████████████████████████████████████
-
-Getting  conda-forge linux-64
-Getting  conda-forge noarch
-Getting  bioconda linux-64
-Getting  bioconda noarch
-Getting  pkgs/main linux-64
-Getting  pkgs/main noarch
-Getting  pkgs/r linux-64
-Getting  pkgs/r noarch
-
-Looking for: [u'faststructure']
-
-252000 packages in https://conda.anaconda.org/conda-forge/linux-64
-35400 packages in https://conda.anaconda.org/bioconda/noarch
-44273 packages in https://conda.anaconda.org/bioconda/linux-64
-87456 packages in https://conda.anaconda.org/conda-forge/noarch
-24825 packages in https://repo.anaconda.com/pkgs/main/linux-64
-4653 packages in https://repo.anaconda.com/pkgs/main/noarch
-6637 packages in https://repo.anaconda.com/pkgs/r/linux-64
-5025 packages in https://repo.anaconda.com/pkgs/r/noarch
-mkdir: cannot create directory ‘/export/home/acs/stud/m/maria.nastase0912/bcbio_runs/workflow_variant_calling/input’: No such file or directory
-mkdir: cannot create directory ‘/export/home/acs/stud/m/maria.nastase0912/bcbio_runs/workflow_variant_calling/config’: No such file or directory
-mkdir: cannot create directory ‘/export/home/acs/stud/m/maria.nastase0912/bcbio_runs/workflow_variant_calling/work’: No such file or directory
-mkdir: cannot create directory ‘/export/home/acs/stud/m/maria.nastase0912/bcbio_runs/workflow_variant_calling/final’: No such file or directory

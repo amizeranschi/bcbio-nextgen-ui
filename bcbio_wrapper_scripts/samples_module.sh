@@ -45,8 +45,6 @@ if [[ ${bcbio_download_samples%?} = "yes" ]]; then
          bgzip -c ${sample_name_list[$((${cnt}*2+1))]}.fastq > ${sample_name_list[$((${cnt}*2+1))]}.fastq.gz
       fi
 
-      ## TODO compute for 3 samples
-
       cnt=$((${cnt} + 1))
    done
    
@@ -59,16 +57,18 @@ fi
 if [[ ${bcbio_download_samples%?} = "no" ]]; then
    ## go to source path where the samples are stored on the system
    cd ${bcbio_path_to_samples_on_sys%?}
-   ## create symlinks in the input directory for the samples
-   echo "--- [$(date +"%F %R")] Create symlinks in the input directory for the samples. "
+   ## copy the samples in the input directory
+   echo "--- [$(date +"%F %R")] Copy samples to the input directory. "
    for FILE in *
    do
+      ## get the name of the file without the extension
       file_name=$(echo "${FILE}" | cut -f 1 -d '.')
       for val in ${sample_name_list[@]}
       do
+         # for all files in directory compare the names with the list given as input and copy them
          if [[ ${file_name} = ${val} ]]; then
             echo "${FILE}"
-            cp ${FILE} ${bcbio_runs_input}
+            # cp ${FILE} ${bcbio_runs_input}
          fi
       done
    done

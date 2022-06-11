@@ -1,104 +1,0 @@
-using configuration file:  infos.yaml
-
-## printing the whole contents of the file:
-export bcbio_existing_version="no"
-export bcbio_development_branch="development"
-export bcbio_total_cores="32"
-export bcbio_main_cores="32"
-export bcbio_install_path="/export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen"
-export bcbio_upgrade="yes"
-export bcbio_annotated_species="yes"
-export bcbio_genome_fasta="/export/home/acs/stud/m/maria.nastase0912/variantCallingScripts/yeast/GTF/sacCer3_BRF.fa"
-export bcbio_transcriptome_gtf="/export/home/acs/stud/m/maria.nastase0912/variantCallingScripts/yeast/GTF/sacCer3_bcbio_lncRNA_BRF.gtf "
-export bcbio_species="Scerevisiae"
-export bcbio_genome="sacCer3"
-export bcbio_vep_species="saccharomyces_cerevisiae"
-export bcbio_vep_assembly="R64-1-1"
-export bcbio_ensembl_ver="105"
-export bcbio_workflow="variant_calling"
-export bcbio_variant_annotation="yes"
-export bcbio_download_samples="yes"
-export bcbio_samples="SRR6059150 SRR6059151 SRR6783014 SRR6783015 SRR6783016 SRR6784354"
-export bcbio_samples_fastq="500-F-Rep3.fastq 500-I-Rep3.fastq 500-I-Rep1.fastq 500-F-Rep2.fastq 500-I-Rep2.fastq 500-F-Rep1.fastq"
-export bcbio_csv_file_path="/export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen_usability_improvements/varcall-analysis.csv"
-
- --- [2022-04-21 00:26] Starting the variant calling workflow
- --- [2022-04-21 00:26] Using Python version: Python 3.9.7
- --- [2022-04-21 00:26] Current PATH variable: /export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen/extra3/bin:/export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen/anaconda/bin:/export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen/tools/bin:/export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen/anaconda/bin:/export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen/tools/bin:/usr/share/Modules/bin:/usr/condabin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/puppetlabs/bin:/export/home/acs/stud/m/maria.nastase0912/.local/bin:/export/home/acs/stud/m/maria.nastase0912/bin
- --- [2022-04-21 00:26] Using configuration file:  infos.yaml
- --- [2022-04-21 00:26] Skipping variant calling because the VCF file exists: /export/home/acs/stud/m/maria.nastase0912/bcbio_runs/workflow_variant_calling/input/varcall-analysis/final/*_varcall-analysis/*-gatk-haplotype*.vcf.gz
- --- [2022-04-21 00:26] Finished variant calling
- --- [2022-04-21 00:26] Removing variants that did not pass quality filters
- --- [2022-04-21 00:26] Reordering the samples in the VCF files and generating variant statistics
- --- [2022-04-21 00:26] Variant statistics were written to the file: varcall-analysis-small-var-bcf.stats.txt
- --- [2022-04-21 00:26] Extracting genotypes to a tab-separated file: varcall-analysis-small-var-GT.table
-Using GATK jar /export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen/anaconda/envs/java/share/gatk4-4.2.6.1-0/gatk-package-4.2.6.1-local.jar
-Running:
-    java -Dsamjdk.use_async_io_read_samtools=false -Dsamjdk.use_async_io_write_samtools=true -Dsamjdk.use_async_io_write_tribble=false -Dsamjdk.compression_level=2 -jar /export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen/anaconda/envs/java/share/gatk4-4.2.6.1-0/gatk-package-4.2.6.1-local.jar VariantsToTable -R /export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen/genomes/Scerevisiae/sacCer3/seq/sacCer3.fa -V varcall-analysis-small-var.vcf -F CHROM -F POS -F ID -F REF -F ALT -GF GT -O varcall-analysis-small-var-GT.table
-00:26:47.839 INFO  NativeLibraryLoader - Loading libgkl_compression.so from jar:file:/export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen/anaconda/envs/java/share/gatk4-4.2.6.1-0/gatk-package-4.2.6.1-local.jar!/com/intel/gkl/native/libgkl_compression.so
-00:26:48.321 INFO  VariantsToTable - ------------------------------------------------------------
-00:26:48.322 INFO  VariantsToTable - The Genome Analysis Toolkit (GATK) v4.2.6.1
-00:26:48.322 INFO  VariantsToTable - For support and documentation go to https://software.broadinstitute.org/gatk/
-00:26:48.322 INFO  VariantsToTable - Executing as maria.nastase0912@haswell-wn30.grid.pub.ro on Linux v5.4.175-1.el8.elrepo.x86_64 amd64
-00:26:48.322 INFO  VariantsToTable - Java runtime: OpenJDK 64-Bit Server VM v11.0.9.1-internal+0-adhoc..src
-00:26:48.322 INFO  VariantsToTable - Start Date/Time: April 21, 2022 at 12:26:47 AM EEST
-00:26:48.323 INFO  VariantsToTable - ------------------------------------------------------------
-00:26:48.323 INFO  VariantsToTable - ------------------------------------------------------------
-00:26:48.323 INFO  VariantsToTable - HTSJDK Version: 2.24.1
-00:26:48.323 INFO  VariantsToTable - Picard Version: 2.27.1
-00:26:48.323 INFO  VariantsToTable - Built for Spark Version: 2.4.5
-00:26:48.323 INFO  VariantsToTable - HTSJDK Defaults.COMPRESSION_LEVEL : 2
-00:26:48.324 INFO  VariantsToTable - HTSJDK Defaults.USE_ASYNC_IO_READ_FOR_SAMTOOLS : false
-00:26:48.324 INFO  VariantsToTable - HTSJDK Defaults.USE_ASYNC_IO_WRITE_FOR_SAMTOOLS : true
-00:26:48.324 INFO  VariantsToTable - HTSJDK Defaults.USE_ASYNC_IO_WRITE_FOR_TRIBBLE : false
-00:26:48.324 INFO  VariantsToTable - Deflater: IntelDeflater
-00:26:48.324 INFO  VariantsToTable - Inflater: IntelInflater
-00:26:48.324 INFO  VariantsToTable - GCS max retries/reopens: 20
-00:26:48.324 INFO  VariantsToTable - Requester pays: disabled
-00:26:48.324 INFO  VariantsToTable - Initializing engine
-00:26:48.491 INFO  FeatureManager - Using codec VCFCodec to read file file:///export/home/acs/stud/m/maria.nastase0912/bcbio_runs/workflow_variant_calling/input/varcall-analysis/variant_annotation/varcall-analysis-small-var.vcf
-00:26:48.506 INFO  VariantsToTable - Done initializing engine
-00:26:48.512 WARN  VariantsToTable - Allele-specific fields will only be split if splitting multi-allelic variants is specified (`--split-multi-allelic` or `-SMA`
-00:26:48.513 INFO  ProgressMeter - Starting traversal
-00:26:48.513 INFO  ProgressMeter -        Current Locus  Elapsed Minutes    Variants Processed  Variants/Minute
-00:26:48.598 INFO  ProgressMeter -             unmapped              0.0                   639         456428.6
-00:26:48.598 INFO  ProgressMeter - Traversal complete. Processed 639 total variants in 0.0 minutes.
-00:26:48.598 INFO  VariantsToTable - Shutting down engine
-[April 21, 2022 at 12:26:48 AM EEST] org.broadinstitute.hellbender.tools.walkers.variantutils.VariantsToTable done. Elapsed time: 0.02 minutes.
-Runtime.totalMemory()=2101346304
- --- [2022-04-21 00:26] Done
-CUSTOM
- --- [2022-04-21 00:26] Running VEP once, with custom annotations from the GTF file: /export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen/genomes/Scerevisiae/sacCer3/rnaseq/ref-transcripts.gtf.gz
-
--------------------- EXCEPTION --------------------
-MSG: ERROR: Cannot use format gtf without Bio::DB::HTS::Tabix module installed
-
-STACK Bio::EnsEMBL::VEP::AnnotationSource::File::new /export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen/anaconda/envs/htslib1.10/share/ensembl-vep-104.3-1/modules/Bio/EnsEMBL/VEP/AnnotationSource/File.pm:162
-STACK Bio::EnsEMBL::VEP::AnnotationSourceAdaptor::get_all_custom /export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen/anaconda/envs/htslib1.10/share/ensembl-vep-104.3-1/modules/Bio/EnsEMBL/VEP/AnnotationSourceAdaptor.pm:228
-STACK Bio::EnsEMBL::VEP::AnnotationSourceAdaptor::get_all /export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen/anaconda/envs/htslib1.10/share/ensembl-vep-104.3-1/modules/Bio/EnsEMBL/VEP/AnnotationSourceAdaptor.pm:93
-STACK Bio::EnsEMBL::VEP::BaseRunner::get_all_AnnotationSources /export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen/anaconda/envs/htslib1.10/share/ensembl-vep-104.3-1/modules/Bio/EnsEMBL/VEP/BaseRunner.pm:170
-STACK Bio::EnsEMBL::VEP::Runner::init /export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen/anaconda/envs/htslib1.10/share/ensembl-vep-104.3-1/modules/Bio/EnsEMBL/VEP/Runner.pm:128
-STACK Bio::EnsEMBL::VEP::Runner::run /export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen/anaconda/envs/htslib1.10/share/ensembl-vep-104.3-1/modules/Bio/EnsEMBL/VEP/Runner.pm:199
-STACK toplevel /export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen/tools/bin/vep:232
-Date (localtime)    = Thu Apr 21 00:26:51 2022
-Ensembl API version = 104
----------------------------------------------------
- --- [2022-04-21 00:26] VCF file with annotations was saved as: varcall-analysis-small-var-vep.vcf
- --- [2022-04-21 00:26] Running VEP a second time, to generate the most severe consequence per variant
-
--------------------- EXCEPTION --------------------
-MSG: ERROR: Cannot use format gtf without Bio::DB::HTS::Tabix module installed
-
-STACK Bio::EnsEMBL::VEP::AnnotationSource::File::new /export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen/anaconda/envs/htslib1.10/share/ensembl-vep-104.3-1/modules/Bio/EnsEMBL/VEP/AnnotationSource/File.pm:162
-STACK Bio::EnsEMBL::VEP::AnnotationSourceAdaptor::get_all_custom /export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen/anaconda/envs/htslib1.10/share/ensembl-vep-104.3-1/modules/Bio/EnsEMBL/VEP/AnnotationSourceAdaptor.pm:228
-STACK Bio::EnsEMBL::VEP::AnnotationSourceAdaptor::get_all /export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen/anaconda/envs/htslib1.10/share/ensembl-vep-104.3-1/modules/Bio/EnsEMBL/VEP/AnnotationSourceAdaptor.pm:93
-STACK Bio::EnsEMBL::VEP::BaseRunner::get_all_AnnotationSources /export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen/anaconda/envs/htslib1.10/share/ensembl-vep-104.3-1/modules/Bio/EnsEMBL/VEP/BaseRunner.pm:170
-STACK Bio::EnsEMBL::VEP::Runner::init /export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen/anaconda/envs/htslib1.10/share/ensembl-vep-104.3-1/modules/Bio/EnsEMBL/VEP/Runner.pm:128
-STACK Bio::EnsEMBL::VEP::Runner::run /export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen/anaconda/envs/htslib1.10/share/ensembl-vep-104.3-1/modules/Bio/EnsEMBL/VEP/Runner.pm:199
-STACK toplevel /export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen/tools/bin/vep:232
-Date (localtime)    = Thu Apr 21 00:26:51 2022
-Ensembl API version = 104
----------------------------------------------------
- --- [2022-04-21 00:26] Variant consequences were written to the file: varcall-analysis-small-var-vep.table
- --- [2022-04-21 00:26] Structural variants have not been called, or there was an error while calling them.
- --- [2022-04-21 00:26] Variant calling workflow is finished.

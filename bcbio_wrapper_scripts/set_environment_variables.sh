@@ -32,6 +32,7 @@ fi
 # directory where bcbio genome is stored
 # seq_dir_genome="${bcbio_install_path}/genomes/${bcbio_species%?}/${bcbio_genome%?}/seq"
 export genome_dir="${bcbio_install_path%?}/genomes/${bcbio_species%?}/${bcbio_genome%?}"
+export gtf_file_location=" ${genome_dir}/rnaseq/ref-transcripts.gtf"
 
 # directories for the analysis directory tree of bcbio
 export bcbio_runs_final="${bcbio_runs_input}/${action_name}/final"

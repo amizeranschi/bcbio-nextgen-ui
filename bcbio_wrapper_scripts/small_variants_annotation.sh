@@ -41,22 +41,21 @@ if [ -f  ${action_name}-small-var.vcf.gz ]; then
         bgzip  ${vcf_file_name}.vcf
         bcftools index ${vcf_file_name}.vcf.gz
         bgzip -d ${vcf_file_name}.vcf.gz
-        vep --fork 4 --vcf --biotype --check_existing --distance 5000 --species ${bcbio_vep_species%?} --symbol --cache --dir_cache ${genome_dir}/vep --input_file ${vcf_file_name}.vcf --output_file ${vcf_file_name}-vep.vcf --force_overwrite --stats_file ${vcf_file_name}-vep.stats --stats_text
+        ${bcbio_install_path%?}/extra3/bin/vep --fork 4 --vcf --biotype --check_existing --distance 5000 --species ${bcbio_vep_species%?} --symbol --cache --dir_cache ${genome_dir}/vep --input_file ${vcf_file_name}.vcf --output_file ${vcf_file_name}-vep.vcf --force_overwrite --stats_file ${vcf_file_name}-vep.stats --stats_text
 
         echo "--- [$(date +"%F %R")] VCF file with annotations was saved as: ${vcf_file_name}-vep.vcf"
 
         ## run VEP again and output a tab-separated file with only the most severe consequence per variant, skipping stats generation this time
         echo "--- [$(date +"%F %R")] Running VEP a second time, to generate the most severe consequence per variant"
-        vep --fork 4 --tab --pick --no_stats --biotype --check_existing --distance 5000 --species ${bcbio_vep_species%?} --cache --dir_cache ${genome_dir}/vep --input_file ${vcf_file_name}.vcf --output_file ${vcf_file_name}-vep.table --force_overwrite 
+        ${bcbio_install_path%?}/extra3/bin/vep --fork 4 --tab --pick --no_stats --biotype --check_existing --distance 5000 --species ${bcbio_vep_species%?} --cache --dir_cache ${genome_dir}/vep --input_file ${vcf_file_name}.vcf --output_file ${vcf_file_name}-vep.table --force_overwrite 
         echo "--- [$(date +"%F %R")] Variant consequences were written to the file: ${vcf_file_name}-vep.table"
     else
         # move sort to install module -----
-        # rm /export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen/genomes/Scerevisiae/sacCer3/rnaseq/ref-transcripts.gtf.gz
         rm ${genome_dir}/rnaseq/ref-transcripts.gtf.gz
 
         sort -k 1,1 -k 4,4n -k 5,5n ${genome_dir}/rnaseq/ref-transcripts.gtf > ${genome_dir}/rnaseq/ref-transcripts_sorted.gtf 
         
-        mv ${genome_dir}/rnaseq/ref-transcripts_sorted.gtf ${genome_dir}/Scerevisiae/sacCer3/rnaseq/ref-transcripts.gtf
+        mv ${genome_dir}/rnaseq/ref-transcripts_sorted.gtf ${genome_dir}/ref-transcripts.gtf
 
         bgzip --keep ${genome_dir}/rnaseq/ref-transcripts.gtf
         tabix ${genome_dir}/rnaseq/ref-transcripts.gtf.gz
@@ -65,12 +64,12 @@ if [ -f  ${action_name}-small-var.vcf.gz ]; then
         # echo "CUSTOM"
         ## run VEP with custom annotations from the GTF file
         echo "--- [$(date +"%F %R")] Running VEP once, with custom annotations from the GTF file: ${genome_dir}/rnaseq/ref-transcripts.gtf"
-        vep --fork 4 --vcf --biotype --check_existing --distance 5000 --symbol --fasta ${genome_dir}/seq/${bcbio_genome%?}.fa --custom ${genome_dir}/rnaseq/ref-transcripts.gtf.gz,ref-transcripts,gtf,overlap,0 --input_file ${vcf_file_name}.vcf --output_file ${vcf_file_name}-vep.vcf --force_overwrite --stats_file ${vcf_file_name}-vep.stats --stats_text
+        ${bcbio_install_path%?}/extra3/bin/vep --fork 4 --vcf --biotype --check_existing --distance 5000 --symbol --fasta ${genome_dir}/seq/${bcbio_genome%?}.fa --custom ${genome_dir}/rnaseq/ref-transcripts.gtf.gz,ref-transcripts,gtf,overlap,0 --input_file ${vcf_file_name}.vcf --output_file ${vcf_file_name}-vep.vcf --force_overwrite --stats_file ${vcf_file_name}-vep.stats --stats_text
         echo "--- [$(date +"%F %R")] VCF file with annotations was saved as: ${vcf_file_name}-vep.vcf"
         
         ## run VEP again and output a tab-separated file with only the most severe consequence per variant, skipping stats generation this time
         echo "--- [$(date +"%F %R")] Running VEP a second time, to generate the most severe consequence per variant"
-        vep --fork 4 --tab --pick --no_stats --biotype --check_existing --distance 5000 --fasta ${genome_dir}/seq/${bcbio_genome%?}.fa --custom ${genome_dir}/rnaseq/ref-transcripts.gtf.gz,ref-transcripts,gtf,overlap,0 --input_file ${vcf_file_name}.vcf --output_file ${vcf_file_name}-vep.table --force_overwrite 
+        ${bcbio_install_path%?}/extra3/bin/vep --fork 4 --tab --pick --no_stats --biotype --check_existing --distance 5000 --fasta ${genome_dir}/seq/${bcbio_genome%?}.fa --custom ${genome_dir}/rnaseq/ref-transcripts.gtf.gz,ref-transcripts,gtf,overlap,0 --input_file ${vcf_file_name}.vcf --output_file ${vcf_file_name}-vep.table --force_overwrite 
         echo "--- [$(date +"%F %R")] Variant consequences were written to the file: ${vcf_file_name}-vep.table"
     fi
 

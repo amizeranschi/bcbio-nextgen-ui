@@ -117,10 +117,10 @@ if [[ ${bcbio_variant_annotation%?} == "yes" ]]; then
 		cp -f  ${bcbio_runs_final}/*_${action_name}/*-gatk-haplotype*.vcf.gz ${action_name}-small-var.vcf.gz
 	fi
     ## run small variants annotation if there is the case
-    bash ${path_to_scripts}/small_variants_annotation.sh $1
+    bash ${path_to_scripts}/small_variants_annotation.sh
 
     ## run structural variants annotation if there is the case
-    bash ${path_to_scripts}/structural_variants_annotation.sh $1
+    bash ${path_to_scripts}/structural_variants_annotation.sh
 fi
 
 ## clean work directory
@@ -128,3 +128,16 @@ rm -rf ${bcbio_workflow_work}
 
 ## print message for workflow completed
 echo "--- [$(date +"%F %R")] Variant calling workflow is finished."
+
+##########################################################################################################################################################################################
+                                                                             # DOWNSTREAM ANALYSIS #
+##########################################################################################################################################################################################
+
+echo "--- [$(date +"%F %R")] Starting downstream analysis, see output in ${path_to_scripts}/downstreamAnalysisVariantCalling."
+
+path_downstream_analysis="${path_to_scripts}/downstreamAnalysisVariantCalling"
+vcf_file="${action_name}-small-var.vcf.gz"
+vcf_file_name=$(echo "${vcf_file}" | cut -f 1 -d '.')
+# echo "==== ${path_downstream_analysis}"
+# echo "${bcbio_vep_species}=="
+Rscript --vanilla ${path_downstream_analysis}/gene_annotation_variant_calling.R ${path_downstream_analysis} ${variant_annotation_dir}/${vcf_file_name}-vep.table ${bcbio_vep_species%?} ${bcbio_organism_type%?} ${gtf_file_location}

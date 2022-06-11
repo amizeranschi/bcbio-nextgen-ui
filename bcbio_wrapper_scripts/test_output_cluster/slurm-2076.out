@@ -1,40 +1,0 @@
-using configuration file:  infos.yaml
-
-## printing the whole contents of the file:
-export bcbio_existing_version="no"
-export bcbio_development_branch="stable"
-export bcbio_total_cores="32"
-export bcbio_install_path="/export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen"
-export bcbio_upgrade="yes"
-export bcbio_annotated_species="yes"
-export bcbio_genome_fasta="/export/home/acs/stud/m/maria.nastase0912/variantCallingScripts/yeast/GTF/sacCer3_BRF.fa"
-export bcbio_transcriptome_gtf="/export/home/acs/stud/m/maria.nastase0912/variantCallingScripts/yeast/GTF/sacCer3_bcbio_lncRNA_BRF.gtf "
-export bcbio_species="Scerevisiae"
-export bcbio_genome="sacCer3"
-export bcbio_workflow="variant_calling"
-export bcbio_download_samples="yes"
-export bcbio_samples="SRR6059150 SRR6059151 SRR6783014 SRR6783015 SRR6783016 SRR6784354"
-spots read      : 10,470,676
-reads read      : 20,941,352
-reads written   : 10,470,676
-reads 0-length  : 10,470,676
-spots read      : 11,928,626
-reads read      : 23,857,252
-reads written   : 11,928,626
-reads 0-length  : 11,928,626
-spots read      : 12,927,276
-reads read      : 25,854,552
-reads written   : 12,927,276
-reads 0-length  : 12,927,276
-spots read      : 12,233,225
-reads read      : 24,466,450
-reads written   : 12,233,225
-reads 0-length  : 12,233,225
-spots read      : 16,004,271
-reads read      : 32,008,542
-reads written   : 16,004,271
-reads 0-length  : 16,004,271
-spots read      : 12,252,738
-reads read      : 24,505,476
-reads written   : 12,252,738
-reads 0-length  : 12,252,738
