@@ -4,20 +4,57 @@ Usability improvements for the Bcbio-nextgen data analysis pipeline: Thesis proj
 The structure of the wrapper:
 
 ├── bcbio_wrapper_scripts <br />
-│  deploy.sh  <br />
-│  parse_yaml.sh <br />
-│  set_environment_variables.sh <br />
-│  setup_environment_module.sh     <br />
-│  install_bcbio_nextgen.sh <br />
-│  samples_module.sh <br />
-│  add_to_yaml.py    <br />
-│  config_module.sh <br />
-│  run_atac_seq.sh  <br />
-│  run_variant_calling.sh <br />
-│  small_variants_annotation.sh <br />
-│  structural_variants_annotation.sh <br />
-│  infos_atac.yaml  <br />
-│  infos.yaml  <br />
+├── deploy.sh <br />
+├── downstreamAnalysis<br /> <br />
+│   ├── bulk_rna_seq-downstream_analysis.R <br />
+│   ├── metadata.csv <br />
+│   ├── tryDownstreamAnalysis <br />
+│   └── tximport-counts.csv <br />
+├── downstreamAnalysisVariantCalling <br />
+│   ├── gene_annotation_variant_calling.R <br />
+│   ├── set_packages.R <br />
+│   ├── small_variants_annotation.sh <br />
+│   ├── structural_variants_annotation.sh <br />
+│   └── variant_annotation.sh <br />
+├── envrionment <br />
+│   ├── install_bcbio_nextgen.sh<br />
+│   ├── install_genome.sh <br />
+│   ├── parse_yaml.sh <br />
+│   ├── set_environment_variables.sh <br />
+│   ├── setup_environment_module.sh <br />
+│   ├── setup_python2_env.sh <br />
+│   └── setup_python3_env.sh <br />
+├── install_dependencies_interface.sh <br />
+├── main.py <br />
+├── result.yaml <br />
+├── utils <br />
+│   └── add_to_yaml.py <br />
+├── web <br />
+│   ├── about.html <br />
+│   ├── data <br />
+│   │   └── report_context.json <br />
+│   ├── downstream_report.html <br />
+│   ├── help.html <br />
+│   ├── hero <br />
+│   │   ├── banner.png <br />
+│   │   └── favicon.ico <br /> 
+│   ├── images <br /> 
+│   │   ├── gridspec_ex.webp <br /> 
+│   │   ├── plot_2.png <br />
+│   │   └── plot_3.png <br />
+│   ├── index.html <br /> 
+│   ├── multiqc_report.html <br />
+│   ├── run_config.html <br />
+│   ├── script.js <br />
+│   └── style.css <br />
+├── workflows <br /> 
+│   ├── config_module.sh <br />
+│   ├── run_atac_seq.sh <br />
+│   ├── run_bulk_rna_seq.sh <br />
+│   ├── run_variant_calling.sh <br />
+│   └── samples_module.sh <br />
+└── yaml_to_table.py <br />
+
 
 
 To run an anallysis it is required to configure the yaml configuration file infos.yaml.
