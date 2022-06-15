@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>BCBIO nextgen</title>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="shortcut icon" type="image/x-icon" href="./hero/favicon.ico">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+		integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+	<link rel="stylesheet" href="./style.css">
+</head>
+
+<body style="height: 90vh; overflow: overlay;" onload="loadPage('run_config', 'width: 100%; height: inherit')">
+	<div class="loading" id="spinner" style="display: none;">Loading&#8230;</div>
+	<nav class="navbar sticky">
+		<!-- LOGO -->
+		<div class="logo"><img src="./hero/banner.png"></div>
+		<!-- NAVIGATION MENU -->
+		<ul class="nav-links">
+			<!-- USING CHECKBOX HACK -->
+			<input type="checkbox" id="checkbox_toggle" />
+			<label for="checkbox_toggle" class="hamburger">&#9776;</label>
+			<!-- NAVIGATION MENUS -->
+			<div class="menu">
+				<li><a href="#" onclick="loadPage('run_config', 'width: 100%; height: inherit'); return false;">Run Configuration</a></li>
+				<li class="services">
+					<div class="tooltip">
+						<a style="font-size: 18px;">Reports</a>
+						<span class="tooltiptext tip-below tip-arrow-top">Currently there are no reports available.<br>It's required to <strong>RUN ANALYSIS</strong> first, in order to generate reports.</span>
+					</div>
+					<!-- DROPDOWN MENU -->
+					<ul class="dropdown" style="visibility: hidden;">
+						<li><a href="#" onclick="loadPage('downstream_report', 'width: 100%; height: inherit'); return false;">Downstream Analysis</a></li>
+						<li><a href="#" onclick="loadPage('multiqc_report', 'width: 100%; height: inherit'); return false;">MultiQC</a></li>
+						<!-- <li><a href="#" onclick="loadPage('fastqc_report', 'width: 100%; height: inherit'); return false;">Fastqc</a></li> -->
+					</ul>
+				</li>
+				<li><a href="#" onclick="loadPage('about', 'width: 100%; height: inherit'); return false;">Help</a></li>
+				<li><a href="#" onclick="loadPage('help', 'width: 100%; height: inherit'); return false;">About</a></li>
+			</div>
+		</ul>
+	</nav>
+	<div id="run_config" class="page-container"></div>
+	<div id="downstream_report" class="page-container"></div>
+	<div id="multiqc_report" class="page-container"></div>
+	<div id="fastqc_report" class="page-container"></div>
+	<div id="about" class="page-container"></div>
+	<div id="help" class="page-container"></div>
+	<script type="text/javascript" src="../eel.js"></script>
+	<script src="./script.js"></script>
+</body>
+
+</html>

@@ -21,7 +21,7 @@ echo " --- [$(date +"%F %R")] Running analysis for ATAC-seq workflow"
 cd ${bcbio_runs_input}/${action_name}/work
 
 # Run analysis with the yaml file generated for the sample data
-bcbio_nextgen.py ../config/${action_name}.yaml -n ${bcbio_total_cores%?}
+bcbio_nextgen.py ../config/${action_name}.yaml -n ${bcbio_total_cores}
 
 ## print message for workflow completed
 echo " --- [$(date +"%F %R")] ATAC-seq workflow is finished."

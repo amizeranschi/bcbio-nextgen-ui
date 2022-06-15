@@ -1,0 +1,420 @@
+<head>
+	<meta charset="UTF-8" />
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+		integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+	<link rel="stylesheet" href="./style.css">
+</head>
+
+<body style="overflow-x: hidden;">
+	<div class="testbox">
+		<form id="form">
+			<h1>BCBIO Generate / Load configuration file</h1>
+			<div class="description">
+				<span>
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+						eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+					</p>
+					<p>
+						Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+						nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+						officia deserunt mollit anim id est laborum.
+					</p>
+				</span>
+			</div>
+			<div class="container-box">
+
+				<h3 class="sub-title">BCBIO Installation Details</h3>
+
+				<!-- Existing Version -->
+				<div class="field">
+					<input class="switch-input" type="checkbox" id="existing_version"
+						onclick="displayFieldOnCheckBox('existing_version', ['path_to_existing_div'], ['install_path_div'])" />
+					<label for="existing_version">
+						Existing Version
+						<div class="tooltip">
+							<i class="fa fa-question-circle"></i>
+							<span class="tooltiptext">Choose to install <b>BCBIO</b> from scratch or from an existing
+								install</span>
+						</div>
+					</label>
+					<label for="existing_version" class="switch">
+						<span class="switch-label" data-on="Yes" data-off="No"></span>
+						<span class="switch-handle"></span>
+					</label>
+					<div class="error" id="existing_version_err"></div>
+				</div>
+
+				<!-- Path To Existing -->
+				<div id="path_to_existing_div" style="display: none;">
+					<label for="path_to_existing">Path To Existing<span class="required-asterisk"> *</span>
+						<div class="tooltip">
+							<i class="fa fa-question-circle"></i>
+							<span class="tooltiptext">The usage of an older installation of <b>BCBIO</b> requires the
+								path
+								to the install</span>
+						</div>
+					</label>
+					<input type="text" id="path_to_existing" />
+					<div class="error" id="path_to_existing_err"></div>
+				</div>
+
+				<!-- Installation Path -->
+				<div id="install_path_div">
+					<h4>Installation Path<span class="required-asterisk"> *</span>
+						<div class="tooltip">
+							<i class="fa fa-question-circle"></i>
+							<span class="tooltiptext">For the packages installed, paths that exceed 80 characters can
+								not be
+								processed</span>
+						</div>
+					</h4>
+					<input type="text" id="install_path" />
+					<div class="error" id="install_path_err"></div>
+				</div>
+
+				<!-- Development Branch -->
+				<h4>
+					Development Branch<span class="required-asterisk"> *</span>
+					<div class="tooltip">
+						<i class="fa fa-question-circle"></i>
+						<span class="tooltiptext">Choose the development branch to upgrade and install <b>BCBIO</b>
+							to</span>
+					</div>
+				</h4>
+				<select id="development_branch">
+					<option value="skip">SKIP</option>
+					<option value="develop">DEVELOP</option>
+				</select>
+				<div class="error" id="development_branch_err"></div>
+
+				<!-- Number of cores -->
+				<h4>Number of cores to run <b>BCBIO</b> with<span class="required-asterisk"> *</span></h4>
+				<div class="title-block">
+					<div style="width: 100%;">
+						<input class="" type="number" id="total_cores" placeholder="Total Cores" />
+						<div class="error" id="total_cores_err"></div>
+					</div>
+					<div style="width: 100%;">
+						<input class="name" type="number" id="main_cores" placeholder="Main Cores" />
+						<div class="error" id="main_cores_err"></div>
+					</div>
+				</div>
+			</div>
+
+			<div class="container-box">
+
+				<h3 class="sub-title">Genome Installation Details</h3>
+
+				<!-- Annotated Species -->
+				<div class="field">
+					<input class="switch-input" type="checkbox" id="annotated_species"
+						onclick="displayFieldOnCheckBox('annotated_species', ['species_div', 'genome_div'], ['genome_fasta_div', 'transcriptome_gtf_div'])" />
+					<label for="annotated_species">
+						Annotated Species
+						<div class="tooltip">
+							<i class="fa fa-question-circle"></i>
+							<span class="tooltiptext">choose if the analysis will run on an existing genome in
+								<b>BCBIO</b> or a custom genome</span>
+						</div>
+					</label>
+					<label for="annotated_species" class="switch">
+						<span class="switch-label" data-on="Yes" data-off="No"></span>
+						<span class="switch-handle"></span>
+					</label>
+					<div class="error" id="annotated_species_err"></div>
+
+				</div>
+
+				<!-- Genome Fasta -->
+				<div id="genome_fasta_div">
+					<h4>Genome Fasta<span class="required-asterisk"> *</span>
+						<div class="tooltip">
+							<i class="fa fa-question-circle"></i>
+							<span class="tooltiptext">The path toward the .fa file of the custom genome</span>
+						</div>
+					</h4>
+					<input type="text" id="genome_fasta" />
+					<div class="error" id="genome_fasta_err"></div>
+				</div>
+
+				<!-- Transcriptome Gtf -->
+				<div id="transcriptome_gtf_div">
+					<h4>Transcriptome Gtf<span class="required-asterisk"> *</span>
+						<div class="tooltip">
+							<i class="fa fa-question-circle"></i>
+							<span class="tooltiptext">The path to the transcriptome of the custom genome</span>
+						</div>
+					</h4>
+					<input type="text" id="transcriptome_gtf" />
+					<div class="error" id="transcriptome_gtf_err"></div>
+				</div>
+
+				<!-- Species -->
+				<div id="species_div" style="display: none;">
+					<h4>
+						Species<span class="required-asterisk"> *</span>
+						<div class="tooltip">
+							<i class="fa fa-question-circle"></i>
+							<span class="tooltiptext">The annotated species</span>
+						</div>
+					</h4>
+					<select id="species">
+						<option value="Scerevisiae">Scerevisiae</option>
+						<option value="Sapiens">Sapiens</option>
+					</select>
+					<div class="error" id="species_err"></div>
+				</div>
+
+				<!-- Genome -->
+				<div id="genome_div" style="display: none;">
+					<h4>
+						Genome<span class="required-asterisk"> *</span>
+						<div class="tooltip">
+							<i class="fa fa-question-circle"></i>
+							<span class="tooltiptext">The annotated genome</span>
+						</div>
+					</h4>
+					<select id="genome">
+						<option value="sacCer3">sacCer3</option>
+						<option value="hg38">hg38</option>
+					</select>
+					<div class="error" id="genome_err"></div>
+				</div>
+
+				<!-- Vep Species -->
+				<h4>
+					Vep Species<span class="required-asterisk"> *</span>
+					<div class="tooltip">
+						<i class="fa fa-question-circle"></i>
+						<span class="tooltiptext">Species for usage of vep tool</span>
+					</div>
+				</h4>
+				<select id="vep_species">
+					<option value="Saccharomyces_cerevisiae">Saccharomyces_cerevisiae</option>
+					<option value="Homo_sapiens">Homo_sapiens</option>
+				</select>
+				<div class="error" id="vep_species_err"></div>
+
+				<!-- Vep Assembly -->
+				<h4>Vep Assembly<span class="required-asterisk"> *</span>
+					<div class="tooltip">
+						<i class="fa fa-question-circle"></i>
+						<span class="tooltiptext">Genome for usage of vep tool</span>
+					</div>
+				</h4>
+				<input type="text" id="vep_assembly" />
+				<div class="error" id="vep_assembly_err"></div>
+
+				<!-- Ensembl Version -->
+				<h4>
+					Ensembl Version<span class="required-asterisk"> *</span>
+					<div class="tooltip">
+						<i class="fa fa-question-circle"></i>
+						<span class="tooltiptext">Vep tool version</span>
+					</div>
+				</h4>
+				<select id="ensembl_ver">
+					<option value="105">105</option>
+					<option value="106">106</option>
+				</select>
+				<div class="error" id="ensembl_ver_err"></div>
+
+			</div>
+
+
+			<div class="container-box">
+
+				<h3 class="sub-title">Workflow Details</h3>
+
+				<!-- Workflow -->
+				<h4>
+					Workflow<span class="required-asterisk"> *</span>
+				</h4>
+				<select id="workflow">
+					<option value="variant_calling">VARIANT CALLING</option>
+					<option value="atac_seq">ATAC seq</option>
+					<option value="bulk_rna_seq">Bulk RNA-seq</option>
+				</select>
+				<div class="error" id="workflow_err"></div>
+
+				<div class="title-block">
+
+					<!-- Variant Annotation -->
+					<div class="field">
+						<input class="switch-input" type="checkbox" id="variant_annotation" />
+						<label for="variant_annotation">
+							Variant Annotation
+							<div class="tooltip">
+								<i class="fa fa-question-circle"></i>
+								<span class="tooltiptext">When running variant calling workflow, there is the choice of
+									running variant annotation also</span>
+							</div>
+						</label>
+						<label for="variant_annotation" class="switch">
+							<span class="switch-label" data-on="Yes" data-off="No"></span>
+							<span class="switch-handle"></span>
+						</label>
+						<div class="error" id="variant_annotation_err"></div>
+
+					</div>
+
+					<!-- Exclude LRC -->
+					<div class="field">
+						<input class="switch-input" type="checkbox" id="exclude_lcr" />
+						<label for="exclude_lcr">
+							Exclude LRC
+							<div class="tooltip">
+								<i class="fa fa-question-circle"></i>
+								<span class="tooltiptext">When running variant calling workflow, there is the choice of
+									performing exclusion of low complexity regions</span>
+							</div>
+						</label>
+						<label for="exclude_lcr" class="switch">
+							<span class="switch-label" data-on="Yes" data-off="No"></span>
+							<span class="switch-handle"></span>
+						</label>
+						<div class="error" id="exclude_lcr_err"></div>
+
+					</div>
+
+					<!-- Download Sample -->
+					<div class="field">
+						<input class="switch-input" type="checkbox" id="download_samples"
+							onclick="displayFieldOnCheckBox('download_samples', ['samples_div'], ['path_to_samples_on_sys_div'])" />
+						<label for="download_samples">
+							Download Sample
+							<div class="tooltip">
+								<i class="fa fa-question-circle"></i>
+								<span class="tooltiptext tip-arrow-right" style="margin-left: -200px !important;">Choose if download samples or get them from local
+									system</span>
+							</div>
+						</label>
+						<label for="download_samples" class="switch">
+							<span class="switch-label" data-on="Yes" data-off="No"></span>
+							<span class="switch-handle"></span>
+						</label>
+						<div class="error" id="download_samples_err"></div>
+
+					</div>
+				</div>
+
+				<!-- Path To Sample On System -->
+				<div id="path_to_samples_on_sys_div">
+					<h4>Path To Sample On System<span class="required-asterisk"> *</span>
+						<div class="tooltip">
+							<i class="fa fa-question-circle"></i>
+							<span class="tooltiptext">The choice to use locally stored samples requires the path to the
+								samples</span>
+						</div>
+					</h4>
+					<input type="text" id="path_to_samples_on_sys" />
+					<div class="error" id="path_to_samples_on_sys_err"></div>
+				</div>
+
+				<!-- Samples -->
+				<div id="samples_div" style="display: none;">
+					<h4>Samples<span class="required-asterisk"> *</span>
+						<div class="tooltip">
+							<i class="fa fa-question-circle"></i>
+							<span class="tooltiptext">The IDs of the samples to download</span>
+						</div>
+					</h4>
+					<input type="text" id="samples" />
+					<div class="error" id="samples_err"></div>
+				</div>
+
+				<!-- Samples Fastq -->
+				<h4>Samples Fastq<span class="required-asterisk"> *</span>
+					<div class="tooltip">
+						<i class="fa fa-question-circle"></i>
+						<span class="tooltiptext">
+							Name convention for each sample id in order without extension <br><br>
+							If a sample has more than 1 file the names will be placed in order for _1 _2 or _3 <br><br>
+							If the samples are already on the system, write their names without the extension INSERT
+						</span>
+					</div>
+				</h4>
+				<input type="text" id="samples_fastq" />
+				<div class="error" id="samples_fastq_err"></div>
+
+				<!-- CSV File Path -->
+				<h4>CSV File Path<span class="required-asterisk"> *</span>
+					<div class="tooltip">
+						<i class="fa fa-question-circle"></i>
+						<span class="tooltiptext">The path toward the csv file for the analysis</span>
+					</div>
+				</h4>
+				<input type="text" id="csv_file_path" />
+				<div class="error" id="csv_file_path_err"></div>
+
+			</div>
+
+			<div class="btn-block">
+				<button class=".btn-random" type="submit">SAVE</button>
+				<button id="preview-btn" class=".btn-random" type="button" disabled="true"
+					onclick="generatePreview()">PREVIEW</button>
+				<button class=".btn-random" type="button" onclick="loadFile()">LOAD</button>
+			</div>
+
+			<div class="btn-block">
+				<button id="run-analysis-btn" class=".btn-random btn-run" type="button" disabled="true" onclick="runAnalysis()">RUN
+					ANALYSIS</button>
+			</div>
+		</form>
+	</div>
+
+	<!-- The Modal Error -->
+	<div id="error-modal" class="modal">
+
+		<!-- Modal content -->
+		<div class="modal-content">
+			<span class="close-span">&times;</span>
+			<i style="color: red; font-size: 40px" class="fa fa-exclamation-triangle"></i>
+			<div class="p-15">
+				<h3>
+					<span id="modal-title_err"></span>
+				</h3>
+				<br />
+				<span style="color: red;" id="modal-msg_err"></span>
+			</div>
+		</div>
+
+	</div>
+
+	<!-- The Modal Success -->
+	<div id="confirmation-modal" class="modal">
+
+		<!-- Modal content -->
+		<div class="modal-content">
+			<span class="close-span">&times;</span>
+			<i style="color: green; font-size: 40px" class="fa fa-check"></i>
+			<div class="p-15">
+				<h3>
+					<span id="modal-title_succ"></span>
+				</h3>
+				<br />
+				<span id="modal-msg_succ"></span>
+			</div>
+		</div>
+
+	</div>
+
+	<!-- The Modal Preview -->
+	<div id="preview-modal" class="modal">
+
+		<!-- Modal content -->
+		<div class="modal-content-top">
+			<span class="close-span">&times;</span>
+			<div class="p-15">
+				<div id="preview-yml" style="overflow-y: scroll;height: 70vh;"></div>
+			</div>
+		</div>
+
+	</div>
+
+	<script type="text/javascript" src="../eel.js"></script>
+	<script src="./script.js"></script>
+</body>

@@ -80,10 +80,10 @@ if (( "$file_size" > "0" )); then
     
     if [[ ${bcbio_annotated_species} = "yes" ]]; then
         ## annotate variants with Ensembl VEP
-        vep --fork 4 --vcf --biotype --check_existing --distance 5000 --species ${bcbio_vep_species%?} --symbol --cache --dir_cache ${genome_dir}/vep --input_file ${vcf_file_name}.vcf --output_file ${vcf_file_name}-vep.vcf --force_overwrite --stats_file ${vcf_file_name}-vep.stats --stats_text
+        vep --fork 4 --vcf --biotype --check_existing --distance 5000 --species ${bcbio_vep_species} --symbol --cache --dir_cache ${genome_dir}/vep --input_file ${vcf_file_name}.vcf --output_file ${vcf_file_name}-vep.vcf --force_overwrite --stats_file ${vcf_file_name}-vep.stats --stats_text
         mv ${vcf_file_name}-vep.vcf ${vcf_file_name}.vcf
         ## run VEP again and output a tab-separated file with only the most severe consequence per variant, skipping stats generation this time
-        vep --fork 4 --tab --pick --no_stats --biotype --check_existing --distance 5000 --species ${bcbio_vep_species%?} --cache --dir_cache ${genome_dir}/vep --input_file ${vcf_file_name}.vcf --output_file ${vcf_file_name}-vep.table --force_overwrite
+        vep --fork 4 --tab --pick --no_stats --biotype --check_existing --distance 5000 --species ${bcbio_vep_species} --cache --dir_cache ${genome_dir}/vep --input_file ${vcf_file_name}.vcf --output_file ${vcf_file_name}-vep.table --force_overwrite
     else
         ## check if there exists a bgzipped and tabix-indexed GTF file for the genome
         if [ -f "${genome_dir}/rnaseq/ref-transcripts.gtf" ]; then
@@ -92,24 +92,24 @@ if (( "$file_size" > "0" )); then
                 if [[ $(grabix check ${genome_dir}/rnaseq/ref-transcripts.gtf) = "no" ]]; then
                     rm ${genome_dir}/rnaseq/ref-transcripts.gtf
                     ## see: https://www.ensembl.org/info/docs/tools/vep/script/vep_custom.html
-                    grep -v "#" ${genome_dir}/rnaseq/ref-transcripts.gtf | sort -k1,1 -k4,4n -k5,5n -t$'\t' | bgzip -@ ${bcbio_main_cores%?} -c > ${genome_dir}/rnaseq/ref-transcripts.gtf
+                    grep -v "#" ${genome_dir}/rnaseq/ref-transcripts.gtf | sort -k1,1 -k4,4n -k5,5n -t$'\t' | bgzip -@ ${bcbio_main_cores} -c > ${genome_dir}/rnaseq/ref-transcripts.gtf
                     tabix -p gff ${genome_dir}/rnaseq/ref-transcripts.gtf
                 fi
             else
                 ## see: https://www.ensembl.org/info/docs/tools/vep/script/vep_custom.html
-                grep -v "#" ${genome_dir}/rnaseq/ref-transcripts.gtf | sort -k1,1 -k4,4n -k5,5n -t$'\t' | bgzip -@ ${bcbio_main_cores%?} -c > ${genome_dir}/rnaseq/ref-transcripts.gtf
+                grep -v "#" ${genome_dir}/rnaseq/ref-transcripts.gtf | sort -k1,1 -k4,4n -k5,5n -t$'\t' | bgzip -@ ${bcbio_main_cores} -c > ${genome_dir}/rnaseq/ref-transcripts.gtf
                 tabix -p gff ${genome_dir}/rnaseq/ref-transcripts.gtf
             fi
         fi
         ## remove BND variants because VEP can't handle them (as of June 2020): https://github.com/Ensembl/ensembl-vep/issues/782#issuecomment-644031020
         sed "/SVTYPE=BND/d" ${vcf_file_name}.vcf > ${vcf_file_name}-no-BND.vcf
         ## run VEP with custom annotations from the GTF file
-        vep --fork 4 --vcf --biotype --check_existing --distance 5000 --symbol --fasta ${genome_dir}/seq/${bcbio_genome%?}.fa --custom ${genome_dir}/rnaseq/ref-transcripts.gtf,ref-transcripts,gtf,overlap,0 --input_file ${vcf_file_name}-no-BND.vcf --output_file ${vcf_file_name}-no-BND-vep.vcf --force_overwrite --stats_file ${vcf_file_name}-no-BND-vep.stats --stats_text --max_sv_size 1000000000
+        vep --fork 4 --vcf --biotype --check_existing --distance 5000 --symbol --fasta ${genome_dir}/seq/${bcbio_genome}.fa --custom ${genome_dir}/rnaseq/ref-transcripts.gtf,ref-transcripts,gtf,overlap,0 --input_file ${vcf_file_name}-no-BND.vcf --output_file ${vcf_file_name}-no-BND-vep.vcf --force_overwrite --stats_file ${vcf_file_name}-no-BND-vep.stats --stats_text --max_sv_size 1000000000
         ## run VEP again and output a tab-separated file with only the most severe consequence per variant, skipping stats generation this time
-        vep --fork 4 --tab --pick --no_stats --biotype --check_existing --distance 5000 --fasta ${genome_dir}/seq/${bcbio_genome%?}.fa --custom ${genome_dir}/rnaseq/ref-transcripts.gtf,ref-transcripts,gtf,overlap,0 --input_file ${vcf_file_name}-no-BND.vcf --output_file ${vcf_file_name}-no-BND-vep.table --force_overwrite --max_sv_size 1000000000
+        vep --fork 4 --tab --pick --no_stats --biotype --check_existing --distance 5000 --fasta ${genome_dir}/seq/${bcbio_genome}.fa --custom ${genome_dir}/rnaseq/ref-transcripts.gtf,ref-transcripts,gtf,overlap,0 --input_file ${vcf_file_name}-no-BND.vcf --output_file ${vcf_file_name}-no-BND-vep.table --force_overwrite --max_sv_size 1000000000
     fi
     ## extract relevant columns (GT and PR,SR) from a VCF file into tab-separated files
-    gatk VariantsToTable -R ${genome_dir}/seq/${bcbio_genome%?}.fa -V ${vcf_file_name}.vcf -F CHROM -F POS -F ID -F REF -F ALT -GF GT -O ${vcf_file_name}-GT.table
+    gatk VariantsToTable -R ${genome_dir}/seq/${bcbio_genome}.fa -V ${vcf_file_name}.vcf -F CHROM -F POS -F ID -F REF -F ALT -GF GT -O ${vcf_file_name}-GT.table
 else
     echo " --- [$(date +"%F %R")] Structural variants have not been called, or there was an error while calling them."
     rm -f ${action_name}-struct-var.vcf

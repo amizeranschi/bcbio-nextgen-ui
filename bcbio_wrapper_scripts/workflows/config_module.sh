@@ -9,7 +9,7 @@ echo " --- [$(date +"%F %R")] Preparing configuration files for bcbio_nextgen in
 ## download a template yaml file, describing the analysis
 cd ${bcbio_runs_input}
 
-if [[ ${bcbio_workflow%?} == "variant_calling" ]]; then
+if [[ ${bcbio_workflow} == "variant_calling" ]]; then
    if [ -x "$(command -v wget)" ]; then
       rm gatk-variant.yaml
       wget ${variant_calling_yaml} -O gatk-variant.yaml
@@ -28,10 +28,10 @@ if [[ ${bcbio_workflow%?} == "variant_calling" ]]; then
    ## copy csv file from the location given in input to the config directory
    
    echo " --- [$(date +"%F %R")] Copying csv  file provided by the user for the variant calling workflow"
-   cp ${bcbio_csv_file_path%?} ${bcbio_runs_input}
+   cp ${bcbio_csv_file_path} ${bcbio_runs_input}
 fi
 
-if [[ ${bcbio_workflow%?} == "atac_seq" ]]; then
+if [[ ${bcbio_workflow} == "atac_seq" ]]; then
    if [ -x "$(command -v wget)" ]; then
       rm atac-example.yaml
       wget --no-check-certificate ${atac_seq_yaml} -O atac-example.yaml
@@ -52,10 +52,10 @@ if [[ ${bcbio_workflow%?} == "atac_seq" ]]; then
    echo " --- [$(date +"%F %R")] Copying csv  file provided by the user for the ATAC-seq workflow"
    echo " --- [$(date +"%F %R")] For ChIP-seq, bcbio_nextgen requires batch and phenotype in the csv columns for the ATAC-seq workflow"
 
-   cp ${bcbio_csv_file_path%?} ${bcbio_runs_input}
+   cp ${bcbio_csv_file_path} ${bcbio_runs_input}
 fi
 
-if [[ ${bcbio_workflow%?} == "bulk_rna_seq" ]]; then
+if [[ ${bcbio_workflow} == "bulk_rna_seq" ]]; then
    if [ -x "$(command -v wget)" ]; then
       rm bulk_rna.yaml
       wget --no-check-certificate ${bulk_rna_seq_yaml} -O bulk_rna.yaml
@@ -72,5 +72,5 @@ if [[ ${bcbio_workflow%?} == "bulk_rna_seq" ]]; then
    # copy csv file from the location given in input to the config directory
    echo " --- [$(date +"%F %R")] Copying csv  file provided by the user for the Bulk RNA-seq workflow"
 
-   cp ${bcbio_csv_file_path%?} ${bcbio_runs_input}
+   cp ${bcbio_csv_file_path} ${bcbio_runs_input}
 fi

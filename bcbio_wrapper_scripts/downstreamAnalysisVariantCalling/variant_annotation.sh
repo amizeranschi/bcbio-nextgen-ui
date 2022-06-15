@@ -6,7 +6,7 @@
 
 echo " --- [$(date +"%F %R")] STARTING VARIANT ANNOTATION"
 
-if [[ ${bcbio_variant_annotation%?} == "yes" ]]; then
+if [[ ${bcbio_variant_annotation} == "yes" ]]; then
     # remove previous annotation and create variant annotation directory
     rm -rf ${variant_annotation_dir}
     mkdir ${variant_annotation_dir}

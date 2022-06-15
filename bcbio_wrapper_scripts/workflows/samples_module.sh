@@ -5,9 +5,9 @@
 ##########################################################################################################################################################################################
 
 ## create a list of sample IDs
-IFS=', ' read -r -a sample_list <<< ${bcbio_samples%?}
+IFS=', ' read -r -a sample_list <<< ${bcbio_samples}
 ## create a list of name samples
-IFS=', ' read -r -a sample_name_list <<< ${bcbio_samples_fastq%?}
+IFS=', ' read -r -a sample_name_list <<< ${bcbio_samples_fastq}
 
 ## get list lengths to determine from the user if the sample is multiple
 count_samples="${#sample_list[@]}"
@@ -17,7 +17,7 @@ count_user_name_samples="${#sample_name_list[@]}"
 number_of_samples=$((${count_user_name_samples}/${count_samples}))
 
 ## if user wants to download data 
-if [[ ${bcbio_download_samples%?} = "yes" ]]; then
+if [[ ${bcbio_download_samples} = "yes" ]]; then
 
    ## download samples in input directory  
    cd ${bcbio_runs_input}
@@ -54,9 +54,9 @@ if [[ ${bcbio_download_samples%?} = "yes" ]]; then
 fi
 
 # for data already on the disk
-if [[ ${bcbio_download_samples%?} = "no" ]]; then
+if [[ ${bcbio_download_samples} = "no" ]]; then
    ## go to source path where the samples are stored on the system
-   cd ${bcbio_path_to_samples_on_sys%?}
+   cd ${bcbio_path_to_samples_on_sys}
    ## copy the samples in the input directory
    echo " --- [$(date +"%F %R")] Copy samples to the input directory. "
    for FILE in *
