@@ -39,6 +39,18 @@ export bcbio_runs_final="${bcbio_runs_input}/${action_name}/final"
 export bcbio_workflow_config="${bcbio_runs_input}/${action_name}/config"
 export bcbio_workflow_work="${bcbio_runs_input}/${action_name}/work"
 
+## Store current path to the scripts
+export path_to_scripts=$PWD
+
+# set variables for variant annotation and gene annotation in downstream analysis
+if [[ ${bcbio_workflow%?} == "variant_calling" ]]; then
+    if [[ ${bcbio_variant_annotation%?} == "yes" ]]; then
+        vcf_file="${action_name}-small-var.vcf.gz"
+        vcf_file_name=$(echo "${vcf_file}" | cut -f 1 -d '.')
+        export variant_annotation_dir="${bcbio_runs_input}/${action_name}/variant_annotation"
+        export path_downstream_analysis="${path_to_scripts}/downstreamAnalysisVariantCalling"
+    fi
+fi
 #####################################################################################################################################################
                                                      # URLS AND USEFUL TEMPLATES #
 #####################################################################################################################################################
@@ -46,9 +58,6 @@ export bcbio_workflow_work="${bcbio_runs_input}/${action_name}/work"
 export variant_calling_yaml="https://raw.githubusercontent.com/bcbio/bcbio-nextgen/master/config/templates/gatk-variant.yaml"
 export atac_seq_yaml="http://s3.amazonaws.com/bcbio-nextgen/atac_userstory_data/atac-example.yaml"
 export bulk_rna_seq_yaml="https://raw.githubusercontent.com/bcbio/bcbio-nextgen/master/config/examples/rnaseq-seqc.yaml"
-
-## Store current path to the scripts
-export path_to_scripts=$PWD
 
 export miniconda3="https://repo.anaconda.com/miniconda/Miniconda3-py37_4.11.0-Linux-x86_64.sh"
 export miniconda2="https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh"

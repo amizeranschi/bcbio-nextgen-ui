@@ -10,7 +10,7 @@ variant_annotation_dir="${bcbio_runs_input}/${action_name}/variant_annotation"
 target_dir=${variant_annotation_dir}
 
 if [ `ls -1 ${bcbio_runs_final}/*/*-manta.vcf.gz 2>/dev/null | wc -l ` -gt 0 ]; then
-    echo "--- [$(date +"%F %R")] Performing variant annotation on structural variants."
+    echo " --- [$(date +"%F %R")] Performing variant annotation on structural variants."
 
     ## copy all the manta vcf files and rename them according to their parent directory's name:
     cd ${bcbio_runs_final}
@@ -111,6 +111,6 @@ if (( "$file_size" > "0" )); then
     ## extract relevant columns (GT and PR,SR) from a VCF file into tab-separated files
     gatk VariantsToTable -R ${genome_dir}/seq/${bcbio_genome%?}.fa -V ${vcf_file_name}.vcf -F CHROM -F POS -F ID -F REF -F ALT -GF GT -O ${vcf_file_name}-GT.table
 else
-    echo "--- [$(date +"%F %R")] Structural variants have not been called, or there was an error while calling them."
+    echo " --- [$(date +"%F %R")] Structural variants have not been called, or there was an error while calling them."
     rm -f ${action_name}-struct-var.vcf
 fi

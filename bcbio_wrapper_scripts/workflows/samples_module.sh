@@ -58,7 +58,7 @@ if [[ ${bcbio_download_samples%?} = "no" ]]; then
    ## go to source path where the samples are stored on the system
    cd ${bcbio_path_to_samples_on_sys%?}
    ## copy the samples in the input directory
-   echo "--- [$(date +"%F %R")] Copy samples to the input directory. "
+   echo " --- [$(date +"%F %R")] Copy samples to the input directory. "
    for FILE in *
    do
       ## get the name of the file without the extension
@@ -68,22 +68,8 @@ if [[ ${bcbio_download_samples%?} = "no" ]]; then
          # for all files in directory compare the names with the list given as input and copy them
          if [[ ${file_name} = ${val} ]]; then
             echo "${FILE}"
-            # cp ${FILE} ${bcbio_runs_input}
+            cp ${FILE} ${bcbio_runs_input}
          fi
       done
    done
-fi
-
-echo "--- [$(date +"%F %R")] Preparing configuration files for bcbio_nextgen in ${bcbio_workflow_dir}"
-
-if [[ ${bcbio_workflow%?} = "variant_calling" ]]; then
-   bash ${path_to_scripts}/config_module.sh 
-fi
-
-if [[ ${bcbio_workflow%?} = "atac_seq" ]]; then
-   bash ${path_to_scripts}/config_module.sh
-fi
-
-if [[ ${bcbio_workflow%?} = "bulk_rna_seq" ]]; then
-   bash ${path_to_scripts}/config_module.sh
 fi

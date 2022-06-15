@@ -14,5 +14,4 @@ if [[ ! -d ${bcbio_install_path%?}/extra2 ]]; then
 
    ${bcbio_install_path%?}/extra2/bin/pip install bcbio-monitor pytz python-dateutil
    ${bcbio_install_path%?}/extra2/bin/extra2 install --yes -c conda-forge -c bioconda faststructure
-
 fi

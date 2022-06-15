@@ -14,8 +14,8 @@ main_cores: 32
 install_path: /export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen
 # install_path: /export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen
 
-# choose to upgrade bcbio_nextgen or not
-upgrade: yes
+# # choose to upgrade bcbio_nextgen or not
+# upgrade: yes
 # choose if the analysis will run on an existing genome in bcbio or a custom genome
 annotated_species: yes
 # sort gtf if no annotated species
@@ -41,7 +41,7 @@ ensembl_ver: 105
 organism_type: yeast
 workflow: variant_calling
 # when running variant calling workflow, there is the choice of running variant annotation also
-variant_annotation: no
+variant_annotation: yes
 # when running variant calling workflow, there is the choice
 # of performing exclusion of low complexity regions
 exclude_lcr: yes

@@ -2,13 +2,10 @@
 
 echo ""
 echo " --- [$(date +"%F %R")] Starting the Bulk RNA-seq workflow"
-echo " --- [$(date +"%F %R")] Using configuration from directory: " ${path_to_scripts}
 
 ##########################################################################################################################################################################################
                                                                             # BULK RNA-SEQ WORKFLOW #
 ##########################################################################################################################################################################################
-
-# TODO restore/resume a previous analysis
 
 # Run Bulk RNA-seq Analysis
 cd ${bcbio_runs_input}
@@ -30,9 +27,3 @@ rm -rf ${bcbio_workflow_work}
 
 ## print message for workflow completed
 echo " --- [$(date +"%F %R")] Bulk RNA-seq workflow is finished."
-
-## begin downstream analysis for the Bulk RNA-seq results
-echo " --- [$(date +"%F %R")] Start downstream analysis for the bulk RNA-seq data."
-## call R script to handle DESQ2 routine
-
-
