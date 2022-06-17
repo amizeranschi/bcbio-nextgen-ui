@@ -5,7 +5,7 @@ The structure of the wrapper:
 
 ├── bcbio_wrapper_scripts <br />
 ├── deploy.sh <br />
-├── downstreamAnalysis<br /> <br />
+├── downstreamAnalysis <br />
 │   ├── bulk_rna_seq-downstream_analysis.R <br />
 │   ├── metadata.csv <br />
 │   ├── tryDownstreamAnalysis <br />
