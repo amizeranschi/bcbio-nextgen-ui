@@ -78,11 +78,13 @@ if [[ ${bcbio_workflow} == "variant_calling" ]]; then
         echo " --- [$(date +"%F %R")] Starting DOWNSTREAM ANALYSIS for VARIANT CALLING WORKFLOW."
 
         # run variant annotation if requested
-        bash ${path_downstream_analysis}/variant_annotation.sh
+        # bash ${path_downstream_analysis}/variant_annotation.sh
         # perform gene annotation on the results from gene annotation
 
         echo " --- [$(date +"%F %R")] Starting gene annotation for Variant Calling Workflow, see output in ${path_to_scripts}/downstreamAnalysisVariantCalling."
-        Rscript --vanilla ${path_downstream_analysis}/gene_annotation_variant_calling.R ${path_downstream_analysis} ${variant_annotation_dir}/${vcf_file_name}-vep.table ${bcbio_vep_species} ${bcbio_organism_type} ${gtf_file_location}
+        echo "${path_downstream_analysis} AND ${variant_annotation_dir}/${vcf_file_name}-vep.table AND ${bcbio_vep_species}  AND ${gtf_file_location}"
+        # ${bcbio_vep_species}
+        Rscript --vanilla ${path_downstream_analysis}/gene_annotation_variant_calling.R ${path_downstream_analysis} ${variant_annotation_dir}/${vcf_file_name}-vep.table ${bcbio_organism_type} ${gtf_file_location}
     fi
 
 fi

@@ -13,7 +13,7 @@ vep_species: Saccharomyces_cerevisiae
 vep_assembly: R64-1-1
 ensembl_ver: 105
 workflow: variant_calling
-variant_annotation: no
+variant_annotation: yes
 exclude_lcr: no
 download_samples: no
 path_to_samples_on_sys: /home/maria/bcbio_runs/workflow_variant_calling_success/input

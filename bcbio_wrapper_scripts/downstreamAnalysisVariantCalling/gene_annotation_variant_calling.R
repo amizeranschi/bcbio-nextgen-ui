@@ -16,9 +16,9 @@ vep_species = my_args[3]
 # replace the underscore with a space to get the name of the organism
 my_species = sub("_", " ", vep_species)
 
-organism_type = my_args[4]
+# organism_type = my_args[4]
 # get gtf file location
-gtf_location = my_args[5]
+gtf_location = my_args[4]
 # check if all packages are installed, if not install them
 source("set_packages.R")
 
@@ -153,7 +153,7 @@ head(kegg_high_moderate)
 # plot the results
 if (!is.null(kegg_high)) {
   jpeg("kegg_high.jpg", width = 350, height = 350)
-  ggplot(ego_high)
+  ggplot(kegg_high)
   dev.off()  
 } else {
     print("Failed to return results of KEGG analysis for the given list of HIGH impact genes!")
@@ -162,7 +162,7 @@ if (!is.null(kegg_high)) {
 
 if (!is.null(kegg_moderate)) {
   jpeg("kegg_moderate.jpg", width = 350, height = 350)
-  ggplot(ego_moderate)
+  ggplot(kegg_moderate)
   dev.off()
 } else {
     print("Failed to return results of KEGG analysis for the given list of MODERATE impact genes!")
@@ -171,7 +171,7 @@ if (!is.null(kegg_moderate)) {
 
 if(!is.null(kegg_high_moderate)) {
   jpeg("kegg_high_moderate.jpg", width = 350, height = 350)
-  ggplot(ego_moderate_high)
+  ggplot(kegg_moderate_high)
   dev.off()
 } else {
     print("Failed to return results of KEGG analysis for the given list of HIGH and MODERATE impact genes!")
@@ -182,7 +182,7 @@ x_high <- enrichDO(gene     = entrezIDs_high$ENTREZID,
               pvalueCutoff  = 0.05,
               pAdjustMethod = "BH",
               qvalueCutoff  = 0.05,
-              readable      = FALSE)
+              readable      = FALSE)database_species
 head(x_high)
 
 x_moderate <- enrichDO(gene          = entrezIDs_moderate$ENTREZID,
@@ -225,8 +225,8 @@ if (!is.null(x_high_moderate)) {
 }
 
 # MeSH enrichment analysis
-ah <- AnnotationHub(localHub=TRUE)
-hsa <- query(ah, c("MeSHDb", my_species))
+# ah <- AnnotationHub(localHub=TRUE)
+hsa <- query(ah_species, c("MeSHDbi", my_species))
 file_hsa <- hsa[[1]]
 db <- MeSHDbi::MeSHDb(file_hsa)
 

@@ -134,3 +134,4 @@ rownames(metadata_heatmap) = colnames(mat1)
 
 pheatmap(mat1, annotation_col = metadata_heatmap)
 
+## gene annotation
