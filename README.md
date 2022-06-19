@@ -17,7 +17,7 @@ The structure of the wrapper:
 │   ├── structural_variants_annotation.sh <br />
 │   └── variant_annotation.sh <br />
 ├── envrionment <br />
-│   ├── install_bcbio_nextgen.sh<br />
+│   ├── install_bcbio_nextgen.sh<br />
 │   ├── install_genome.sh <br />
 │   ├── parse_yaml.sh <br />
 │   ├── set_environment_variables.sh <br />
