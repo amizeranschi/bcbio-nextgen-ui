@@ -226,45 +226,47 @@ if (!is.null(x_high_moderate)) {
 
 # MeSH enrichment analysis
 # ah <- AnnotationHub(localHub=TRUE)
-hsa <- query(ah_species, c("MeSHDbi", my_species))
-file_hsa <- hsa[[1]]
-db <- MeSHDbi::MeSHDb(file_hsa)
+qu <- query(ah_species, c("MeSHDbi", my_species))
+if (length(qu) > 0) {
+  file_qu <- qu[[1]]
+  db <- MeSHDbi::MeSHDb(file_qu)
 
+  de_high <- names(high_impact_genes)[1:100]
+  mesh_high <- enrichMeSH(de_high, MeSHDb = db, database='gendoo', category = 'C')
 
-de_high <- names(high_impact_genes)[1:100]
-mesh_high <- enrichMeSH(de_high, MeSHDb = db, database='gendoo', category = 'C')
+  de_moderate <- names(moderate_impact_genes)[1:100]
+  mesh_moderate <- enrichMeSH(de_moderate, MeSHDb = db, database='gendoo', category = 'C')
 
-de_moderate <- names(moderate_impact_genes)[1:100]
-mesh_moderate <- enrichMeSH(de_moderate, MeSHDb = db, database='gendoo', category = 'C')
+  de_high_moderate <- names(high_moderate_impact_genes)[1:100]
+  mesh_high_moderate <- enrichMeSH(de_high_moderate, MeSHDb = db, database='gendoo', category = 'C')
 
-de_high_moderate <- names(high_moderate_impact_genes)[1:100]
-mesh_high_moderate <- enrichMeSH(de_high_moderate, MeSHDb = db, database='gendoo', category = 'C')
+  # plot the results
+  if (!is.null(de_high)) {
+    jpeg("mesh_high.jpg", width = 350, height = 350)
+    ggplot(mesh_high)
+    dev.off()
+  } else {
+      print("Failed to return MeSH enrichment analysis results for the given list of HIGH impact genes!")
+  }
 
-# plot the results
-if (!is.null(de_high)) {
-  jpeg("mesh_high.jpg", width = 350, height = 350)
-  ggplot(mesh_high)
-  dev.off()
+  if (!is.null(de_moderate)) {
+    jpeg("mesh_moderate.jpg", width = 350, height = 350)
+    ggplot(mesh_moderate)
+    dev.off()
+  } else {
+      print("Failed to return MeSH enrichment analysis results for the given list of MODERATE impact genes!")
+  }
+
+  if (!is.null(de_high_moderate)) {
+    jpeg("mesh_high_moderate.jpg", width = 350, height = 350)
+    ggplot(mesh_high_moderate)
+    dev.off()
+  } else {
+      print("Failed to return MeSH enrichment analysis results for the given list of HIGH and MODERATE impact genes!")
+  }
 } else {
-    print("Failed to return MeSH enrichment analysis results for the given list of HIGH impact genes!")
+    print("No MeSHDb for the specified genome!")
 }
-
-if (!is.null(de_moderate)) {
-  jpeg("mesh_moderate.jpg", width = 350, height = 350)
-  ggplot(mesh_moderate)
-  dev.off()
-} else {
-    print("Failed to return MeSH enrichment analysis results for the given list of MODERATE impact genes!")
-}
-
-if (!is.null(de_high_moderate)) {
-  jpeg("mesh_high_moderate.jpg", width = 350, height = 350)
-  ggplot(mesh_high_moderate)
-  dev.off()
-} else {
-    print("Failed to return MeSH enrichment analysis results for the given list of HIGH and MODERATE impact genes!")
-}
-
 
 #############################################################
 # possibly giving up on this

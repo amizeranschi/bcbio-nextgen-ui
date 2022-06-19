@@ -13,7 +13,7 @@ eel.init("web")
 conf_path = os.getcwd() + '/result.yaml'
 report_context_path = os.getcwd() + '/web/data/report_context.json'
 
-# Exposing the random_python function to javascript
+# Exposing the python function to javascript
 
 @eel.expose
 def save_configuration(config):
