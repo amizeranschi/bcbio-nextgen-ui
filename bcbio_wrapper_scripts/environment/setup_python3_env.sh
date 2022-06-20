@@ -13,6 +13,10 @@ if [[ ! -d ${bcbio_install_path}/extra3 ]]; then
    ln -s ${bcbio_install_path}/extra3/bin/conda ${bcbio_install_path}/extra3/bin/conda_extra3
 
    ${bcbio_install_path}/extra3/bin/conda_extra3 install --yes -c conda-forge -c bioconda mamba
+   
+   # r-rcolorbrewer 
+   # r-pheatmap 
+   # bioconductor-deseq2
    ln -s ${bcbio_install_path}/extra3/bin/mamba ${bcbio_install_path}/extra3/bin/mamba_extra3
 
    ## installing packages
@@ -20,4 +24,6 @@ if [[ ! -d ${bcbio_install_path}/extra3 ]]; then
    ${bcbio_install_path}/extra3/bin/mamba_extra3 install --yes -c conda-forge r-base
    ${bcbio_install_path}/extra3/bin/mamba_extra3 install --yes -c conda-forge r-essentials
    ${bcbio_install_path}/extra3/bin/conda_extra3 install gxx_linux-64
+
+   ${bcbio_install_path}/extra3/bin/conda_extra3 install --yes -c conda-forge -c bioconda bioconductor-annotationhub bioconductor-annotationdbi bioconductor-meshdbi r-ggplot2 bioconductor-clusterprofiler bioconductor-dose bioconductor-meshes bioconductor-chipseeker bioconductor-gosemsim bioconductor-reactomepa bioconductor-variantannotation
 fi

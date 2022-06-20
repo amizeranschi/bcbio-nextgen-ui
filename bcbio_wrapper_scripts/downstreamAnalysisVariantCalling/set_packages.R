@@ -15,7 +15,8 @@ check_install = function(packages) {
   }
 }
 ## Install and load the required packages:
-packages = c("AnnotationHub", "AnnotationDbi", "MeSHDbi", "ggplot2", "clusterProfiler", "DOSE", "meshes")
+packages = c("AnnotationHub", "AnnotationDbi", "MeSHDbi", "ggplot2", "clusterProfiler", "DOSE", "meshes") #, "ChIPseeker", "GOSemSim","ReactomePA",  "VariantAnnotation", "pheatmap", "RColorBrewer",  "DESeq2")
+# , "bedr", "gage", "gageData",  "topGO", "biomaRt")
 # , "AnnotationDbi","MeSHDbi", "ggplot2","ChIPseeker","clusterProfiler", "GOSemSim","ReactomePA",  "VariantAnnotation", "pheatmap", "RColorBrewer",  "DESeq2")
 # , "bedr", "gage", "gageData",  "topGO", "biomaRt")
 check_install(packages)
