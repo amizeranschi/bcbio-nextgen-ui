@@ -15,8 +15,8 @@ check_install = function(packages) {
   }
 }
 ## Install and load the required packages:
-packages = c("AnnotationHub", "AnnotationDbi", "MeSHDbi", "ggplot2", "clusterProfiler")
-# , "AnnotationDbi","MeSHDbi", "ggplot2","ChIPseeker","clusterProfiler", "DOSE", "meshes", "GOSemSim","ReactomePA",  "VariantAnnotation", "pheatmap", "RColorBrewer",  "DESeq2")
+packages = c("AnnotationHub", "AnnotationDbi", "MeSHDbi", "ggplot2", "clusterProfiler", "DOSE", "meshes")
+# , "AnnotationDbi","MeSHDbi", "ggplot2","ChIPseeker","clusterProfiler", "GOSemSim","ReactomePA",  "VariantAnnotation", "pheatmap", "RColorBrewer",  "DESeq2")
 # , "bedr", "gage", "gageData",  "topGO", "biomaRt")
 check_install(packages)
 installed = lapply(packages, library, character.only = T)
