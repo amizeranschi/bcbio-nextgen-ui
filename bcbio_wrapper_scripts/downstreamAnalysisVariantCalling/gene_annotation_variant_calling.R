@@ -54,6 +54,7 @@ my_txdb = loadDb(txdb_file)
 # get data
 gatk_data = read.table(file, header = F, stringsAsFactors = F)
 
+print(" --- Preparing data...")
 # set the column names
 # TODO check if mammal genome or  yeast
 colnames(gatk_data) = c("Uploaded_variation", "Location", "Allele", "Gene", "Feature", "Feature_type", "Consequence", "cDNA_position", "CDS_position", "Protein_position", "Amino_acids", "Codons", "Existing_variation", "IMPACT", "DISTANCE", "STRAND", "FLAGS", "BIOTYPE", "CLIN_SIG", "SOMATIC", "PHENO")
@@ -80,7 +81,7 @@ entrezIDs_high = AnnotationDbi::select(database_species, keys = high_impact_gene
 entrezIDs_moderate = AnnotationDbi::select(database_species, keys = moderate_impact_genes, keytype=species_keytype, columns = "ENTREZID")
 entrezIDs_moderate_high = AnnotationDbi::select(database_species, keys = high_moderate_impact_genes, keytype=species_keytype, columns = "ENTREZID")
 
-
+print(" --- Cluster profile for representation of gene ontology")
 # use cluster profile for representation of gene ontology on each list of
 # interest genes
 ego_high = enrichGO(gene       = entrezIDs_high$ENTREZID,
@@ -113,10 +114,12 @@ ego_moderate_high = enrichGO(gene     = entrezIDs_moderate_high$ENTREZID,
                         readable      = FALSE)
 head(ego_moderate_high)
 
+print(" --- Cluster profile for representation of gene ontology plots")
+
 # plot the results
 if (!is.null(ego_high)) {
   jpeg("ego_high.jpg", width = 350, height = 350)
-  ggplot(ego_high)
+  barplot(ego_high, showCategory=20, title="Enrichment Analysis - representation of gene ontology on HIGH impact genes") 
   dev.off()
 } else {
     print("Failed to return results of Gene Ontology for the given list of HIGH impact genes!")
@@ -124,7 +127,7 @@ if (!is.null(ego_high)) {
 
 if (!is.null(moderate_impact_genes)) {
   jpeg("ego_moderate.jpg", width = 350, height = 350)
-  ggplot(ego_moderate)
+  barplot(ego_moderate, showCategory=20, title="Enrichment Analysis - representation of gene ontology on MODERATE impact genes") 
   dev.off()
 } else {
     print("Failed to return results of Gene Ontology for the given list of MODERATE impact genes!")
@@ -132,11 +135,13 @@ if (!is.null(moderate_impact_genes)) {
 
 if (!is.null(ego_moderate_high)) {
   jpeg("ego_moderate_high.jpg", width = 350, height = 350)
-  ggplot(ego_moderate_high)
+  barplot(ego_moderate_high, showCategory=20, title="Enrichment Analysis - representation of gene ontology on HIGH and MODERATE impact genes") 
   dev.off()
 } else {
     print("Failed to return results of Gene Ontology for the given list of HIGH and MODERATE impact genes!")
 }
+
+print(" --- KEGG pathway over-representation analysis on the extracted genes")
 
 # search the organism for kegg analysis
 kegg_organism = search_kegg_organism(my_species)$kegg_code
@@ -157,10 +162,12 @@ kegg_high_moderate <- enrichKEGG(gene         = high_moderate_impact_genes,
                                  pvalueCutoff = 0.05)
 head(kegg_high_moderate)
 
+print(" --- KEGG pathway over-representation analysis on the extracted genes plots")
+
 # plot the results
 if (!is.null(kegg_high)) {
   jpeg("kegg_high.jpg", width = 350, height = 350)
-  ggplot(kegg_high)
+  barplot(kegg_high, showCategory=20, title="KEGG pathway over-representation analysis on the HIGH impact genes")
   dev.off()  
 } else {
     print("Failed to return results of KEGG analysis for the given list of HIGH impact genes!")
@@ -169,7 +176,7 @@ if (!is.null(kegg_high)) {
 
 if (!is.null(kegg_moderate)) {
   jpeg("kegg_moderate.jpg", width = 350, height = 350)
-  ggplot(kegg_moderate)
+  barplot(kegg_moderate, showCategory=20, title="KEGG pathway over-representation analysis on the MODERATE impact genes")
   dev.off()
 } else {
     print("Failed to return results of KEGG analysis for the given list of MODERATE impact genes!")
@@ -178,11 +185,13 @@ if (!is.null(kegg_moderate)) {
 
 if(!is.null(kegg_high_moderate)) {
   jpeg("kegg_high_moderate.jpg", width = 350, height = 350)
-  ggplot(kegg_high_moderate)
+  barplot(kegg_high_moderate, showCategory=20, title="KEGG pathway over-representation analysis on the HIGH and MODERATE impact genes")
   dev.off()
 } else {
     print("Failed to return results of KEGG analysis for the given list of HIGH and MODERATE impact genes!")
 }
+
+print(" --- Over-representation analysis for disease ontology")
 
 # Over-representation analysis for disease ontology
 x_high <- enrichDO(gene     = entrezIDs_high$ENTREZID,
@@ -206,10 +215,12 @@ x_high_moderate <- enrichDO(gene          = entrezIDs_moderate_high$ENTREZID,
                        readable      = FALSE)
 head(x_high_moderate)
 
+print(" --- Over-representation analysis for disease ontology plots")
+
 # plot the results
 if (!is.null(x_high)) {
   jpeg("x_high.jpg", width = 350, height = 350)
-  ggplot(x_high)
+  barplot(x_high, showCategory=20, title="Over-representation analysis for disease ontology in HIGH impact genes")
   dev.off()
 } else {
     print("Failed to return results of Disease Ontology for the given list of HIGH impact genes!")
@@ -217,7 +228,7 @@ if (!is.null(x_high)) {
 
 if (!is.null(x_moderate)) {
   jpeg("x_moderate.jpg", width = 350, height = 350)
-  ggplot(x_moderate)
+  barplot(x_moderate, showCategory=20, title="Over-representation analysis for disease ontology in MODERATE impact genes")
   dev.off()
 } else {
     print("Failed to return results of Disease Ontology for the given list of MODERATE impact genes!")
@@ -225,7 +236,7 @@ if (!is.null(x_moderate)) {
 
 if (!is.null(x_high_moderate)) {
   jpeg("x_moderate_high.jpg", width = 350, height = 350)
-  ggplot(x_high_moderate)
+  barplot(x_high_moderate, showCategory=20, title="Over-representation analysis for disease ontology in HIGH and MODERATE impact genes")
   dev.off()
 } else {
     print("Failed to return results of Disease Ontology for the given list of HIGH and MODERATE impact genes!")
@@ -235,6 +246,8 @@ if (!is.null(x_high_moderate)) {
 # ah <- AnnotationHub(localHub=TRUE)
 qu <- query(ah_species, c("MeSHDbi", my_species))
 if (length(qu) > 0) {
+  print(" --- MeSH enrichment analysis...")
+
   file_qu <- qu[[1]]
   db <- MeSHDbi::MeSHDb(file_qu)
 
@@ -250,7 +263,7 @@ if (length(qu) > 0) {
   # plot the results
   if (!is.null(de_high)) {
     jpeg("mesh_high.jpg", width = 350, height = 350)
-    ggplot(mesh_high)
+    barplot(mesh_high)
     dev.off()
   } else {
       print("Failed to return MeSH enrichment analysis results for the given list of HIGH impact genes!")
@@ -258,7 +271,7 @@ if (length(qu) > 0) {
 
   if (!is.null(de_moderate)) {
     jpeg("mesh_moderate.jpg", width = 350, height = 350)
-    ggplot(mesh_moderate)
+    barplot(mesh_moderate)
     dev.off()
   } else {
       print("Failed to return MeSH enrichment analysis results for the given list of MODERATE impact genes!")
@@ -266,7 +279,7 @@ if (length(qu) > 0) {
 
   if (!is.null(de_high_moderate)) {
     jpeg("mesh_high_moderate.jpg", width = 350, height = 350)
-    ggplot(mesh_high_moderate)
+    barplot(mesh_high_moderate)
     dev.off()
   } else {
       print("Failed to return MeSH enrichment analysis results for the given list of HIGH and MODERATE impact genes!")

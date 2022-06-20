@@ -27,17 +27,70 @@ installed = lapply(packages, library, character.only = T)
 ##      * DESQ2 condition,
 ##      * path to final or directly the csv files paths
 ##  * copy csv/input files to work directory
+args = commandArgs(trailingOnly=TRUE)
+my_args <- head(args)
 
+## Clear all objects from the memory:
+# Set working directory
+work_dir=my_args[1]
+setwd(work_dir)
+
+# set files with genomic data
+counts_file=my_args[2]
+metadata_file=my_args[3]
+
+# species name
+# vep_species stores the original string provided by the user in the config file
+vep_species = my_args[4]
+# replace the underscore with a space to get the name of the organism
+my_species = sub("_", " ", vep_species)
+
+# organism_type = my_args[4]
+# get gtf file location
+gtf_location = my_args[4]
+
+ get database for the species using my_species to search AnnotationHub
+ah_species <- AnnotationHub()
+# query(ah_species, "OrgDb")
+qu = query(ah_species, c("OrgDb", my_species))
+if (length(qu) > 0) {
+  database_species <- qu[[1]]
+} else {
+    database_species = NULL
+    print("No OrgDb found for the specified organism in AnnotationHub! Exiting gene annotation.")
+    quit()
+}
+
+species_keytype = "ORF"
+# create a custom Transcript database based on the GTF file from Bcbio's genome
+# create a file name for the TxDB file, which is an SQLite DB, by appending the
+# extension ".sqlite" to gtf_location
+txdb_file = paste0(gtf_location, ".sqlite")
+
+# use gtf_location to create an SQLite file called txdb_file, if the latter not
+# exist already
+if(!file.exists(txdb_file))
+{
+  txdb_gtf = GenomicFeatures::makeTxDbFromGFF(gtf_location, organism = my_species)
+  AnnotationDbi::saveDb(txdb_gtf, txdb_file)
+}
+
+# create a TxDB object from txdb_file that will later be used as a instance
+my_txdb = loadDb(txdb_file)
 
 ## Set working directory
-setwd("C:/Users/40724/Documents/downstreamAnalysis")
+# setwd("C:/Users/40724/Documents/downstreamAnalysis")
 
 ## Preparing count data
-counts_data <- read.csv('tximport-counts.csv', header = TRUE, sep = ",")
+# counts_data <- read.csv('tximport-counts.csv', header = TRUE, sep = ",")
+counts_data <- read.csv(counts_file, header = TRUE, sep = ",")
+
 head(counts_data)
 
 ## preparing samples info or metadata
-metaData <- read.table('metadata.csv', header = TRUE, sep = ",")
+# metaData <- read.table('metadata.csv', header = TRUE, sep = ",")
+metaData <- read.table(metadata_file, header = TRUE, sep = ",")
+
 metaData
 
 ## Get condition for DESeq object

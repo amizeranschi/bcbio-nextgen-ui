@@ -51,6 +51,11 @@ if [[ ${bcbio_workflow} == "variant_calling" ]]; then
         export path_downstream_analysis="${path_to_scripts}/downstreamAnalysisVariantCalling"
     fi
 fi
+
+export path_downstream_analysis_bulk="${path_to_scripts}/downstreamAnalysisBulk-RNA-seq"
+export counts_file="${bcbio_runs_final}/*${action_name}/counts/*.csv"
+export metadata_file="${bcbio_runs_final}/*${action_name}/metadata.csv"
+
 #####################################################################################################################################################
                                                      # URLS AND USEFUL TEMPLATES #
 #####################################################################################################################################################

@@ -94,4 +94,5 @@ fi
 ## Run downstream analysis for bulk_rna_seq
 if [[ ${bcbio_workflow} == "bulk_rna_seq" ]]; then
     echo " --- [$(date +"%F %R")] Starting DOWNSTREAM ANALYSIS for BULK RNA-seq WORKFLOW."
+    Rscript --vanilla ${path_downstream_analysis_bulk}/bulk_rna_seq-downstream_analysis.R ${path_downstream_analysis_bulk} ${counts_file} ${metadata_file} ${bcbio_vep_species} ${gtf_file_location}
 fi
