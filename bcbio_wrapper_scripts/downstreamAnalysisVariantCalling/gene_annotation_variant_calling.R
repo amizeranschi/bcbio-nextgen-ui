@@ -24,8 +24,15 @@ source("set_packages.R")
 
 # get database for the species using my_species to search AnnotationHub
 ah_species <- AnnotationHub()
-query(ah_species, "OrgDb")
-database_species <- query(ah_species, c("OrgDb", my_species))[[1]]
+# query(ah_species, "OrgDb")
+qu = query(ah_species, c("OrgDb", my_species))
+if (length(qu) > 0) {
+  database_species <- qu[[1]]
+} else {
+    database_species = NULL
+    print("No OrgDb found for the specified organism in AnnotationHub! Exiting gene annotation.")
+    quit()
+}
 
 species_keytype = "ORF"
 # create a custom Transcript database based on the GTF file from Bcbio's genome
@@ -171,7 +178,7 @@ if (!is.null(kegg_moderate)) {
 
 if(!is.null(kegg_high_moderate)) {
   jpeg("kegg_high_moderate.jpg", width = 350, height = 350)
-  ggplot(kegg_moderate_high)
+  ggplot(kegg_high_moderate)
   dev.off()
 } else {
     print("Failed to return results of KEGG analysis for the given list of HIGH and MODERATE impact genes!")
@@ -182,7 +189,7 @@ x_high <- enrichDO(gene     = entrezIDs_high$ENTREZID,
               pvalueCutoff  = 0.05,
               pAdjustMethod = "BH",
               qvalueCutoff  = 0.05,
-              readable      = FALSE)database_species
+              readable      = FALSE)
 head(x_high)
 
 x_moderate <- enrichDO(gene          = entrezIDs_moderate$ENTREZID,
@@ -265,7 +272,7 @@ if (length(qu) > 0) {
       print("Failed to return MeSH enrichment analysis results for the given list of HIGH and MODERATE impact genes!")
   }
 } else {
-    print("No MeSHDb for the specified genome!")
+    print("No MeSHDb found for the specified organism in AnnotationHub!")
 }
 
 #############################################################
