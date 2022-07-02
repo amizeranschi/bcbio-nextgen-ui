@@ -118,7 +118,7 @@ print(" --- Cluster profile for representation of gene ontology plots")
 
 # plot the results
 if (!is.null(ego_high)) {
-  jpeg("ego_high.jpg", width = 350, height = 350)
+  jpeg("variant_calling_ego_high.jpg", width = 350, height = 350)
   barplot(ego_high, showCategory=20, title="Enrichment Analysis - representation of gene ontology on HIGH impact genes") 
   dev.off()
 } else {
@@ -126,7 +126,7 @@ if (!is.null(ego_high)) {
 }
 
 if (!is.null(moderate_impact_genes)) {
-  jpeg("ego_moderate.jpg", width = 350, height = 350)
+  jpeg("variant_calling_ego_moderate.jpg", width = 350, height = 350)
   barplot(ego_moderate, showCategory=20, title="Enrichment Analysis - representation of gene ontology on MODERATE impact genes") 
   dev.off()
 } else {
@@ -134,7 +134,7 @@ if (!is.null(moderate_impact_genes)) {
 }
 
 if (!is.null(ego_moderate_high)) {
-  jpeg("ego_moderate_high.jpg", width = 350, height = 350)
+  jpeg("variant_calling_ego_moderate_high.jpg", width = 350, height = 350)
   barplot(ego_moderate_high, showCategory=20, title="Enrichment Analysis - representation of gene ontology on HIGH and MODERATE impact genes") 
   dev.off()
 } else {
@@ -166,7 +166,7 @@ print(" --- KEGG pathway over-representation analysis on the extracted genes plo
 
 # plot the results
 if (!is.null(kegg_high)) {
-  jpeg("kegg_high.jpg", width = 350, height = 350)
+  jpeg("variant_calling_kegg_high.jpg", width = 350, height = 350)
   barplot(kegg_high, showCategory=20, title="KEGG pathway over-representation analysis on the HIGH impact genes")
   dev.off()  
 } else {
@@ -175,7 +175,7 @@ if (!is.null(kegg_high)) {
 }
 
 if (!is.null(kegg_moderate)) {
-  jpeg("kegg_moderate.jpg", width = 350, height = 350)
+  jpeg("variant_calling_kegg_moderate.jpg", width = 350, height = 350)
   barplot(kegg_moderate, showCategory=20, title="KEGG pathway over-representation analysis on the MODERATE impact genes")
   dev.off()
 } else {
@@ -184,7 +184,7 @@ if (!is.null(kegg_moderate)) {
 
 
 if(!is.null(kegg_high_moderate)) {
-  jpeg("kegg_high_moderate.jpg", width = 350, height = 350)
+  jpeg("variant_calling_kegg_high_moderate.jpg", width = 350, height = 350)
   barplot(kegg_high_moderate, showCategory=20, title="KEGG pathway over-representation analysis on the HIGH and MODERATE impact genes")
   dev.off()
 } else {
@@ -219,7 +219,7 @@ print(" --- Over-representation analysis for disease ontology plots")
 
 # plot the results
 if (!is.null(x_high)) {
-  jpeg("x_high.jpg", width = 350, height = 350)
+  jpeg("variant_calling_x_high.jpg", width = 350, height = 350)
   barplot(x_high, showCategory=20, title="Over-representation analysis for disease ontology in HIGH impact genes")
   dev.off()
 } else {
@@ -227,7 +227,7 @@ if (!is.null(x_high)) {
 }
 
 if (!is.null(x_moderate)) {
-  jpeg("x_moderate.jpg", width = 350, height = 350)
+  jpeg("variant_calling_x_moderate.jpg", width = 350, height = 350)
   barplot(x_moderate, showCategory=20, title="Over-representation analysis for disease ontology in MODERATE impact genes")
   dev.off()
 } else {
@@ -235,7 +235,7 @@ if (!is.null(x_moderate)) {
 }
 
 if (!is.null(x_high_moderate)) {
-  jpeg("x_moderate_high.jpg", width = 350, height = 350)
+  jpeg("variant_calling_x_moderate_high.jpg", width = 350, height = 350)
   barplot(x_high_moderate, showCategory=20, title="Over-representation analysis for disease ontology in HIGH and MODERATE impact genes")
   dev.off()
 } else {
@@ -262,7 +262,7 @@ if (length(qu) > 0) {
 
   # plot the results
   if (!is.null(de_high)) {
-    jpeg("mesh_high.jpg", width = 350, height = 350)
+    jpeg("variant_calling_mesh_high.jpg", width = 350, height = 350)
     barplot(mesh_high)
     dev.off()
   } else {
@@ -270,7 +270,7 @@ if (length(qu) > 0) {
   }
 
   if (!is.null(de_moderate)) {
-    jpeg("mesh_moderate.jpg", width = 350, height = 350)
+    jpeg("variant_calling_mesh_moderate.jpg", width = 350, height = 350)
     barplot(mesh_moderate)
     dev.off()
   } else {
@@ -278,7 +278,7 @@ if (length(qu) > 0) {
   }
 
   if (!is.null(de_high_moderate)) {
-    jpeg("mesh_high_moderate.jpg", width = 350, height = 350)
+    jpeg("variant_calling_mesh_high_moderate.jpg", width = 350, height = 350)
     barplot(mesh_high_moderate)
     dev.off()
   } else {

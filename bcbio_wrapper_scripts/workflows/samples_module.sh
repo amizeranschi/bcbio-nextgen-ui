@@ -35,6 +35,7 @@ if [[ ${bcbio_download_samples} = "yes" ]]; then
          mv ${sample}.fastq ${sample_name_list[${cnt}]}.fastq
          ## bgzip the samples
          bgzip -c ${sample_name_list[cnt]}.fastq > ${sample_name_list[${cnt}]}.fastq.gz
+         rm -rf ${sample_name_list[cnt]}.fastq
       fi
       if [[ ${number_of_samples} = 2 ]]; then
          ## rename samples as user input
@@ -43,6 +44,8 @@ if [[ ${bcbio_download_samples} = "yes" ]]; then
          ## bgzip the samples
          bgzip -c ${sample_name_list[$((${cnt}*2))]}.fastq > ${sample_name_list[$((${cnt}*2))]}.fastq.gz
          bgzip -c ${sample_name_list[$((${cnt}*2+1))]}.fastq > ${sample_name_list[$((${cnt}*2+1))]}.fastq.gz
+         rm -rf ${sample_name_list[$((${cnt}*2))]}.fastq
+         rm -rf ${sample_name_list[$((${cnt}*2+1))]}.fastq
       fi
 
       cnt=$((${cnt} + 1))

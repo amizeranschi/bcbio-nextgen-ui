@@ -8,16 +8,14 @@ check_install = function(packages) {
     ## use BiocManager::install() instead of install.packages()
     if (!requireNamespace("BiocManager", quietly = T))
       install.packages("BiocManager", repos='https://cloud.r-project.org')
-      # install.packages("Rcpp")
-      # , repos='https://cloud.r-project.org')
     
     BiocManager::install(not_installed, ask = F)
   }
 }
 ## Install and load the required packages:
-packages = c("AnnotationHub", "AnnotationDbi", "MeSHDbi", "ggplot2", "clusterProfiler", "DOSE", "meshes", "ChIPseeker", "GOSemSim","ReactomePA",  "VariantAnnotation", "pheatmap", "RColorBrewer",  "DESeq2")
-# , "bedr", "gage", "gageData",  "topGO", "biomaRt")
-# , "AnnotationDbi","MeSHDbi", "ggplot2","ChIPseeker","clusterProfiler", "GOSemSim","ReactomePA",  "VariantAnnotation", "pheatmap", "RColorBrewer",  "DESeq2")
-# , "bedr", "gage", "gageData",  "topGO", "biomaRt")
+packages = c("MeSHDbi", "ggplot2","ChIPseeker","clusterProfiler", "DOSE", "meshes", "GOSemSim","ReactomePA", "AnnotationHub", "AnnotationDbi", "VariantAnnotation", "pheatmap", "RColorBrewer",  "DESeq2", "bedr",  "SBGNview", "pathview", "gage", "gageData",  "topGO", "biomaRt")
 check_install(packages)
-installed = lapply(packages, library, character.only = T)
+installed = apply(packages, library, character.only = T)
+
+installed = apply("MeSHDbi", library, character.only = T)
+

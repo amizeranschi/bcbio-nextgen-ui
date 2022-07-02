@@ -49,7 +49,7 @@ echo " --- [$(date +"%F %R")] The PATH IS: ${PATH}"
 ## GO TO SAMPLES MODULE
 ## Handle the samples for the upcoming analysis
 
-bash ${path_to_scripts}/workflows/samples_module.sh
+# bash ${path_to_scripts}/workflows/samples_module.sh
 
 ## Setup configuration files for the workflow
 bash ${path_to_scripts}/workflows/config_module.sh 
@@ -95,4 +95,5 @@ fi
 if [[ ${bcbio_workflow} == "bulk_rna_seq" ]]; then
     echo " --- [$(date +"%F %R")] Starting DOWNSTREAM ANALYSIS for BULK RNA-seq WORKFLOW."
     Rscript --vanilla ${path_downstream_analysis_bulk}/bulk_rna_seq-downstream_analysis.R ${path_downstream_analysis_bulk} ${counts_file} ${metadata_file} ${bcbio_vep_species} ${gtf_file_location}
+    python3 create_json_downstream_page.py ${bcbio_workflow} ${path_downstream_analysis_bulk}
 fi

@@ -1,23 +1,23 @@
-## Clear all objects from the memory:
-rm(list = ls())
-check_install = function(packages) {
-  not_installed = setdiff(packages, rownames(installed.packages()))
-  if(length(not_installed) > 0) {
-    write(paste("The libraries", not_installed, "are not available, so they are being installed now.", sep=" "), stdout())
+# ## Clear all objects from the memory:
+# rm(list = ls())
+# check_install = function(packages) {
+#   not_installed = setdiff(packages, rownames(installed.packages()))
+#   if(length(not_installed) > 0) {
+#     write(paste("The libraries", not_installed, "are not available, so they are being installed now.", sep=" "), stdout())
     
-    ## use BiocManager::install() instead of install.packages()
-    if (!requireNamespace("BiocManager", quietly = T))
-      install.packages("BiocManager", repos='https://cloud.r-project.org')
-    # install.packages("Rcpp")
-    # , repos='https://cloud.r-project.org')
+#     ## use BiocManager::install() instead of install.packages()
+#     if (!requireNamespace("BiocManager", quietly = T))
+#       install.packages("BiocManager", repos='https://cloud.r-project.org')
+#     # install.packages("Rcpp")
+#     # , repos='https://cloud.r-project.org')
     
-    BiocManager::install(not_installed, ask = F)
-  }
-}
+#     BiocManager::install(not_installed, ask = F)
+#   }
+# }
 
 packages = c("AnnotationHub", "AnnotationDbi", "MeSHDbi", "ggplot2", "clusterProfiler", "DOSE", "meshes", "ChIPseeker", "GOSemSim","ReactomePA",  "VariantAnnotation", "pheatmap", "RColorBrewer",  "DESeq2", "enrichplot")
-install.packages('GOplot', repos='https://cloud.r-project.org')
-check_install(packages)
+# install.packages('GOplot', repos='https://cloud.r-project.org')
+# check_install(packages)
 
 installed = lapply(packages, library, character.only = T)
 library(GOplot)
@@ -153,7 +153,7 @@ vsd = vst(dds, blind = FALSE)
 print(" --- Creating MA plot")
 
 ## MA Plot
-png("MA.png", width = 950, height = 650)
+png("bulk_rna_seq_MA.png", width = 950, height = 650)
 DESeq2::plotMA(res, alpha = 0.05, colSig = "blue", cex = 1, main="MA Plot")
 dev.off()
 
@@ -169,7 +169,7 @@ colors = colorRampPalette( rev(brewer.pal(9, "Blues")) )(255)
 
 print(" --- Creating heatmap plot for sample distances")
 
-png("heatmap_distances.png", width = 850, height = 900)
+png("bulk_rna_seq_heatmap_distances.png", width = 850, height = 900)
 
 pheatmap(sampleDistMatrix,
          clustering_distance_rows = sampleDists,
@@ -181,10 +181,11 @@ dev.off()
 # first method
 # plotPCA(vsd, intgroup = c("panel", "X"))
 # second method
+
 pcaData <- plotPCA(vsd, intgroup = c("panel", "X"), returnData = TRUE)
 percentVar <- round(100 * attr(pcaData, "percentVar"))
 
-png("PCA-plot.png", width = 700, height = 500)
+png("bulk_rna_seq_PCA-plot.png", width = 700, height = 500)
 print(" --- Creating PA plot")
 
 ggplot(pcaData, aes(PC1, PC2, color=panel, shape=X), title="PCA") +
@@ -210,7 +211,7 @@ rownames(metadata_heatmap) = colnames(mat1)
 
 print(" --- Creating top significantly differentially expressed pheatmap plot")
 
-png("top_genes.png", width = 800, height = 900)
+png("bulk_rna_seq_top_genes.png", width = 800, height = 900)
 pheatmap(mat1, annotation_col = metadata_heatmap, main="Top significantlly expressed genes")
 dev.off()
 
@@ -247,14 +248,14 @@ print(" --- Cluster profile for representation of gene ontology plots")
 
 # plot the results
 if (!is.null(ego_RT)) {
-  png("ego_RT.png", width = 750, height = 750)
+  png("bulk_rna_seq_ego_RT.png", width = 750, height = 750)
   barplot(ego_RT, showCategory=20, title="Enrichment Analysis - representation of gene ontology on ROOT samples") 
   dev.off()
 } else {
     print("Failed to return results of Gene Ontology for ROOT!")
 }
 if (!is.null(ego_AE)) {
-  png("ego_AE.png", width = 750, height = 950)
+  png("bulk_rna_seq_ego_AE.png", width = 750, height = 950)
   barplot(ego_AE, showCategory=20, title="Enrichment Analysis - representation of gene ontology on AERIAL samples") 
   dev.off()
 } else {
@@ -281,7 +282,7 @@ print(" --- KEGG pathway over-representation analysis on the extracted genes plo
 
 # plot the results
 if (!is.null(kegg_RT)) {
-  png("kegg_RT.png", width = 600, height = 650)
+  png("bulk_rna_seq_kegg_RT.png", width = 600, height = 650)
   barplot(kegg_RT, showCategory=20, title="KEGG pathway over-representation analysis on the ROOT genes")
   dev.off()  
 } else {
@@ -290,7 +291,7 @@ if (!is.null(kegg_RT)) {
 }
 
 if (!is.null(kegg_AE)) {
-  png("kegg_AE.png", width = 600, height = 650)
+  png("bulk_rna_seq_kegg_AE.png", width = 600, height = 650)
   barplot(kegg_AE, showCategory=20, title="KEGG pathway over-representation analysis on the AERIAL genes")
   dev.off()
 } else {
@@ -328,7 +329,7 @@ print(" --- Over-representation analysis for disease ontology plots")
 
 # plot the results
 if (!is.null(x_RT)) {
-  png("x_RT.png", width = 600, height = 650)
+  png("bulk_rna_seq_x_RT.png", width = 600, height = 650)
   barplot(x_RT, showCategory=20, title="Over-representation analysis for disease ontology in ROOT genes")
   dev.off()
 } else {
@@ -336,7 +337,7 @@ if (!is.null(x_RT)) {
 }
 
 if (!is.null(x_AE)) {
-  png("x_AE.png", width = 600, height = 650)
+  png("bulk_rna_seq_x_AE.png", width = 600, height = 650)
   barplot(x_AE, showCategory=20, title="Over-representation analysis for disease ontology in AERIAL genes")
   dev.off()
 } else {
@@ -361,7 +362,7 @@ if (length(qu) > 0) {
 
   # plot the results
   if (!is.null(de_RT)) {
-    png("mesh_RT.png", width = 600, height = 650)
+    png("bulk_rna_seq_mesh_RT.png", width = 600, height = 650)
     barplot(mesh_RT)
     dev.off()
   } else {
@@ -369,7 +370,7 @@ if (length(qu) > 0) {
   }
 
   if (!is.null(de_AE)) {
-    png("mesh_AE.png", width = 600, height = 650)
+    png("bulk_rna_seq_mesh_AE.png", width = 600, height = 650)
     barplot(mesh_AE)
     dev.off()
   } else {
