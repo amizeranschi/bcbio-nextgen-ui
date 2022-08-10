@@ -18,6 +18,7 @@ export bcbio_runs_input="${bcbio_runs}${workflow_name}/input"
 # extraction of the name of the csv file to keep for the analysis flow name
 export action_name=$(echo ${bcbio_csv_file_path##*/} | cut -f 1 -d '.')
 
+
 # create the directories
 if [ ! -d ${bcbio_runs} ]; then
     mkdir ${bcbio_runs}
@@ -28,6 +29,7 @@ fi
 if [ ! -d ${bcbio_runs_input} ]; then
     mkdir ${bcbio_runs_input}
 fi
+
 
 # directory where bcbio genome is stored
 # seq_dir_genome="${bcbio_install_path}/genomes/${bcbio_species}/${bcbio_genome}/seq"
@@ -42,17 +44,20 @@ export bcbio_workflow_work="${bcbio_runs_input}/${action_name}/work"
 ## Store current path to the scripts
 export path_to_scripts=$PWD
 export path_to_web="${path_to_scripts}/web"
+export path_downstream_analysis="${path_to_scripts}/downstreamAnalysis"
+mkdir ${path_to_scripts}/downstreamAnalysis/dowstreamResults
+export dowstreamResults="${path_to_scripts}/downstreamAnalysis/dowstreamResults"
+mkdir ${dowstreamResults}/${bcbio_workflow}
+export dowstreamResultsWorkflow="${dowstreamResults}/${bcbio_workflow}"
 # set variables for variant annotation and gene annotation in downstream analysis
 if [[ ${bcbio_workflow} == "variant_calling" ]]; then
     if [[ ${bcbio_variant_annotation} == "yes" ]]; then
         vcf_file="${action_name}-small-var.vcf.gz"
         vcf_file_name=$(echo "${vcf_file}" | cut -f 1 -d '.')
         export variant_annotation_dir="${bcbio_runs_input}/${action_name}/variant_annotation"
-        export path_downstream_analysis="${path_to_scripts}/downstreamAnalysisVariantCalling"
     fi
 fi
 
-export path_downstream_analysis_bulk="${path_to_scripts}/downstreamAnalysisBulk-RNA-seq"
 export counts_file="${bcbio_runs_final}/*${action_name}/counts/*.csv"
 export metadata_file="${bcbio_runs_final}/*${action_name}/metadata.csv"
 

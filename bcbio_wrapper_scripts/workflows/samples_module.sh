@@ -12,9 +12,11 @@ IFS=', ' read -r -a sample_name_list <<< ${bcbio_samples_fastq}
 ## get list lengths to determine from the user if the sample is multiple
 count_samples="${#sample_list[@]}"
 count_user_name_samples="${#sample_name_list[@]}"
-
+echo "${count_samples} count samples"
+echo "${count_user_name_samples} usr cnt"
 ## get the number of samples from fastq
 number_of_samples=$((${count_user_name_samples}/${count_samples}))
+echo "${number_of_samples} nbr"
 
 ## if user wants to download data 
 if [[ ${bcbio_download_samples} = "yes" ]]; then
@@ -39,12 +41,17 @@ if [[ ${bcbio_download_samples} = "yes" ]]; then
       fi
       if [[ ${number_of_samples} = 2 ]]; then
          ## rename samples as user input
-         mv ${sample}*1.fastq ${sample_name_list[$((${cnt}*2))]}.fastq
-         mv ${sample}*2.fastq ${sample_name_list[$((${cnt}*2+1))]}.fastq
          ## bgzip the samples
+         echo "aaa"
+         echo "${cnt}"
+         echo "aaa"
+         mv ${sample}*1.fastq ${sample_name_list[$((${cnt}*2))]}.fastq
          bgzip -c ${sample_name_list[$((${cnt}*2))]}.fastq > ${sample_name_list[$((${cnt}*2))]}.fastq.gz
-         bgzip -c ${sample_name_list[$((${cnt}*2+1))]}.fastq > ${sample_name_list[$((${cnt}*2+1))]}.fastq.gz
          rm -rf ${sample_name_list[$((${cnt}*2))]}.fastq
+
+         mv ${sample}*2.fastq ${sample_name_list[$((${cnt}*2+1))]}.fastq
+         # bgzip -c ${sample_name_list[$((${cnt}*2))]}.fastq > ${sample_name_list[$((${cnt}*2))]}.fastq.gz
+         bgzip -c ${sample_name_list[$((${cnt}*2+1))]}.fastq > ${sample_name_list[$((${cnt}*2+1))]}.fastq.gz
          rm -rf ${sample_name_list[$((${cnt}*2+1))]}.fastq
       fi
 

@@ -5,12 +5,66 @@
 		integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 	<link rel="stylesheet" href="./style.css">
 </head>
+
 <body>
 
-	<span>
 
-		Add blueprints
-	</span>
+	<div style="padding: 5% 10% 0% 5%; color: black;">
+		<h2>Project Description</h2>
+		<br>
+		<div style="padding-left: 15px; color: black;">
+			<p>
+				Bcbio-nextgen is a massively parallel data analysis pipeline in the bioinformatics field that supports
+				the most common next-generation sequencing experiments.
+			</p><br>
+			<p>
+				It is a powerful tool, but its configuration requires advanced computer literacy, thus potentially
+				alienating a part of its target group of users: biologists, ecologists, and medical practitioners.
+				Bcbio-nextgen open source community aims to automate all experiments in an effort to redirect the focus
+				of the scientists towards additional analyses that could retrieve meaningful information from the
+				pre-processed biological data.
+			</p><br>
+			<p>
+				This project implements a wrapper over bcbio-nextgen to simplify the installation and configuration of
+				the pipeline in order to make it more user-friendly for scientists. In addition, it provides a series of
+				three algorithms that deliver detailed information of the bcbio-nextgen pre-processed samples. This
+				encourages a growth in the complexity of the experiments, allowing researchers to extract meaningful
+				information, minimizing the time spent on the pre-processing tasks.
+			</p>
+		</div>
+		<br>
+		<br>
+
+		<h2>System Requirements</h2>
+		<br>
+		<div style="padding-left: 15px; color: black;">
+			<p>
+				Bcbio-nextgen uses a lot of internal tools that actually dictate the system requirements. For
+				small projects, a personal laptop with 50GB free space on the disk should work just fine,
+				although as the projects scale towards analyses on human or mammal genomes, the minimum
+				requirements rise up to at least 100GB disk space for tools and reports without counting
+				the disk space required by the samples. 
+			</p><br>
+			<p>
+				The installation can take up to 2h, considering
+				the Internet connection quality and the storage system throughput. Bcbio’s installation is
+				based on conda solved environments, which can take up a lot of RAM, so the recommended
+				RAM requirements are 1CPU - 20GB RAM. For smaller genomes and simpler experiments,
+				16GB RAM is enough, although as the experiments grow in complexity, the usage of clusters
+				becomes necessary. 
+			</p><br>
+			<p>
+				Although the bcbio-nextgen wrapper can run on CLI-only systems, in
+				order to use the user interface feature, the system must have GUI support. The wrapper
+				can be used from the CLI by running the deploy.sh with the YAML config file as argument,
+				while using the user interface, the Requirements form provided can be completed and the
+				execution is triggered within the interface. The output data is located on the disk on the
+				/home/directory/bcbio runs/workflow {name of the workflow}directory and the reports are
+				available in the Reports section in the interface.
+			</p>
+		</div>
+	</div>
+
 	<script type="text/javascript" src="../eel.js"></script>
 	<script src="./script.js"></script>
 </body>

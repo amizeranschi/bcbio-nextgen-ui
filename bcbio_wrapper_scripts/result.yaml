@@ -1,5 +1,5 @@
 existing_version: yes
-path_to_existing: /export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen
+path_to_existing: /home/maria/bcbio_nextgen
 install_path: ''
 development_branch: skip
 total_cores: 32
@@ -12,11 +12,13 @@ genome: sacCer3
 vep_species: Saccharomyces_cerevisiae
 vep_assembly: R64-1-1
 ensembl_ver: 105
-workflow: bulk_rna_seq
+workflow: variant_calling
 variant_annotation: yes
 exclude_lcr: no
 download_samples: no
-path_to_samples_on_sys: /export/home/acs/stud/m/maria.nastase0912/bcbio_runs/workflow_bulk_rna_seq_old/input/
-samples: SRR5482575 SRR5482576 SRR5482577 SRR5482578 SRR5482579 SRR5482580
-samples_fastq: AE1-R1 AE1-R2 AE2-R1 AE2-R2 AE3-R1 AE3-R2 RT1-R1 RT1-R2 RT2-R1 RT2-R2 RT3-R1 RT3-R2
-csv_file_path: /export/home/acs/stud/m/maria.nastase0912/bcbio_nextgen_usability_improvements/bulk_rna_seq.csv 
+path_to_samples_on_sys: /home/maria/bcbio_runs/workflow_variant_calling/input
+samples: 
+# SRR5482575 SRR5482576 SRR5482577 SRR5482578 SRR5482579 SRR5482580
+samples_fastq: 500-I-Rep1 500-I-Rep2 500-I-Rep3
+#  AE1-R1 AE1-R2 AE2-R1 AE2-R2 AE3-R1 AE3-R2 RT1-R1 RT1-R2 RT2-R1 RT2-R2 RT3-R1 RT3-R2 RT3-R1 RT3-R2
+csv_file_path: /home/maria/bcbio_nextgen_usability_improvements/varcall-analysis.csv

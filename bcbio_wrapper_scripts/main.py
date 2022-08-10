@@ -2,7 +2,7 @@ import eel
 import os
 import json
 import ruamel.yaml
-
+import time
 import yaml_to_table
 
 from tkinter import *
@@ -81,6 +81,8 @@ def run_analysis():
 	print("Trigger All scripts")
 	try:
 		os.system('bash ' + os.getcwd()+ '/deploy.sh ' + conf_path)
+		os.system('cp -r ' + os.getcwd()+ '/downstreamAnalysisBulk-RNA-seq ' + os.getcwd() + '/web/images/')
+		# time.sleep(10)
 		return True
 	except:
 		return False

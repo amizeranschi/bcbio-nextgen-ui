@@ -49,7 +49,7 @@ echo " --- [$(date +"%F %R")] The PATH IS: ${PATH}"
 ## GO TO SAMPLES MODULE
 ## Handle the samples for the upcoming analysis
 
-# bash ${path_to_scripts}/workflows/samples_module.sh
+bash ${path_to_scripts}/workflows/samples_module.sh
 
 ## Setup configuration files for the workflow
 bash ${path_to_scripts}/workflows/config_module.sh 
@@ -82,18 +82,26 @@ if [[ ${bcbio_workflow} == "variant_calling" ]]; then
         # perform gene annotation on the results from variant annotation
         echo " --- [$(date +"%F %R")] Starting gene annotation for Variant Calling Workflow, see output in ${path_to_scripts}/downstreamAnalysisVariantCalling."
         Rscript --vanilla ${path_downstream_analysis}/gene_annotation_variant_calling.R ${path_downstream_analysis} ${variant_annotation_dir}/${vcf_file_name}-vep.table ${bcbio_vep_species} ${gtf_file_location}
+        
+
     fi
 
 fi
 
 ## Run downstream analysis for atac_seq
 if [[ ${bcbio_workflow} == "atac_seq" ]]; then
+    # to do add path to peaks file
     echo " --- [$(date +"%F %R")] Starting DOWNSTREAM ANALYSIS for ATAC-seq/ChIP-seq WORKFLOW."
+    Rscript --vanilla ${path_downstream_analysis}/chIP_seq-downstreamAnalysis.R ${path_downstream_analysis_bulk}  ${bcbio_vep_species} ${gtf_file_location}
+
 fi
 
 ## Run downstream analysis for bulk_rna_seq
 if [[ ${bcbio_workflow} == "bulk_rna_seq" ]]; then
     echo " --- [$(date +"%F %R")] Starting DOWNSTREAM ANALYSIS for BULK RNA-seq WORKFLOW."
-    Rscript --vanilla ${path_downstream_analysis_bulk}/bulk_rna_seq-downstream_analysis.R ${path_downstream_analysis_bulk} ${counts_file} ${metadata_file} ${bcbio_vep_species} ${gtf_file_location}
+    Rscript --vanilla ${path_downstream_analysis}/bulk_rna_seq-downstream_analysis.R ${path_downstream_analysis} ${counts_file} ${metadata_file} ${bcbio_vep_species} ${gtf_file_location}
     python3 create_json_downstream_page.py ${bcbio_workflow} ${path_downstream_analysis_bulk}
 fi
+
+mv ${path_downstream_analysis}/*.txt ${dowstreamResultsWorkflow}
+mv ${path_downstream_analysis}/*.png ${dowstreamResultsWorkflow}

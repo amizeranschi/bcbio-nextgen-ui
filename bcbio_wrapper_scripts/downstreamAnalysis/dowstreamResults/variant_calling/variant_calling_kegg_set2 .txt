@@ -1,0 +1,4 @@
+ID	Description	GeneRatio	BgRatio	pvalue	p.adjust	qvalue	geneID	Count
+sce04070	Phosphatidylinositol signaling system	1/1	23/2412	0.00953565505804321	0.0248756218905473		YBL105C	1
+sce04139	Mitophagy - yeast	1/1	40/2412	0.0165837479270315	0.0248756218905473		YBL105C	1
+sce04011	MAPK signaling pathway - yeast	1/1	114/2412	0.0472636815920399	0.0472636815920399		YBL105C	1

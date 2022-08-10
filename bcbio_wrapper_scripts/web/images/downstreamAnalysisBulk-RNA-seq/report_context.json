@@ -1,0 +1,67 @@
+{
+    "workflow": "bulk_rna_seq",
+    "content": [
+        {
+            "title": "MA plot",
+            "components": [
+                {
+                    "description": "MA plot",
+                    "imagePath": "./images/downstreamAnalysisBulk-RNA-seq/bulk_rna_seq_MA.png"
+                }
+            ]
+        },
+        {
+            "title": "Heatmap of sample distances",
+            "components": [
+                {
+                    "description": "Heatmap of sample distances",
+                    "imagePath": "./images/downstreamAnalysisBulk-RNA-seq/bulk_rna_seq_heatmap_distances.png"
+                }
+            ]
+        },
+        {
+            "title": "PCA plot",
+            "components": [
+                {
+                    "description": "PCA plot",
+                    "imagePath": "./images/downstreamAnalysisBulk-RNA-seq/bulk_rna_seq_PCA-plot.png"
+                }
+            ]
+        },
+        {
+            "title": "Top significantly differentially expressed pheatmap plot",
+            "components": [
+                {
+                    "description": "Top significantly differentially expressed pheatmap plot",
+                    "imagePath": "./images/downstreamAnalysisBulk-RNA-seq/bulk_rna_seq_top_genes.png"
+                }
+            ]
+        },
+        {
+            "title": "Gene Ontology Enrichment Analysis",
+            "components": [
+                {
+                    "description": "Enrichment Analysis - representation of gene ontology on ROOT genes",
+                    "imagePath": "./images/downstreamAnalysisBulk-RNA-seq/bulk_rna_seq_ego_RT.png"
+                },
+                {
+                    "description": "Enrichment Analysis - representation of gene ontology on AERIAL genes",
+                    "imagePath": "./images/downstreamAnalysisBulk-RNA-seq/bulk_rna_seq_ego_AE.png"
+                }
+            ]
+        },
+        {
+            "title": "KEGG pathway over-representation analysis",
+            "components": [
+                {
+                    "description": "KEGG pathway over-representation analysis on ROOT genes",
+                    "imagePath": "./images/downstreamAnalysisBulk-RNA-seq/bulk_rna_seq_kegg_RT.png"
+                },
+                {
+                    "description": "KEGG pathway over-representation analysis on AERIAL genes",
+                    "imagePath": "./images/downstreamAnalysisBulk-RNA-seq/bulk_rna_seq_kegg_AE.png"
+                }
+            ]
+        }
+    ]
+}

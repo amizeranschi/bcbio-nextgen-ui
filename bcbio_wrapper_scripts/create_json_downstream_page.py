@@ -16,6 +16,14 @@ kegg_analysis = False
 disease_analysis = False
 mesh_analysis = False
 plot_type_list = []
+ma_analysis = False
+sample_analysis = False
+pca_analysis = False
+top_analysis = False
+plot_list_ma = []
+plot_list_heatmap = []
+plot_list_pca = []
+plot_list_top = []
 
 if workflow_name == "variant_calling":
     # gene ontology
@@ -86,76 +94,69 @@ if workflow_name == "variant_calling":
         plot_type_list += [{'title': "MeSH enrichment analysis", 'components': plot_list_mesh}]
 
 if workflow_name == "bulk_rna_seq":
-    ma_analysis = False
-    sample_analysis = False
-    pca_analysis = False
-    top_analysis = False
-    plot_list_ma = []
-    plot_list_heatmap = []
-    plot_list_pca = []
-    plot_list_top = []
+
 
     # MA plot
     if os.path.isfile(path_to_images + '/bulk_rna_seq_MA.png'):
         desc = "MA plot"
-        plot_list_ma += [{'description': desc, 'imagePath': path_to_images + '/bulk_rna_seq_MA.png'}]
+        plot_list_ma += [{'description': desc, 'imagePath': './images/downstreamAnalysisBulk-RNA-seq/bulk_rna_seq_MA.png'}]
         ma_analysis =  True
     # sample distances
     if os.path.isfile(path_to_images + '/bulk_rna_seq_heatmap_distances.png'):
         desc = "Heatmap of sample distances"
-        plot_list_heatmap += [{'description': desc, 'imagePath': path_to_images + '/bulk_rna_seq_heatmap_distances.png'}]
+        plot_list_heatmap += [{'description': desc, 'imagePath': './images/downstreamAnalysisBulk-RNA-seq/bulk_rna_seq_heatmap_distances.png'}]
         sample_analysis =  True
 
     # PCA 
     if os.path.isfile(path_to_images + '/bulk_rna_seq_PCA-plot.png'):
         desc = "PCA plot"
-        plot_list_pca += [{'description': desc, 'imagePath': path_to_images + '/bulk_rna_seq_PCA-plot.png'}]
+        plot_list_pca += [{'description': desc, 'imagePath': './images/downstreamAnalysisBulk-RNA-seq/bulk_rna_seq_PCA-plot.png'}]
         pca_analysis =  True
 
     # top genes
     if os.path.isfile(path_to_images + '/bulk_rna_seq_top_genes.png'):
         desc = "Top significantly differentially expressed pheatmap plot"
-        plot_list_top += [{'description': desc, 'imagePath': path_to_images + '/bulk_rna_seq_top_genes.png'}]
+        plot_list_top += [{'description': desc, 'imagePath': './images/downstreamAnalysisBulk-RNA-seq/bulk_rna_seq_top_genes.png'}]
         top_analysis =  True
 
     # gene ontology
     if os.path.isfile(path_to_images + '/bulk_rna_seq_ego_RT.png'):
         desc = "Enrichment Analysis - representation of gene ontology on ROOT genes"
-        plot_list_GO += [{'description': desc, 'imagePath': path_to_images + '/bulk_rna_seq_ego_RT.png'}]
+        plot_list_GO += [{'description': desc, 'imagePath': './images/downstreamAnalysisBulk-RNA-seq/bulk_rna_seq_ego_RT.png'}]
         go_analysis =  True
     if os.path.isfile(path_to_images + '/bulk_rna_seq_ego_AE.png'):
         desc = "Enrichment Analysis - representation of gene ontology on AERIAL genes"
-        plot_list_GO += [{'description': desc, 'imagePath': path_to_images + '/bulk_rna_seq_ego_AE.png'}]
+        plot_list_GO += [{'description': desc, 'imagePath': './images/downstreamAnalysisBulk-RNA-seq/bulk_rna_seq_ego_AE.png'}]
         go_analysis =  True
 
     # kegg pathway
     if os.path.isfile(path_to_images + '/bulk_rna_seq_kegg_RT.png'):
         desc = "KEGG pathway over-representation analysis on ROOT genes"
-        plot_list_KEGG += [{'description': desc, 'imagePath': path_to_images + '/bulk_rna_seq_kegg_RT.png'}]
+        plot_list_KEGG += [{'description': desc, 'imagePath': './images/downstreamAnalysisBulk-RNA-seq/bulk_rna_seq_kegg_RT.png'}]
         kegg_analysis =  True
     if os.path.isfile(path_to_images + '/bulk_rna_seq_kegg_AE.png'):
         desc = "KEGG pathway over-representation analysis on AERIAL genes"
-        plot_list_KEGG += [{'description': desc, 'imagePath': path_to_images + '/bulk_rna_seq_kegg_AE.png'}]
+        plot_list_KEGG += [{'description': desc, 'imagePath': './images/downstreamAnalysisBulk-RNA-seq/bulk_rna_seq_kegg_AE.png'}]
         kegg_analysis =  True
 
     #  disease ontology
     if os.path.isfile(path_to_images + '/bulk_rna_seq_x_RT.png'):
         desc = "Over-representation analysis for disease ontology in ROOT genes"
-        plot_list_disease += [{'description': desc, 'imagePath': path_to_images + '/bulk_rna_seq_x_RT.png'}]
+        plot_list_disease += [{'description': desc, 'imagePath': './images/downstreamAnalysisBulk-RNA-seq/bulk_rna_seq_x_RT.png'}]
         disease_analysis =  True
     if os.path.isfile(path_to_images + '/bulk_rna_seq_x_AE.png'):
         desc = "Over-representation analysis for disease ontology AERIAL genes"
-        plot_list_disease += [{'description': desc, 'imagePath': path_to_images + '/bulk_rna_seq_x_AE.png'}]
+        plot_list_disease += [{'description': desc, 'imagePath': './images/downstreamAnalysisBulk-RNA-seq/bulk_rna_seq_x_AE.png'}]
         disease_analysis =  True
 
     #  mesh enrichment analysis
     if os.path.isfile(path_to_images + '/bulk_rna_seq_mesh_RT.png'):
         desc = "MeSH enrichment analysis in ROOT genes"
-        plot_list_mesh += [{'description': desc, 'imagePath': path_to_images + '/bulk_rna_seq_mesh_RT.png'}]
+        plot_list_mesh += [{'description': desc, 'imagePath': './images/downstreamAnalysisBulk-RNA-seq/bulk_rna_seq_mesh_RT.png'}]
         mesh_analysis =  True
     if os.path.isfile(path_to_images + '/bulk_rna_seq_mesh_AE.png'):
         desc = "MeSH enrichment analysis in AERIAL genes"
-        plot_list_mesh += [{'description': desc, 'imagePath': path_to_images + '/bulk_rna_seq_mesh_AE.png'}]
+        plot_list_mesh += [{'description': desc, 'imagePath': './images/downstreamAnalysisBulk-RNA-seq/bulk_rna_seq_mesh_AE.png'}]
         mesh_analysis =  True
 
     if ma_analysis:
@@ -179,6 +180,6 @@ if workflow_name == "atac_seq":
     plot_type_list = [{'title': "analysis_name", 'components': plot_list}]
 
 
-fh = open("report_context.json", "a+")
+fh = open("web/data/report_context.json", "a+")
 fh.write(json.dumps({"workflow": workflow_name, "content": plot_type_list}))
 fh.close()

@@ -4,10 +4,74 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
 		integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 	<link rel="stylesheet" href="./style.css">
+	<style>
+		li {
+             padding-bottom: 5px;
+			 font-size: 15px;
+		}
+
+		strong {
+			font-weight: bolder;
+		}
+	</style>
 </head>
 <body>
+	<div style="padding: 5% 10% 0% 5%; color: black;">
+		<h2>CONFIGURATION STEPS</h2>
+		<!-- <p>test</p>
+		<p>test<br></p> -->
+		<br>
+		<div style="padding-left: 15px; color: black;">
+			<ul>
+				<li><strong> - </strong> existing_version: ----> choose to install bcbio from scratch or from an existing install</li>
+				<li><strong> - </strong>path_to_existing: ----> the usage of an older installation of bcbio requires the path to the install</li>
+				<li><strong> - </strong>development_branch: ----> choose the development branch to upgrade and install bcbio to</li>
+				<li><strong> - </strong>total_cores: ----> number of cores to run bcbio with </li>
+				<li><strong> - </strong>main_cores: ----> number of cores to run bcbio with </li>
+				<li><strong> - </strong>install_path: ----> the isnatllation path must be specified WARNING: the path shall be located in the home directory of the system for the packages installed, paths that exceed 80 characters can not be processed </li>
+				<li><strong> - </strong>upgrade: ----> choose to upgrade bcbio_nextgen or not </li>
+				<li><strong> - </strong>annotated_species: ----> choose if the analysis will run on an existing genome in bcbio or a custom genome </li>
+				<li><strong> - </strong>genome_fasta: ----> the path toward the .fa file of the custom genome sort gtf if no annotated species </li>
+				<li><strong> - </strong>transcriptome_gtf: ----> the path to the transcriptome of the custom genome </li>
+				<li><strong> - </strong>species: ----> the annotated species </li>
+				<li><strong> - </strong>genome: ----> the annotated genome </li>
+				<li><strong> - </strong>vep_species: ----> species for usage of vep tool </li>
+				<li><strong> - </strong>vep_assembly: ----> genome for usage of vep tool </li>
+				<li><strong> - </strong>ensembl_ver: ----> vep tool version </li>
+				<li><strong> - </strong>workflow: ----> name of the workflow
+					<div style="padding-left: 10px; color: black;">
+						convention available:
+						<div style="padding-left: 10px; color: black;">
+							<ul>
+								<li>** variant_calling for Variant calling and variant annotation</li>
+								<li>** atac_seq for ATAC seq workflow </li>
+							</ul>
+						</div>
+					</div>
+				</li>
+				<li><strong> - </strong>variant_annotation: ----> when running variant calling workflow, there is the choice of running variant annotation also </li>
+				<li><strong> - </strong>exclude_lcr: ----> when running variant calling workflow, there is the choice of performing exclusion of low complexity regions</li>
+				<li><strong> - </strong>download_samples: ----> choose if download samples or get them from local system </li>
+				<li><strong> - </strong>path_to_samples_on_sys: ----> the choice to use locally stored samples requires the path to the samples </li>
+				<li><strong> - </strong>samples: ----> id of the samples to download </li>
+				<li><strong> - </strong>samples_fastq: ----> name convention for each sample id in order without extension
+					<div style="padding-left: 10px; color: black;">
+						<ul>
+							<li>if a sample has more than 1 file the names will be placed in order for _1 _2 or _3</li>
+							<li>if the samples are already on the system, write their names without the extension</li>
+						</ul>
+					</div>
+				</li>
+				<li><strong> - </strong>csv_file_path: ----> the path toward the csv file for the analysis </li>
+	
+			</ul>
+		</div>
+		<br>
 
-	<span> Describe all the input fields</span>
+		<span>
+			Check the integrity of your samples IDs
+		</span>
+	</div>
 	<script type="text/javascript" src="../eel.js"></script>
 	<script src="./script.js"></script>
 </body>
