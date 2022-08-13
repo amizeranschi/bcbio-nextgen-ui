@@ -69,7 +69,7 @@ export variant_calling_yaml="https://raw.githubusercontent.com/bcbio/bcbio-nextg
 export atac_seq_yaml="http://s3.amazonaws.com/bcbio-nextgen/atac_userstory_data/atac-example.yaml"
 export bulk_rna_seq_yaml="https://raw.githubusercontent.com/bcbio/bcbio-nextgen/master/config/examples/rnaseq-seqc.yaml"
 
-export miniconda3="https://repo.anaconda.com/miniconda/Miniconda3-py37_4.11.0-Linux-x86_64.sh"
+export miniconda3="https://repo.anaconda.com/miniconda/Miniconda3-py37_4.12.0-Linux-x86_64.sh"
 export miniconda2="https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh"
 export install_script_bcbio="https://raw.githubusercontent.com/bcbio/bcbio-nextgen/master/scripts/bcbio_nextgen_install.py"
 
