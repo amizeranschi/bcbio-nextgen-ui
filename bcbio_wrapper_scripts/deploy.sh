@@ -3,7 +3,8 @@
 ## Give excecution rights to every script
 chmod +x environment/*.sh
 chmod +x workflows/*.sh
-chmod +x downstreamAnalysis*/*.sh
+#chmod +x downstreamAnalysis*/*.sh
+chmod +x *.sh
 
 ##########################################################################################################################################################################################
                                                                             # Environment #
