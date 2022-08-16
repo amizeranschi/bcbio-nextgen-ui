@@ -11,10 +11,10 @@ cd ${bcbio_runs_input}
 
 if [[ ${bcbio_workflow} == "variant_calling" ]]; then
    if [ -x "$(command -v wget)" ]; then
-      rm gatk-variant.yaml
+      rm -f gatk-variant.yaml
       wget ${variant_calling_yaml} -O gatk-variant.yaml
    else
-      rm gatk-variant.yaml
+      rm -f gatk-variant.yaml
       curl -L -C - -O ${variant_calling_yaml}
    fi
    ## edit the settings in the illumina-rnaseq.yaml file, to make the analysis work for our files:
@@ -33,10 +33,10 @@ fi
 
 if [[ ${bcbio_workflow} == "atac_seq" ]]; then
    if [ -x "$(command -v wget)" ]; then
-      rm atac-example.yaml
+      rm -f atac-example.yaml
       wget --no-check-certificate ${atac_seq_yaml} -O atac-example.yaml
    else
-      rm atac-example.yaml
+      rm -f atac-example.yaml
       curl -L -C - -O ${atac_seq_yaml}
    fi
 
@@ -57,10 +57,10 @@ fi
 
 if [[ ${bcbio_workflow} == "bulk_rna_seq" ]]; then
    if [ -x "$(command -v wget)" ]; then
-      rm bulk_rna.yaml
+      rm -f bulk_rna.yaml
       wget --no-check-certificate ${bulk_rna_seq_yaml} -O bulk_rna.yaml
    else
-      rm bulk_rna.yaml
+      rm -f bulk_rna.yaml
       curl -L -C - -O ${bulk_rna_seq_yaml}
    fi
 
