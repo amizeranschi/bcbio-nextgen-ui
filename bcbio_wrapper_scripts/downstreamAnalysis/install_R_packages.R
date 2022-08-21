@@ -33,7 +33,7 @@ if(!require(argyle))
   
   ## allow R to look for pacakges in both CRAN and Bioconductor
   setRepositories(ind = 1:2)
-  devtools::install_github("andrewparkermorgan/argyle")
+  devtools::install_github("andrewparkermorgan/argyle", force = T, upgrade = F)
   library(argyle)
 }
 
@@ -46,7 +46,7 @@ if(!require(IntAssoPlot))
   
   ## allow R to look for pacakges in both CRAN and Bioconductor
   setRepositories(ind = 1:2)
-  devtools::install_github("whweve/IntAssoPlot")
+  devtools::install_github("whweve/IntAssoPlot", force = T, upgrade = F)
   library(IntAssoPlot)
 }
 
@@ -59,7 +59,7 @@ if(!require(DRP))
   
   ## allow R to look for pacakges in both CRAN and Bioconductor
   setRepositories(ind = 1:2)
-  devtools::install_github("camult/DRP")
+  devtools::install_github("camult/DRP", force = T, upgrade = F)
   library(DRP)
 }
 
@@ -72,7 +72,7 @@ if(!require(lassosum))
   
   ## allow R to look for pacakges in both CRAN and Bioconductor
   setRepositories(ind = 1:2)
-  devtools::install_github("tshmak/lassosum")
+  devtools::install_github("tshmak/lassosum", force = T, upgrade = F)
   library(lassosum)
 }
 
@@ -85,7 +85,7 @@ if(!require(bigsnpr))
   
   ## allow R to look for pacakges in both CRAN and Bioconductor
   setRepositories(ind = 1:2)
-  devtools::install_github("privefl/bigsnpr")
+  devtools::install_github("privefl/bigsnpr", force = T, upgrade = F)
   library(bigsnpr)
 }
 
@@ -125,7 +125,7 @@ if(!require(GAPIT3))
   
   ## allow R to look for pacakges in both CRAN and Bioconductor
   setRepositories(ind = 1:2)
-  devtools::install_github("jiabowang/GAPIT3", force=TRUE)
+  devtools::install_github("jiabowang/GAPIT3", force = T, upgrade = F)
   library(GAPIT3)
 }
 
