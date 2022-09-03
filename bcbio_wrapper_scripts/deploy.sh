@@ -74,19 +74,11 @@ fi
 
 ## Run downstream analysis for variant calling: variant annotation and gene annotation
 if [[ ${bcbio_workflow} == "variant_calling" ]]; then
-    
-    if [[ ${bcbio_variant_annotation} == "yes" ]]; then
-        echo " --- [$(date +"%F %R")] Starting DOWNSTREAM ANALYSIS for VARIANT CALLING WORKFLOW."
-
-        # run variant annotation if requested
-        bash ${path_downstream_analysis}/variant_annotation.sh
-        # perform gene annotation on the results from variant annotation
-        echo " --- [$(date +"%F %R")] Starting gene annotation for Variant Calling Workflow, see output in ${path_to_scripts}/downstreamAnalysisVariantCalling."
-        Rscript --vanilla ${path_downstream_analysis}/gene_annotation_variant_calling.R ${path_downstream_analysis} ${variant_annotation_dir}/${vcf_file_name}-vep.table ${bcbio_vep_species} ${gtf_file_location}
-        
-
-    fi
-
+    echo " --- [$(date +"%F %R")] Starting DOWNSTREAM ANALYSIS for VARIANT CALLING WORKFLOW."
+    bash ${path_downstream_analysis}/variant_annotation.sh
+    # perform gene annotation on the results from variant annotation
+    echo " --- [$(date +"%F %R")] Starting gene annotation for Variant Calling Workflow, see output in ${path_to_scripts}/downstreamAnalysisVariantCalling."
+    Rscript --vanilla ${path_downstream_analysis}/gene_annotation_variant_calling.R ${path_downstream_analysis} ${variant_annotation_dir}/${vcf_file_name}-vep.table ${bcbio_vep_species} ${gtf_file_location}
 fi
 
 ## Run downstream analysis for atac_seq
@@ -94,7 +86,6 @@ if [[ ${bcbio_workflow} == "atac_seq" ]]; then
     # to do add path to peaks file
     echo " --- [$(date +"%F %R")] Starting DOWNSTREAM ANALYSIS for ATAC-seq/ChIP-seq WORKFLOW."
     Rscript --vanilla ${path_downstream_analysis}/chIP_seq-downstreamAnalysis.R ${path_downstream_analysis_bulk}  ${bcbio_vep_species} ${gtf_file_location}
-
 fi
 
 ## Run downstream analysis for bulk_rna_seq
