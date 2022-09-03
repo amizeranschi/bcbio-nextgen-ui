@@ -26,7 +26,8 @@ if [[ ${bcbio_existing_version} = "yes" ]]; then
    
    ## set the path with all the utils
    echo " --- [$(date +"%F %R")] Setting the PATH for Python 3 and Python2 environment installation."
-   export PATH="${bcbio_install_path}/anaconda/bin:${bcbio_install_path}/tools/bin:${bcbio_install_path}/extra3/bin:${bcbio_install_path}/extra2/bin${PATH:+:${PATH}}"
+   #export PATH="${bcbio_install_path}/anaconda/bin:${bcbio_install_path}/tools/bin:${bcbio_install_path}/extra3/bin:${bcbio_install_path}/extra2/bin${PATH:+:${PATH}}"
+   export PATH="${bcbio_install_path}/extra3/bin:${bcbio_install_path}/extra2/bin${bcbio_install_path}/anaconda/bin:${bcbio_install_path}/tools/bin:${PATH:+:${PATH}}"
    echo " --- [$(date +"%F %R")] The PATH IS: ${PATH}"
 
    ## check if a genome is installed on the system
@@ -35,7 +36,6 @@ if [[ ${bcbio_existing_version} = "yes" ]]; then
    if [[ ! -d ${bcbio_install_path}/genomes/${bcbio_species}/${bcbio_genome} ]]; then
       echo " --- [$(date +"%F %R")] The requested genome ${bcbio_genome} was not found."
       bash ${path_to_scripts}/install_genome.sh
-
    fi
 
    echo " --- [$(date +"%F %R")] The requested genome ${bcbio_genome} can be found at ${bcbio_install_path}."
