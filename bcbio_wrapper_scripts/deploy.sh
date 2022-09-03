@@ -40,7 +40,7 @@ source environment/set_environment_variables.sh
 
 bash environment/setup_environment_module.sh
 
-export PATH="${bcbio_install_path}/extra3/bin:${bcbio_install_path}/anaconda/bin:${bcbio_install_path}/tools/bin:${bcbio_install_path}/extra2/bin${PATH:+:${PATH}}"
+export PATH="${bcbio_install_path}/extra3/bin:${bcbio_install_path}/extra2/bin${bcbio_install_path}/anaconda/bin:${bcbio_install_path}/tools/bin:${PATH:+:${PATH}}"
 echo " --- [$(date +"%F %R")] The PATH IS: ${PATH}"
 
 ##########################################################################################################################################################################################
