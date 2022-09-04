@@ -14,7 +14,7 @@ check_install = function(packages)
     if (!requireNamespace("BiocManager", quietly = TRUE))
       install.packages("BiocManager")
     
-    BiocManager::install(not_installed, ask = F, update = F)
+    BiocManager::install(not_installed, quiet = T, ask = F, update = F)
   }
 }
 
