@@ -4,10 +4,12 @@
                                                                              # VARIANT ANNOTATION #
 ##########################################################################################################################################################################################
 
-echo " --- [$(date +"%F %R")] STARTING VARIANT ANNOTATION"
+echo " --- [$(date +"%F %R")] Running variant annotation in the following directory: ${variant_annotation_dir}"
 
 # remove previous annotation and create variant annotation directory
-rm -rf ${variant_annotation_dir}
+if [ -d ${variant_annotation_dir} ]; then
+   rm -rf ${variant_annotation_dir}
+fi
 mkdir ${variant_annotation_dir}
 cd ${variant_annotation_dir}
 
