@@ -1,3 +1,5 @@
+## set up a default CRAN mirror
+chooseCRANmirror(ind = 1)
 
 ## The following function tests whether a list of packages is installed and installs them if they are not available:
 check_install = function(packages) 
