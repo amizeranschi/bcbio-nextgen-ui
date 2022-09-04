@@ -51,11 +51,9 @@ mkdir ${dowstreamResults}/${bcbio_workflow}
 export dowstreamResultsWorkflow="${dowstreamResults}/${bcbio_workflow}"
 # set variables for variant annotation and gene annotation in downstream analysis
 if [[ ${bcbio_workflow} == "variant_calling" ]]; then
-    if [[ ${bcbio_variant_annotation} == "yes" ]]; then
-        vcf_file="${action_name}-small-var.vcf.gz"
-        vcf_file_name=$(echo "${vcf_file}" | cut -f 1 -d '.')
-        export variant_annotation_dir="${bcbio_runs_input}/${action_name}/variant_annotation"
-    fi
+    vcf_file="${action_name}-small-var.vcf.gz"
+    vcf_file_name=$(echo "${vcf_file}" | cut -f 1 -d '.')
+    export variant_annotation_dir="${bcbio_runs_input}/${action_name}/variant_annotation"
 fi
 
 export counts_file="${bcbio_runs_final}/*${action_name}/counts/*.csv"
