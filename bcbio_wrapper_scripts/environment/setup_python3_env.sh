@@ -32,4 +32,9 @@ if [[ ! -d ${bcbio_install_path}/extra3 ]]; then
    ## install the Encode::Locale perl module
    yes | ${bcbio_install_path}/extra3/bin/cpan install Encode::Locale
    
+   
+   ## install R packages 
+   echo " --- [$(date +"%F %R")] Installing required R packages"
+   Rscript --vanilla ${path_downstream_analysis}/install_R_packages.R
+   
 fi
