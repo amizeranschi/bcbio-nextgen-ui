@@ -17,7 +17,7 @@ ln -s ${bcbio_install_path}/anaconda/bin/conda ${bcbio_install_path}/anaconda/bi
 ln -s ${bcbio_install_path}/anaconda/bin/python ${bcbio_install_path}/anaconda/bin/bcbio_python
 
 ## set biobambam version to be stable 
-${bcbio_install_path}/anaconda/bin/bcbio_conda install -y biobambam=2.0.87 -c bioconda
+#${bcbio_install_path}/anaconda/bin/bcbio_conda install -y biobambam=2.0.87 -c bioconda
 
 ## Install R packages if necessary
 echo " --- [$(date +"%F %R")] Installing required R packages"
