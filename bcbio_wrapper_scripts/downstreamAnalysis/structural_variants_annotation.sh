@@ -6,7 +6,7 @@
 
 # process structural variants, similarly to small variants (with slight differences between scenarios involving bcbio_nextgen)
 
-variant_annotation_dir="${bcbio_runs_input}/${action_name}/variant_annotation"
+#variant_annotation_dir="${bcbio_runs_input}/${action_name}/variant_annotation"
 target_dir=${variant_annotation_dir}
 
 if [ `ls -1 ${bcbio_runs_final}/*/*-manta.vcf.gz 2>/dev/null | wc -l ` -gt 0 ]; then
