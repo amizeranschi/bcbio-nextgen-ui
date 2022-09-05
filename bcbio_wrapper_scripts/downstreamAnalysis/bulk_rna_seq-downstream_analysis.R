@@ -156,4 +156,4 @@ pheatmap(mat1, annotation_col = metadata_heatmap, main="Top significantlly expre
 dev.off()
 
 workflow_name = "bulk_rna_seq"
-system(paste("Rscript --vanilla ", path_to_scripts, "/downstreamAnalysis/computeMetrics.R", sgnfGenes_RT, sgnfGenes_AE, my_species, workflow_name))
+system(paste(paste0("Rscript --vanilla ", path_to_scripts, "/downstreamAnalysis/computeMetrics.R"), sgnfGenes_RT, sgnfGenes_AE, my_species, workflow_name))
