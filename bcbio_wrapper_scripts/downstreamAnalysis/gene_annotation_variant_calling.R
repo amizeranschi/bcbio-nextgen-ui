@@ -47,4 +47,4 @@ high_moderate_impact_genes = unique(high_moderate_impact_vars[, c("Gene")])
 
 workflow_name = "variant_calling"
 
-system(paste("Rscript --vanilla ", path_to_scripts, "/downstreamAnalysis/computeMetrics.R", high_impact_genes, moderate_impact_genes, my_species, workflow_name))
+system(paste(paste0("Rscript --vanilla ", path_to_scripts, "/downstreamAnalysis/computeMetrics.R"), high_impact_genes, moderate_impact_genes, my_species, workflow_name))
