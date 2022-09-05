@@ -1,9 +1,7 @@
-packages = c("AnnotationHub", "AnnotationDbi", "MeSHDbi", "ggplot2", "clusterProfiler", "DOSE", "meshes", "ChIPseeker", "GOSemSim","ReactomePA",  "VariantAnnotation", "pheatmap", "RColorBrewer",  "DESeq2", "enrichplot")
-# install.packages('GOplot', repos='https://cloud.r-project.org')
-# check_install(packages)
 
+# load the required packages
+packages = c("AnnotationHub", "AnnotationDbi", "MeSHDbi", "ggplot2", "clusterProfiler", "DOSE", "meshes", "ChIPseeker", "GOSemSim", "GOplot", "ReactomePA",  "VariantAnnotation", "pheatmap", "RColorBrewer",  "DESeq2", "enrichplot")
 installed = lapply(packages, library, character.only = T)
-library(GOplot)
 
 args = commandArgs(trailingOnly=TRUE)
 my_args <- head(args)
