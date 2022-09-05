@@ -20,6 +20,8 @@ my_species = sub("_", " ", vep_species)
 # get gtf file location
 gtf_location = my_args[4]
 
+path_to_scripts = my_args[5]
+
 # get data
 gatk_data = read.table(file, header = F, stringsAsFactors = F)
 
@@ -45,4 +47,4 @@ high_moderate_impact_genes = unique(high_moderate_impact_vars[, c("Gene")])
 
 workflow_name = "variant_calling"
 
-system(paste("Rscript --vanilla computeMetrics.R", high_impact_genes, moderate_impact_genes, my_species, workflow_name))
+system(paste("Rscript --vanilla ", path_to_scripts, "/downstreamAnalysis/computeMetrics.R", high_impact_genes, moderate_impact_genes, my_species, workflow_name))
