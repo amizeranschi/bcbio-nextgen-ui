@@ -24,6 +24,8 @@ my_species = sub("_", " ", vep_species)
 # get gtf file location
 gtf_location = my_args[5]
 
+path_to_scripts = my_args[6]
+
 print(" --- Preparing data...")
 
 ## Preparing count data
@@ -154,4 +156,4 @@ pheatmap(mat1, annotation_col = metadata_heatmap, main="Top significantlly expre
 dev.off()
 
 workflow_name = "bulk_rna_seq"
-system(paste("Rscript --vanilla computeMetrics.R", sgnfGenes_RT, sgnfGenes_AE, my_species, workflow_name))
+system(paste("Rscript --vanilla ", path_to_scripts, "/downstreamAnalysis/computeMetrics.R", sgnfGenes_RT, sgnfGenes_AE, my_species, workflow_name))
