@@ -44,16 +44,13 @@ export bcbio_workflow_work="${bcbio_runs_input}/${action_name}/work"
 ## Store current path to the scripts
 export path_to_scripts=$PWD
 export path_to_web="${path_to_scripts}/web"
-export path_downstream_analysis="${path_to_scripts}/downstreamAnalysis"
-mkdir ${path_to_scripts}/downstreamAnalysis/dowstreamResults
-export dowstreamResults="${path_to_scripts}/downstreamAnalysis/dowstreamResults"
-mkdir ${dowstreamResults}/${bcbio_workflow}
-export dowstreamResultsWorkflow="${dowstreamResults}/${bcbio_workflow}"
+export path_downstream_analysis="${bcbio_runs_input}/${action_name}/downstreamAnalysis"
+mkdir ${path_downstream_analysis}
+
 # set variables for variant annotation and gene annotation in downstream analysis
 if [[ ${bcbio_workflow} == "variant_calling" ]]; then
     vcf_file="${action_name}-small-var.vcf.gz"
     vcf_file_name=$(echo "${vcf_file}" | cut -f 1 -d '.')
-    export variant_annotation_dir="${bcbio_runs_input}/${action_name}/variant_annotation"
 fi
 
 export counts_file="${bcbio_runs_final}/*${action_name}/counts/*.csv"
