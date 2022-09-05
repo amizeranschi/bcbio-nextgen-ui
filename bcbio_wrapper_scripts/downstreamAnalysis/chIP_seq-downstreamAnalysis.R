@@ -91,7 +91,7 @@ head(peakAnnoDF$geneId)
 entrezIDs = AnnotationDbi::select(org.Sc.sgd.db, keys = peakAnnoDF$geneId, keytype=species_keytype, columns = "ENTREZID")
 
 workflow_name = "chip_seq"
-system(paste("Rscript --vanilla ", path_to_scripts, "/downstreamAnalysis/computeMetrics.R", entrezIDs, null, my_species, workflow_name))
+system(paste(paste0("Rscript --vanilla ", path_to_scripts, "/downstreamAnalysis/computeMetrics.R"), entrezIDs, null, my_species, workflow_name))
 
 # ## functional enrichment analysis using ReactomePA
 # pathwayAnno = ReactomePA::enrichPathway(entrezIDs$ENTREZID, organism = "yeast")
