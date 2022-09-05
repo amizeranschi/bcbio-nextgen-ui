@@ -21,20 +21,19 @@ bash ${path_to_scripts}/environment/setup_python3_env.sh
 ## IF BCBIO IS ALREADY INSTALLED
 if [[ ${bcbio_existing_version} = "yes" ]]; then
 
-   echo " --- [$(date +"%F %R")] bcbio_nextgen already installedy installed on the system."
-   echo " --- [$(date +"%F %R")] Use bcbio_nextgen already installed version."
+   echo " --- [$(date +"%F %R")] bcbio_nextgen is already available in: ${bcbio_install_path}"
    
    ## set the path with all the utils
-   echo " --- [$(date +"%F %R")] Setting the PATH for Python 3 and Python2 environment installation."
+   echo " --- [$(date +"%F %R")] Setting up the PATH"
    #export PATH="${bcbio_install_path}/anaconda/bin:${bcbio_install_path}/tools/bin:${bcbio_install_path}/extra3/bin:${bcbio_install_path}/extra2/bin${PATH:+:${PATH}}"
    export PATH="${bcbio_install_path}/extra3/bin:${bcbio_install_path}/extra2/bin${bcbio_install_path}/anaconda/bin:${bcbio_install_path}/tools/bin:${PATH:+:${PATH}}"
-   echo " --- [$(date +"%F %R")] The PATH IS: ${PATH}"
+   echo " --- [$(date +"%F %R")] The PATH is: ${PATH}"
 
    ## check if a genome is installed on the system
    ## if not, install it
    echo " --- [$(date +"%F %R")] Check if there is any genome installed on the system"
    if [[ ! -d ${bcbio_install_path}/genomes/${bcbio_species}/${bcbio_genome} ]]; then
-      echo " --- [$(date +"%F %R")] The requested genome ${bcbio_genome} was not found."
+      echo " --- [$(date +"%F %R")] The requested genome ${bcbio_genome} was not found and is being installed now"
       bash ${path_to_scripts}/install_genome.sh
    fi
 
@@ -49,17 +48,16 @@ fi
 ##########################################################################################################################################################################################
 
 if [[ ${bcbio_existing_version} = "no" ]]; then
-   echo " --- [$(date +"%F %R")] bcbio_nextgen not on the system."
-   echo " --- [$(date +"%F %R")] bcbio_nextgen will start installation."
+   echo " --- [$(date +"%F %R")] bcbio_nextgen is not available on the system and is being installed now"
 
    ## install bcbio and the genome
    bash ${path_to_scripts}/environment/install_bcbio_nextgen.sh
 
    ## set the path with all the utils
-   echo " --- [$(date +"%F %R")] Setting the PATH for Python 3 and Python2 environment installation."
+   echo " --- [$(date +"%F %R")] Setting the PATH variable"
    #export PATH="${bcbio_install_path}/anaconda/bin:${bcbio_install_path}/tools/bin:${bcbio_install_path}/extra3/bin:${bcbio_install_path}/extra2/bin${PATH:+:${PATH}}"
    export PATH="${bcbio_install_path}/extra3/bin:${bcbio_install_path}/extra2/bin${bcbio_install_path}/anaconda/bin:${bcbio_install_path}/tools/bin:${PATH:+:${PATH}}"
-   echo " --- [$(date +"%F %R")] The PATH IS: ${PATH}"
+   echo " --- [$(date +"%F %R")] The PATH is: ${PATH}"
    
    bash ${path_to_scripts}/environment/install_genome.sh
 fi
