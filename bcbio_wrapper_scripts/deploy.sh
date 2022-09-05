@@ -77,7 +77,7 @@ if [[ ${bcbio_workflow} == "variant_calling" ]]; then
     echo " --- [$(date +"%F %R")] Starting downstream analysis for Variant Calling workflow, see output in: ${path_downstream_analysis}"
     bash ${path_to_scripts}/downstreamAnalysis/variant_annotation.sh
     # perform gene annotation on the results from variant annotation
-    Rscript --vanilla ${path_to_scripts}/downstreamAnalysis/gene_annotation_variant_calling.R ${path_downstream_analysis} ${path_downstream_analysis}/${vcf_file_name}-vep.table ${bcbio_vep_species} ${gtf_file_location}
+    Rscript --vanilla ${path_to_scripts}/downstreamAnalysis/gene_annotation_variant_calling.R ${path_downstream_analysis} ${path_downstream_analysis}/${vcf_file_name}-vep.table ${bcbio_vep_species} ${gtf_file_location} ${path_to_scripts}
     python3 create_json_downstream_page.py ${bcbio_workflow} ${path_downstream_analysis}
 fi
 
@@ -85,7 +85,7 @@ fi
 if [[ ${bcbio_workflow} == "atac_seq" ]]; then
     # to do add path to peaks file
     echo " --- [$(date +"%F %R")] Starting downstream analysis for ATAC-seq/ChIP-seq workflow, see output in: ${path_downstream_analysis}"
-    Rscript --vanilla ${path_to_scripts}/downstreamAnalysis/chIP_seq-downstreamAnalysis.R ${path_downstream_analysis} ${bcbio_vep_species} ${gtf_file_location}
+    Rscript --vanilla ${path_to_scripts}/downstreamAnalysis/chIP_seq-downstreamAnalysis.R ${path_downstream_analysis} ${bcbio_vep_species} ${gtf_file_location} ${path_to_scripts}
     ## below is not yet implemented for atac_seq
     #python3 create_json_downstream_page.py ${bcbio_workflow} ${path_downstream_analysis}
 fi
@@ -93,7 +93,7 @@ fi
 ## Run downstream analysis for bulk_rna_seq
 if [[ ${bcbio_workflow} == "bulk_rna_seq" ]]; then
     echo " --- [$(date +"%F %R")] Starting downstream analysis for Bulk RNA-seq workflow, see output in: ${path_downstream_analysis}"
-    Rscript --vanilla ${path_to_scripts}/downstreamAnalysis/bulk_rna_seq-downstream_analysis.R ${path_downstream_analysis} ${counts_file} ${metadata_file} ${bcbio_vep_species} ${gtf_file_location}
+    Rscript --vanilla ${path_to_scripts}/downstreamAnalysis/bulk_rna_seq-downstream_analysis.R ${path_downstream_analysis} ${counts_file} ${metadata_file} ${bcbio_vep_species} ${gtf_file_location} ${path_to_scripts}
     python3 create_json_downstream_page.py ${bcbio_workflow} ${path_downstream_analysis}
 fi
 
