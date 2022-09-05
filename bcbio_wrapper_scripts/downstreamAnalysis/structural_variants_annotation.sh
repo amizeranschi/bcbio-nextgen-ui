@@ -6,8 +6,7 @@
 
 # process structural variants, similarly to small variants (with slight differences between scenarios involving bcbio_nextgen)
 
-#variant_annotation_dir="${bcbio_runs_input}/${action_name}/variant_annotation"
-target_dir=${variant_annotation_dir}
+# only the Manta structural variant caller is currently supported
 
 if [ `ls -1 ${bcbio_runs_final}/*/*-manta.vcf.gz 2>/dev/null | wc -l ` -gt 0 ]; then
     echo " --- [$(date +"%F %R")] Performing variant annotation on structural variants."
@@ -20,12 +19,12 @@ if [ `ls -1 ${bcbio_runs_final}/*/*-manta.vcf.gz 2>/dev/null | wc -l ` -gt 0 ]; 
     for dir_file in */*-manta.vcf.gz; do
         ## extract the directory name
         dir=$( dirname ${dir_file} )
-        cp ${dir_file} ${target_dir}/${dir}-manta.vcf.gz
+        cp ${dir_file} ${path_downstream_analysis}/${dir}-manta.vcf.gz
         ## copy the indexes as well
-        cp ${dir_file}.tbi ${target_dir}/${dir}-manta.vcf.gz.tbi
+        cp ${dir_file}.tbi ${path_downstream_analysis}/${dir}-manta.vcf.gz.tbi
     done
         
-    cd ${target_dir}
+    cd ${path_downstream_analysis}
         
     ## create a list of VCF.gz files to be merged
     rm -f vcf_files.list
