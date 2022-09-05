@@ -4,14 +4,14 @@
                                                                              # VARIANT ANNOTATION #
 ##########################################################################################################################################################################################
 
-echo " --- [$(date +"%F %R")] Running variant annotation in the following directory: ${variant_annotation_dir}"
+echo " --- [$(date +"%F %R")] Running variant annotation in the following directory: ${path_downstream_analysis}"
 
 # remove previous annotation and create variant annotation directory
-if [ -d ${variant_annotation_dir} ]; then
-   rm -rf ${variant_annotation_dir}
+if [ -d ${path_downstream_analysis} ]; then
+   rm -rf ${path_downstream_analysis}
 fi
-mkdir ${variant_annotation_dir}
-cd ${variant_annotation_dir}
+mkdir ${path_downstream_analysis}
+cd ${path_downstream_analysis}
 
 ## copy the joint VCF file with a proper name for variant annotation
 if [ -f ${bcbio_runs_final}/*_${action_name}/*-gatk-haplotype*.vcf.gz ]; then
@@ -19,7 +19,7 @@ if [ -f ${bcbio_runs_final}/*_${action_name}/*-gatk-haplotype*.vcf.gz ]; then
 fi
     
 ## run small variants annotation if there is the case
-bash ${path_downstream_analysis}/small_variants_annotation.sh
+bash ${path_to_scripts}/downstreamAnalysis/small_variants_annotation.sh
 
 ## run structural variants annotation if there is the case
-bash ${path_downstream_analysis}/structural_variants_annotation.sh
+bash ${path_to_scripts}/downstreamAnalysis/structural_variants_annotation.sh
