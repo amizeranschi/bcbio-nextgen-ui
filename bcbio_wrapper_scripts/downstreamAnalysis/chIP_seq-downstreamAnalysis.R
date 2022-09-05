@@ -22,7 +22,8 @@ my_species = sub("_", " ", vep_species)
 
 # get gtf file location
 gtf_location = my_args[4]
-# gtf_location="/home/maria/bcbio_nextgen/genomes/Scerevisiae/sacCer3/rnaseq/ref-transcripts.gtf"
+
+path_to_scripts = my_args[5]
 
 print(" --- Preparing data...")
 peaks = ChIPseeker::readPeakFile(peaks_file, header = F)
@@ -90,7 +91,7 @@ head(peakAnnoDF$geneId)
 entrezIDs = AnnotationDbi::select(org.Sc.sgd.db, keys = peakAnnoDF$geneId, keytype=species_keytype, columns = "ENTREZID")
 
 workflow_name = "chip_seq"
-system(paste("Rscript --vanilla computeMetrics.R", entrezIDs, null, my_species, workflow_name))
+system(paste("Rscript --vanilla ", path_to_scripts, "/downstreamAnalysis/computeMetrics.R", entrezIDs, null, my_species, workflow_name))
 
 # ## functional enrichment analysis using ReactomePA
 # pathwayAnno = ReactomePA::enrichPathway(entrezIDs$ENTREZID, organism = "yeast")
