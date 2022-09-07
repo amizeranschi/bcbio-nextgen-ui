@@ -9,9 +9,7 @@ my_args <- head(args)
 sgnfGenes_set1 = args[1]
 sgnfGenes_set2 = args[2]
 my_species = args[3]
-my_species = paste(my_species, args[4])
-workflow_name = args[5]
-# gtf_location = args[6]
+workflow_name = args[4]
 
 # get database for the species using my_species to search AnnotationHub
 
