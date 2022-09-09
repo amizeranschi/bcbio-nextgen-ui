@@ -52,7 +52,7 @@ if [ -f  ${action_name}-small-var.vcf.gz ]; then
         # echo " --- [$(date +"%F %R")] Variant consequences were written to the file: ${vcf_file_name}-vep.table"
         
         ## run VEP using the cache for our species
-        echo " --- [$(date +"%F %R")] Running VEP with the official cache for the species: ${bcbio_vep_species}, version ${bcbio_ensembl_ver}
+        echo " --- [$(date +"%F %R")] Running VEP with the official cache for the species: ${bcbio_vep_species}, version ${bcbio_ensembl_ver}"
         ${bcbio_install_path}/extra3/bin/vep --fork 4 --tab --pick --biotype --check_existing --distance 1000000 --symbol --species ${bcbio_vep_species} --cache --cache_version ${bcbio_ensembl_ver} --dir_cache ${genome_dir}/vep --input_file ${vcf_file_name}.vcf --output_file ${vcf_file_name}-vep.table --force_overwrite --stats_file ${vcf_file_name}-vep.stats --stats_text --offline --max_sv_size 1000000000
         echo " --- [$(date +"%F %R")] Variant consequences were written to the file: ${vcf_file_name}-vep.table"
         
