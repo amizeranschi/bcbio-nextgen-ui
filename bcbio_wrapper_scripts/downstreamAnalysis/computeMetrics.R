@@ -44,7 +44,7 @@ if (length(qu) > 0)
 # keytypes(orgdb_species)
 
 ## set the appropriate key type according to species
-if(my_species == "Saccharomyces cerevisiae")
+if(sub("_", " ", my_species) == "Saccharomyces cerevisiae")
 {
   species_keytype = "ORF"
 } else 
@@ -258,7 +258,7 @@ if (!is.null(x_ME)) {
 
 
 # MeSH enrichment analysis
-qu = query(ah_species, c("MeSHDb", my_species))
+qu = query(ah_species, c("MeSHDb", sub("_", " ", my_species)))
 if (length(qu) > 0) {
   print(" --- MeSH enrichment analysis...")
 
