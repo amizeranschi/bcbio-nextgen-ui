@@ -12,90 +12,133 @@ my_species = args[3]
 workflow_name = args[4]
 
 # get database for the species using my_species to search AnnotationHub
+ah_species = AnnotationHub()
 
-ah_species <- AnnotationHub()
-# query(ah_species, "OrgDb")
+## search for a suitable OrgDb
 qu = query(ah_species, c("OrgDb", my_species))
-if (length(qu) > 0) {
-  database_species <- qu[[1]]
-} else {
-    database_species = NULL
-    print("No OrgDb found for the specified organism in AnnotationHub! Exiting gene annotation.")
-    quit()
+if (length(qu) > 0)
+{
+  orgdb_species = qu[[1]]
+} else 
+{
+  orgdb_species = NULL
+  print("No OrgDb found for the specified organism in AnnotationHub! Exiting gene annotation.")
+  quit()
 }
 
-species_keytype = "ORF"
-# create a custom Transcript database based on the GTF file from Bcbio's genome
-# create a file name for the TxDB file, which is an SQLite DB, by appending the
-# extension ".sqlite" to gtf_location
-# txdb_file = paste0(gtf_location, ".sqlite")
+## search for a suitable MeSHDb
+qu = query(ah_species, c("MeSHDb", my_species))
+if (length(qu) > 0)
+{
+  meshdb_species = MeSHDbi::MeSHDb(qu[[1]])
+} else 
+{
+  meshdb_species = NULL
+  print("No OrgDb found for the specified organism in AnnotationHub! Exiting gene annotation.")
+  quit()
+}
 
-# use gtf_location to create an SQLite file called txdb_file, if the latter not
-# exist already
-# if(!file.exists(txdb_file))
-# {
-#   txdb_gtf = GenomicFeatures::makeTxDbFromGFF(gtf_location, format = "gtf", organism = my_species)
-#   AnnotationDbi::saveDb(txdb_gtf, txdb_file)
-# }
 
-# # create a TxDB object from txdb_file that will later be used as a instance
-# my_txdb = loadDb(txdb_file)
+
+## view the available key types in orgdb_species
+# keytypes(orgdb_species)
+
+## set the appropriate key type according to species
+if(my_species == "Saccharomyces cerevisiae")
+{
+  species_keytype = "ORF"
+} else 
+{
+  species_keytype = "SYMBOL"
+}
+
 
 ## gene annotation
-# use the database_species to get a list of Entrez IDs corresponding to the
-# significant gene IDs
-entrezIDs_set1 = AnnotationDbi::select(database_species, keys = sgnfGenes_set1, keytype=species_keytype, columns = "ENTREZID")
-entrezIDs_set2 = AnnotationDbi::select(database_species, keys = sgnfGenes_set2, keytype=species_keytype, columns = "ENTREZID")
+# use orgdb_species to get a list of Entrez IDs corresponding to the significant gene IDs
+entrezIDs_HI = AnnotationDbi::select(orgdb_species, keys = sgnfGenes_HI, keytype=species_keytype, columns = "ENTREZID")
+entrezIDs_ME = AnnotationDbi::select(orgdb_species, keys = sgnfGenes_ME, keytype=species_keytype, columns = "ENTREZID")
 
-# use cluster profile for representation of gene ontology on each list of
-# interest genes
-print(" --- Cluster profile for representation of gene ontology")
 
-ego_set1 <- enrichGO(gene       = entrezIDs_set1$ENTREZID,
-                OrgDb         = database_species,
+
+## function for replacing ORFs (for yeast) or SYMBOLs (for any other organism) with GENENAMEs in KEGG and GO enrichment results
+## if an NA is returned for a gene, use the ORF instead
+
+makeReadable = function(geneIDs, orig_keytype)
+{
+  ## check if length(geneIDs) is greater than 0
+  if(length(geneIDs) == 0)
+  {
+    return(character(0))
+  }
+  ## convert ORFs to GENENAMEs, for yeast
+  # genenames = lapply(geneIDs, function(x) { AnnotationDbi::mapIds(org.Sc.sgd.db, keys = unlist(strsplit(x, split = "/")), keytype="ORF", column = "GENENAME", multiVals = "first") })
+  
+  ## convert ORFs or ENTREZIDs to COMMON gene names
+  genenames = lapply(geneIDs, function(x) { AnnotationDbi::mapIds(orgdb_species, keys = unlist(strsplit(x, split = "/")), keytype=orig_keytype, column = "COMMON", multiVals = "first") })
+  
+  ## replace NA values with original species_keytype (SYMBOL or ORF)
+  for(someiter in 1:length(genenames))
+  {
+    genenames[[someiter]][is.na(genenames[[someiter]])] = names(genenames[[someiter]][is.na(genenames[[someiter]])])
+  }
+  
+  ## paste together the genenames and return the concatenated strings
+  genenames = sapply(genenames, paste, collapse = "/")
+}
+
+
+
+
+# use clusterProfiler for representation of gene ontology on each list of interest genes
+print(" --- Gene Ontology overrepresentation analysis")
+
+GO_HI = enrichGO(gene     = entrezIDs_HI$ENTREZID,
+                OrgDb         = orgdb_species,
                 keyType       = 'ENTREZID',
                 ont           = "CC",
                 pAdjustMethod = "BH",
                 pvalueCutoff  = 0.01,
                 qvalueCutoff  = 0.05)
-name_set1 = paste(workflow_name,"ego_set1",sep="_")
-file_name_set1 = paste(name_set1, ".txt")
-figure_name_set1 = paste(name_set1, ".png")
-write.table(ego_set1, file = file_name_set1, sep = "\t", quote = F, row.names = F, na = "")
+name_HI = paste(workflow_name,"GO_HI",sep="_")
+file_name_HI = paste(name_HI, ".txt")
+figure_name_HI = paste(name_HI, ".png")
+write.table(GO_HI, file = file_name_HI, sep = "\t", quote = F, row.names = F, na = "")
 
-head(summary(ego_set1), n=3)
-head(ego_set1)
-ego_set2 = enrichGO(gene = entrezIDs_set2$ENTREZID,
+head(summary(GO_HI), n=3)
+head(GO_HI)
+GO_ME = enrichGO(gene = entrezIDs_ME$ENTREZID,
                keyType       = "ENTREZID",
-               OrgDb         = database_species,
+               OrgDb         = orgdb_species,
                ont           = "ALL",
                pAdjustMethod = "BH",
                pvalueCutoff  = 0.01,
                qvalueCutoff  = 0.05)
-name_set2 = paste(workflow_name,"ego_set2",sep="_")
-file_name_set2 = paste(name_set2, ".txt")
-figure_name_set2 = paste(name_set2, ".png")
-write.table(ego_set2, file = file_name_set2, sep = "\t", quote = F, row.names = F, na = "")
+name_ME = paste(workflow_name,"GO_ME",sep="_")
+file_name_ME = paste(name_ME, ".txt")
+figure_name_ME = paste(name_ME, ".png")
+write.table(GO_ME, file = file_name_ME, sep = "\t", quote = F, row.names = F, na = "")
 
-head(ego_set2)
+head(GO_ME)
 
 print(" --- Cluster profile for representation of gene ontology plots")
 
 # plot the results
-if (!is.null(ego_set1)) {
-  png(figure_name_set1, width = 750, height = 750)
-  barplot(ego_set1, showCategory=20, title="Enrichment Analysis - representation of gene ontology on set1 significant samples") 
+if (!is.null(GO_HI)) {
+  png(figure_name_HI, width = 750, height = 750)
+  barplot(GO_HI, showCategory=20, title="Enrichment Analysis - representation of gene ontology on HI significant samples") 
   dev.off()
 } else {
-    print("Failed to return results of Gene Ontology for set1 significant!")
+    print("Failed to return results of Gene Ontology for HI significant!")
 }
-if (!is.null(ego_set2)) {
-  png(figure_name_set2, width = 750, height = 950)
-  barplot(ego_set2, showCategory=20, title="Enrichment Analysis - representation of gene ontology on set2 significant samples") 
+if (!is.null(GO_ME)) {
+  png(figure_name_ME, width = 750, height = 950)
+  barplot(GO_ME, showCategory=20, title="Enrichment Analysis - representation of gene ontology on ME significant samples") 
   dev.off()
 } else {
-    print("Failed to return results of Gene Ontology for set2 significant!")
+    print("Failed to return results of Gene Ontology for ME significant!")
 }
+
+
 
 # search the organism for kegg analysis
 kegg_organism = search_kegg_organism(my_species)$kegg_code
@@ -103,145 +146,170 @@ kegg_organism = search_kegg_organism(my_species)$kegg_code
 print(" --- KEGG pathway over-representation analysis on the extracted genes")
 
 # KEGG pathway over-representation analysis on the extracted genes
-kegg_set1 <- enrichKEGG(gene           = sgnfGenes_set1,
+kegg_HI = enrichKEGG(gene           = sgnfGenes_HI,
                         organism     = kegg_organism,
                         pvalueCutoff = 0.05)
 
-kegg_name_set1 = paste(workflow_name,"kegg_set1",sep="_")
-file_name_kegg_set1 = paste(kegg_name_set1, ".txt")
-figure_name_kegg_set1 = paste(kegg_name_set1, ".png")
-write.table(kegg_set1, file = file_name_kegg_set1, sep = "\t", quote = F, row.names = F, na = "")
+kegg_name_HI = paste(workflow_name,"kegg_HI",sep="_")
+file_name_kegg_HI = paste(kegg_name_HI, ".txt")
+figure_name_kegg_HI = paste(kegg_name_HI, ".png")
+write.table(kegg_HI, file = file_name_kegg_HI, sep = "\t", quote = F, row.names = F, na = "")
 
-head(kegg_set1)
+head(kegg_HI)
 
-kegg_set2 <- enrichKEGG(gene               = sgnfGenes_set2,
+kegg_ME = enrichKEGG(gene                = sgnfGenes_ME,
                             organism     = kegg_organism,
                             pvalueCutoff = 0.05)
+kegg_ME_readable = kegg_ME
+kegg_ME_readable@result$geneID = makeReadable(kegg_ME@result$geneID, orig_keytype = "ORF")
+kegg_name_ME = paste(workflow_name,"kegg_ME",sep="_")
+file_name_kegg_ME = paste0(kegg_name_ME, ".txt")
+figure_name_kegg_ME = paste0(kegg_name_ME, ".png")
+write.table(kegg_ME, file = file_name_kegg_ME, sep = "\t", quote = F, row.names = F, na = "")
 
-kegg_name_set2 = paste(workflow_name,"kegg_set2",sep="_")
-file_name_kegg_set2 = paste(kegg_name_set2, ".txt")
-figure_name_kegg_set2 = paste(kegg_name_set2, ".png")
-write.table(kegg_set2, file = file_name_kegg_set2, sep = "\t", quote = F, row.names = F, na = "")
-
-head(kegg_set2)
+head(kegg_ME)
 
 print(" --- KEGG pathway over-representation analysis on the extracted genes plots")
 
 # plot the results
-if (!is.null(kegg_set1)) {
-  png(figure_name_kegg_set1, width = 600, height = 650)
-  barplot(kegg_set1, showCategory=20, title="KEGG pathway over-representation analysis on the set1 significant genes")
+if (!is.null(kegg_HI)) {
+  png(figure_name_kegg_HI, width = 600, height = 650)
+  barplot(kegg_HI, showCategory=20, title="KEGG pathway over-representation analysis on the HI significant genes")
   dev.off()  
 } else {
-  print("Failed to return results of KEGG analysis for the given list of set1 significant significant genes!")
+  print("Failed to return results of KEGG analysis for the given list of HI significant significant genes!")
   
 }
 
-if (!is.null(kegg_set2)) {
-  png(figure_name_kegg_set2, width = 600, height = 650)
-  barplot(kegg_set2, showCategory=20, title="KEGG pathway over-representation analysis on the set2 significant genes")
+if (!is.null(kegg_ME)) {
+  png(figure_name_kegg_ME, width = 600, height = 650)
+  barplot(kegg_ME, showCategory=20, title="KEGG pathway over-representation analysis on the ME significant genes")
   dev.off()
 } else {
-  print("Failed to return results of KEGG analysis for the given list of set2 significant significant genes!")
+  print("Failed to return results of KEGG analysis for the given list of ME significant significant genes!")
 }
+
+
+
+
+
+
+
 
 print(" --- Over-representation analysis for disease ontology")
 
 # Over-representation analysis for disease ontology
-entrez_set1 <- c(entrezIDs_set1$ENTREZID)
-head(entrez_set1)
-# remove <- NA
+entrez_HI = c(entrezIDs_HI$ENTREZID)
+head(entrez_HI)
+# remove = NA
 # if (any (is.na (remove))) 
-#   entrez_set1 <- entrez_set1 [! is.na (entrez_set1)]
-# head(entrez_set1)
-# typeof(entrez_set1)
+#   entrez_HI = entrez_HI [! is.na (entrez_HI)]
+# head(entrez_HI)
+# typeof(entrez_HI)
 
-x_set1 <- enrichDO(gene          = entrez_set1,
+x_HI = enrichDO(gene          = entrez_HI,
                  ont           = "DO",
                  pvalueCutoff  = 0.05,
                  pAdjustMethod = "BH",
                  qvalueCutoff  = 0.05,
                  readable      = FALSE)
 
-x_name_set1 = paste(workflow_name,"disease_ont_set1",sep="_")
-file_name_x_set1 = paste(x_name_set1, ".txt")
-figure_name_x_set1 = paste(x_name_set1, ".png")
-write.table(x_set1, file = file_name_x_set1, sep = "\t", quote = F, row.names = F, na = "")
+x_name_HI = paste(workflow_name,"disease_ont_HI",sep="_")
+file_name_x_HI = paste(x_name_HI, ".txt")
+figure_name_x_HI = paste(x_name_HI, ".png")
+write.table(x_HI, file = file_name_x_HI, sep = "\t", quote = F, row.names = F, na = "")
 
-head(x_set1)
+head(x_HI)
 
-x_set2 <- enrichDO(gene                = entrezIDs_set2$ENTREZID,
+x_ME = enrichDO(gene                = entrezIDs_ME$ENTREZID,
                  ont           = "DO",
                  pvalueCutoff  = 0.05,
                  pAdjustMethod = "BH",
                  qvalueCutoff  = 0.05,
                  readable      = FALSE)
-x_name_set2 = paste(workflow_name,"disease_ont_set2",sep="_")
-file_name_x_set2 = paste(x_name_set2, ".txt")
-figure_name_x_set2 = paste(x_name_set2, ".png")
-write.table(x_set2, file = file_name_x_set2, sep = "\t", quote = F, row.names = F, na = "")
+x_name_ME = paste(workflow_name,"disease_ont_ME",sep="_")
+file_name_x_ME = paste0(x_name_ME, ".txt")
+figure_name_x_ME = paste0(x_name_ME, ".png")
+write.table(x_ME, file = file_name_x_ME, sep = "\t", quote = F, row.names = F, na = "")
 
-head(x_set2)
+head(x_ME)
 
 print(" --- Over-representation analysis for disease ontology plots")
 
 # plot the results
-if (!is.null(x_set1)) {
-  png(figure_name_x_set1, width = 600, height = 650)
-  barplot(x_set1, showCategory=20, title="Over-representation analysis for disease ontology in set1 significant genes")
+if (!is.null(x_HI)) {
+  png(figure_name_x_HI, width = 600, height = 650)
+  barplot(x_HI, showCategory=20, title="Over-representation analysis for disease ontology in HI significant genes")
   dev.off()
 } else {
-  print("Failed to return results of Disease Ontology for the given list of set1 significant significant genes!")
+  print("Failed to return results of Disease Ontology for the given list of HI significant significant genes!")
 }
 
-if (!is.null(x_set2)) {
-  png(figure_name_x_set2, width = 600, height = 650)
-  barplot(x_set2, showCategory=20, title="Over-representation analysis for disease ontology in set2 significant genes")
+if (!is.null(x_ME)) {
+  png(figure_name_x_ME, width = 600, height = 650)
+  barplot(x_ME, showCategory=20, title="Over-representation analysis for disease ontology in ME significant genes")
   dev.off()
 } else {
-  print("Failed to return results of Disease Ontology for the given list of set2 significant significant genes!")
+  print("Failed to return results of Disease Ontology for the given list of ME significant significant genes!")
 }
 
 
 
 # MeSH enrichment analysis
-qu <- query(ah_species, c("MeSHDbi", my_species))
+qu = query(ah_species, c("MeSHDb", my_species))
 if (length(qu) > 0) {
   print(" --- MeSH enrichment analysis...")
 
-  file_qu <- qu[[1]]
-  db <- MeSHDbi::MeSHDb(file_qu)
+  file_qu = qu[[1]]
+  db = MeSHDbi::MeSHDb(file_qu)
 
-  de_set1 <- names(sgnfGenes_set1)[1:100]
-  mesh_set1 <- enrichMeSH(de_set1, MeSHDb = db, database='gendoo', category = 'C')
+  # de_HI = names(sgnfGenes_HI)[1:100]
+  # mesh_HI = enrichMeSH(de_HI, MeSHDb = db, database='gendoo', category = 'C')
+  mesh_HI = tryCatch(enrichMeSH(na.omit(entrezIDs_HI$ENTREZID), MeSHDb = meshdb_species, database='gendoo', category = 'C'),
+           error=function(cond) {
+             return(NA)
+           },
+           warning=function(cond) {
+             # return(NA)
+           })
  
-  mesh_name_set1 = paste(workflow_name,"mesh_set1",sep="_")
-  file_name_mesh_set1 = paste(mesh_name_set1, ".txt")
-  figure_name_mesh_set1 = paste(mesh_name_set1, ".png")
-  write.table(mesh_set1, file = file_name_mesh_set1, sep = "\t", quote = F, row.names = F, na = "")
+  mesh_name_HI = paste(workflow_name,"mesh_HI",sep="_")
+  file_name_mesh_HI = paste0(mesh_name_HI, ".txt")
+  figure_name_mesh_HI = paste0(mesh_name_HI, ".png")
+  write.table(mesh_HI, file = file_name_mesh_HI, sep = "\t", quote = F, row.names = F, na = "")
 
-  de_set2 <- names(sgnfGenes_set2)[1:100]
-  mesh_set2 <- enrichMeSH(de_set2, MeSHDb = db, database='gendoo', category = 'C')
+  # de_ME = names(sgnfGenes_ME)[1:100]
+  # mesh_ME = enrichMeSH(de_ME, MeSHDb = db, database='gendoo', category = 'C')
+  mesh_ME = tryCatch(enrichMeSH(na.omit(entrezIDs_ME$ENTREZID), MeSHDb = meshdb_species, database='gendoo', category = 'C'),
+                     error=function(cond) {
+                       return(NA)
+                     },
+                     warning=function(cond) {
+                       # return(NA)
+                     })
 
-  mesh_name_set2 = paste(workflow_name,"mesh_set2",sep="_")
-  file_name_mesh_set2 = paste(mesh_name_set2, ".txt")
-  figure_name_mesh_set2 = paste(mesh_name_set2, ".png")
-  write.table(mesh_set2, file = file_name_mesh_set2, sep = "\t", quote = F, row.names = F, na = "")
+  mesh_name_ME = paste(workflow_name,"mesh_ME",sep="_")
+  file_name_mesh_ME = paste0(mesh_name_ME, ".txt")
+  figure_name_mesh_ME = paste0(mesh_name_ME, ".png")
+  write.table(mesh_ME, file = file_name_mesh_ME, sep = "\t", quote = F, row.names = F, na = "")
 
   # plot the results
-  if (!is.null(de_set1)) {
-    png(figure_name_mesh_set1, width = 600, height = 650)
-    barplot(mesh_set1)
+  if (!is.null(de_HI)) {
+    png(figure_name_mesh_HI, width = 600, height = 650)
+    barplot(mesh_HI)
     dev.off()
   } else {
-      print("Failed to return MeSH enrichment analysis results for the given list of set1 significant significant genes!")
+      print("Failed to return MeSH enrichment analysis results for the given list of HI significant significant genes!")
   }
 
-  if (!is.null(de_set2)) {
-    png(figure_name_mesh_set2, width = 600, height = 650)
-    barplot(mesh_set2)
+  if (!is.null(de_ME)) {
+    png(figure_name_mesh_ME, width = 600, height = 650)
+    barplot(mesh_ME)
     dev.off()
   } else {
-      print("Failed to return MeSH enrichment analysis results for the given list of set2 significant significant genes!")
+      print("Failed to return MeSH enrichment analysis results for the given list of ME significant significant genes!")
   }
+} else
+{
+  print(paste0("No MeSHDb available for ", my_species))
 }
