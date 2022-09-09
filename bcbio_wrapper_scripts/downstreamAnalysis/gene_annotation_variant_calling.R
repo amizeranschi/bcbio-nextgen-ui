@@ -14,7 +14,7 @@ file=my_args[2]
 # vep_species stores the original string provided by the user in the config file
 vep_species = my_args[3]
 # replace the underscore with a space to get the name of the organism
-my_species = sub("_", " ", vep_species)
+# my_species = sub("_", " ", vep_species)
 
 # organism_type = my_args[4]
 # get gtf file location
@@ -47,4 +47,4 @@ high_moderate_impact_genes = unique(high_moderate_impact_vars[, c("Gene")])
 
 workflow_name = "variant_calling"
 
-system(paste(paste0("Rscript --vanilla ", path_to_scripts, "/downstreamAnalysis/computeMetrics.R"), high_impact_genes, moderate_impact_genes, my_species, workflow_name))
+system(paste(paste0("Rscript --vanilla ", path_to_scripts, "/downstreamAnalysis/computeMetrics.R"), high_impact_genes, moderate_impact_genes, vep_species, workflow_name))
