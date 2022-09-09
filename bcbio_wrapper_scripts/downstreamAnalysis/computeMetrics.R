@@ -52,6 +52,8 @@ if(my_species == "Saccharomyces cerevisiae")
   species_keytype = "SYMBOL"
 }
 
+print(paste0(" --- The current species is ", my_species, " and the annotation key type used is ", species_keytype))
+
 
 ## gene annotation
 # use orgdb_species to get a list of Entrez IDs corresponding to the significant gene IDs
