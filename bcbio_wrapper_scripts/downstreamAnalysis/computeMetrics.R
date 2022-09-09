@@ -11,6 +11,8 @@ sgnfGenes_set2 = args[2]
 my_species = args[3]
 workflow_name = args[4]
 
+print(paste0(" --- current species is: ", my_species))
+
 # get database for the species using my_species to search AnnotationHub
 ah_species = AnnotationHub()
 
