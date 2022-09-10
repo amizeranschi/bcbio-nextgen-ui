@@ -14,7 +14,7 @@ vep_assembly: R64-1-1
 ensembl_ver: 105
 workflow: variant_calling
 exclude_lcr: no
-download_samples: no
+download_samples: yes
 path_to_samples_on_sys: /home/maria/bcbio_runs/workflow_variant_calling/input
 samples: SRR9041539 SRR9041540 SRR9041541 SRR9041542 SRR9041543 SRR9041544
 # SRR5482575 SRR5482576 SRR5482577 SRR5482578 SRR5482579 SRR5482580
