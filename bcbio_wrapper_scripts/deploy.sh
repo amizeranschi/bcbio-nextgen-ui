@@ -99,3 +99,6 @@ fi
 
 #mv ${path_downstream_analysis}/*.txt ${dowstreamResultsWorkflow}
 #mv ${path_downstream_analysis}/*.png ${dowstreamResultsWorkflow}
+
+echo " --- [$(date +"%F %R")] Finished the analysis."
+
