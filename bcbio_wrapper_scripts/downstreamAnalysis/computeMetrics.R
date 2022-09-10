@@ -6,8 +6,8 @@ installed = lapply(packages, library, character.only = T)
 args = commandArgs(trailingOnly=TRUE)
 my_args <- head(args)
 
-sgnfGenes_set1 = args[1]
-sgnfGenes_set2 = args[2]
+sgnfGenes_HI = args[1]
+sgnfGenes_ME = args[2]
 my_species = args[3]
 workflow_name = args[4]
 
