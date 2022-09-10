@@ -296,7 +296,7 @@ if (length(qu) > 0) {
   write.table(mesh_ME, file = file_name_mesh_ME, sep = "\t", quote = F, row.names = F, na = "")
   
   # plot the results
-  if (!is.null(mesh_HI)) {
+  if (!is.na(mesh_HI)) {
     png(figure_name_mesh_HI, width = 600, height = 650)
     barplot(mesh_HI)
     dev.off()
@@ -304,7 +304,7 @@ if (length(qu) > 0) {
     print("Failed to return MeSH enrichment analysis results for the given list of HI significant significant genes!")
   }
   
-  if (!is.null(mesh_ME)) {
+  if (!is.na(mesh_ME)) {
     png(figure_name_mesh_ME, width = 600, height = 650)
     barplot(mesh_ME)
     dev.off()
