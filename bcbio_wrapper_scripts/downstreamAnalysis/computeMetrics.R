@@ -155,7 +155,7 @@ print(" --- KEGG pathway over-representation analysis on the extracted genes")
 kegg_HI = enrichKEGG(gene         = sgnfGenes_HI,
                      organism     = kegg_organism,
                      pvalueCutoff = 0.05)
-
+print(is.null(kegg_HI))
 print(" --- kegg_HI done")
 
 kegg_HI_readable = kegg_HI
@@ -170,8 +170,8 @@ write.table(kegg_HI_readable, file = file_name_kegg_HI, sep = "\t", quote = F, r
 kegg_MO = enrichKEGG(gene         = sgnfGenes_MO,
                      organism     = kegg_organism,
                      pvalueCutoff = 0.05)
-
-print(" --- kegg_ME done")
+print(is.null(kegg_MO))
+print(" --- kegg_MO done")
 
 kegg_MO_readable = kegg_MO
 kegg_MO_readable@result$geneID = makeReadable(kegg_MO@result$geneID, orig_keytype = species_keytype)
