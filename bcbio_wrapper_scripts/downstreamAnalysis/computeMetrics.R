@@ -14,6 +14,9 @@ workflow_name = args[4]
 # get database for the species using my_species to search AnnotationHub
 ah_species = AnnotationHub()
 
+write.table(sgnfGenes_HI, file = "HI_impact_genes.txt", sep = "\t", col.names = F, row.names = F, quote = F)
+write.table(sgnfGenes_MO, file = "MO_impact_genes.txt", sep = "\t", col.names = F, row.names = F, quote = F)
+
 ## search for a suitable OrgDb
 qu = query(ah_species, c("OrgDb", sub("_", " ", my_species)))
 if (length(qu) > 0)
