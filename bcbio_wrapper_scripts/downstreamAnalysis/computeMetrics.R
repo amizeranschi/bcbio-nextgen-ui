@@ -47,18 +47,20 @@ if (length(qu) > 0)
 if(sub("_", " ", my_species) == "Saccharomyces cerevisiae")
 {
   species_keytype = "ORF"
-} else 
+} else
 {
-  species_keytype = "SYMBOL"
+  species_keytype = "ENSEMBL"
 }
 
-print(paste0(" --- The current species is ", my_species, " and the annotation key type used is ", species_keytype))
+
+
+# print(paste0(" --- The current species is ", my_species, " and the annotation key type used is ", species_keytype))
 
 
 ## gene annotation
 # use orgdb_species to get a list of Entrez IDs corresponding to the significant gene IDs
-entrezIDs_HI = AnnotationDbi::select(orgdb_species, keys = sgnfGenes_HI, keytype=species_keytype, columns = "ENTREZID")
-entrezIDs_ME = AnnotationDbi::select(orgdb_species, keys = sgnfGenes_ME, keytype=species_keytype, columns = "ENTREZID")
+entrezIDs_HI = AnnotationDbi::select(orgdb_species, keys = sgnfGenes_HI, keytype = species_keytype, columns = "ENTREZID")
+entrezIDs_ME = AnnotationDbi::select(orgdb_species, keys = sgnfGenes_ME, keytype = species_keytype, columns = "ENTREZID")
 
 
 
@@ -76,9 +78,9 @@ makeReadable = function(geneIDs, orig_keytype)
   # genenames = lapply(geneIDs, function(x) { AnnotationDbi::mapIds(org.Sc.sgd.db, keys = unlist(strsplit(x, split = "/")), keytype="ORF", column = "GENENAME", multiVals = "first") })
   
   ## convert ORFs or ENTREZIDs to COMMON gene names
-  genenames = lapply(geneIDs, function(x) { AnnotationDbi::mapIds(orgdb_species, keys = unlist(strsplit(x, split = "/")), keytype=orig_keytype, column = "COMMON", multiVals = "first") })
+  genenames = lapply(geneIDs, function(x) { AnnotationDbi::mapIds(orgdb_species, keys = unlist(strsplit(x, split = "/")), keytype = orig_keytype, column = "COMMON", multiVals = "first") })
   
-  ## replace NA values with original species_keytype (SYMBOL or ORF)
+  ## replace NA values with original SYMBOL
   for(someiter in 1:length(genenames))
   {
     genenames[[someiter]][is.na(genenames[[someiter]])] = names(genenames[[someiter]][is.na(genenames[[someiter]])])
@@ -148,18 +150,19 @@ kegg_organism = search_kegg_organism(sub("_", " ", my_species))$kegg_code
 print(" --- KEGG pathway over-representation analysis on the extracted genes")
 
 # KEGG pathway over-representation analysis on the extracted genes
-kegg_HI = enrichKEGG(gene           = sgnfGenes_HI,
+kegg_HI = enrichKEGG(gene         = sgnfGenes_HI,
                      organism     = kegg_organism,
                      pvalueCutoff = 0.05)
-
+kegg_HI_readable = kegg_HI
+kegg_HI_readable@result$geneID = makeReadable(kegg_HI@result$geneID, orig_keytype = "ORF")
 kegg_name_HI = paste(workflow_name,"kegg_HI",sep="_")
 file_name_kegg_HI = paste(kegg_name_HI, ".txt")
 figure_name_kegg_HI = paste(kegg_name_HI, ".png")
-write.table(kegg_HI, file = file_name_kegg_HI, sep = "\t", quote = F, row.names = F, na = "")
+write.table(kegg_HI_readable, file = file_name_kegg_HI, sep = "\t", quote = F, row.names = F, na = "")
 
-head(kegg_HI)
+# head(kegg_HI)
 
-kegg_ME = enrichKEGG(gene                = sgnfGenes_ME,
+kegg_ME = enrichKEGG(gene         = sgnfGenes_ME,
                      organism     = kegg_organism,
                      pvalueCutoff = 0.05)
 kegg_ME_readable = kegg_ME
@@ -167,9 +170,9 @@ kegg_ME_readable@result$geneID = makeReadable(kegg_ME@result$geneID, orig_keytyp
 kegg_name_ME = paste(workflow_name,"kegg_ME",sep="_")
 file_name_kegg_ME = paste0(kegg_name_ME, ".txt")
 figure_name_kegg_ME = paste0(kegg_name_ME, ".png")
-write.table(kegg_ME, file = file_name_kegg_ME, sep = "\t", quote = F, row.names = F, na = "")
+write.table(kegg_ME_readable, file = file_name_kegg_ME, sep = "\t", quote = F, row.names = F, na = "")
 
-head(kegg_ME)
+# head(kegg_ME)
 
 print(" --- KEGG pathway over-representation analysis on the extracted genes plots")
 
@@ -296,7 +299,7 @@ if (length(qu) > 0) {
   write.table(mesh_ME, file = file_name_mesh_ME, sep = "\t", quote = F, row.names = F, na = "")
   
   # plot the results
-  if (!is.na(mesh_HI)) {
+  if (!is.na(de_HI)) {
     png(figure_name_mesh_HI, width = 600, height = 650)
     barplot(mesh_HI)
     dev.off()
@@ -304,7 +307,7 @@ if (length(qu) > 0) {
     print("Failed to return MeSH enrichment analysis results for the given list of HI significant significant genes!")
   }
   
-  if (!is.na(mesh_ME)) {
+  if (!is.na(de_ME)) {
     png(figure_name_mesh_ME, width = 600, height = 650)
     barplot(mesh_ME)
     dev.off()
