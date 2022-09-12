@@ -37,9 +37,13 @@ moderate_impact_vars = gatk_data[(gatk_data$IMPACT == "MODERATE"), ]
 # retain the genes corresponding to high- and moderate-impact variants
 # genes high-impact variants
 high_impact_genes = unique(high_impact_vars[, c("Gene")])
+print(" --- genes with HIGH impact variants: ")
+print(high_impact_genes)
 
 # genes with moderate-impact variants
 moderate_impact_genes = unique(moderate_impact_vars[, c("Gene")])
+print(" --- genes with MODERATE impact variants: ")
+print(moderate_impact_genes)
 
 # genes with high-impact OR moderate-impact variants
 # high_moderate_impact_genes = unique(high_moderate_impact_vars[, c("Gene")])
