@@ -149,40 +149,50 @@ if (!is.null(GO_MO)) {
 # search the organism for kegg analysis
 kegg_organism = search_kegg_organism(sub("_", " ", my_species))$kegg_code
 
+
 print(" --- KEGG pathway over-representation analysis on the extracted genes")
+
+
+# print(" --- HI genes:")
+# print(sgnfGenes_HI)
+# bitr_kegg(sgnfGenes_HI, fromType = "kegg", toType = "Path", organism = kegg_organism)
+# bitr_kegg(sgnfGenes_HI, fromType = "kegg", toType = "Module", organism = kegg_organism)
+# 
+# print(" --- MO genes:")
+# print(sgnfGenes_MO)
+# bitr_kegg(sgnfGenes_ME, fromType = "kegg", toType = "Path", organism = kegg_organism)
+# bitr_kegg(sgnfGenes_ME, fromType = "kegg", toType = "Module", organism = kegg_organism)
+
+
 
 # KEGG pathway over-representation analysis on the extracted genes
 kegg_HI = enrichKEGG(gene         = sgnfGenes_HI,
                      organism     = kegg_organism,
                      pvalueCutoff = 0.05)
-print(is.null(kegg_HI))
-print(" --- kegg_HI done")
+if(!is.null(kegg_HI)){
+  kegg_HI_readable = kegg_HI
+  kegg_HI_readable@result$geneID = makeReadable(kegg_HI@result$geneID, orig_keytype = species_keytype)
+  kegg_name_HI = paste(workflow_name,"kegg_HI",sep="_")
+  file_name_kegg_HI = paste(kegg_name_HI, ".txt")
+  figure_name_kegg_HI = paste(kegg_name_HI, ".png")
+  write.table(kegg_HI_readable, file = file_name_kegg_HI, sep = "\t", quote = F, row.names = F, na = "")
+}
 
-kegg_HI_readable = kegg_HI
-kegg_HI_readable@result$geneID = makeReadable(kegg_HI@result$geneID, orig_keytype = species_keytype)
-kegg_name_HI = paste(workflow_name,"kegg_HI",sep="_")
-file_name_kegg_HI = paste(kegg_name_HI, ".txt")
-figure_name_kegg_HI = paste(kegg_name_HI, ".png")
-write.table(kegg_HI_readable, file = file_name_kegg_HI, sep = "\t", quote = F, row.names = F, na = "")
-
-# head(kegg_HI)
 
 kegg_MO = enrichKEGG(gene         = sgnfGenes_MO,
                      organism     = kegg_organism,
                      pvalueCutoff = 0.05)
-print(is.null(kegg_MO))
-print(" --- kegg_MO done")
+if(!is.null(kegg_HI))
+{
+  kegg_MO_readable = kegg_MO
+  kegg_MO_readable@result$geneID = makeReadable(kegg_MO@result$geneID, orig_keytype = species_keytype)
+  kegg_name_MO = paste(workflow_name,"kegg_MO",sep="_")
+  file_name_kegg_MO = paste0(kegg_name_MO, ".txt")
+  figure_name_kegg_MO = paste0(kegg_name_MO, ".png")
+  write.table(kegg_MO_readable, file = file_name_kegg_MO, sep = "\t", quote = F, row.names = F, na = "")
+}
 
-kegg_MO_readable = kegg_MO
-kegg_MO_readable@result$geneID = makeReadable(kegg_MO@result$geneID, orig_keytype = species_keytype)
-kegg_name_MO = paste(workflow_name,"kegg_MO",sep="_")
-file_name_kegg_MO = paste0(kegg_name_MO, ".txt")
-figure_name_kegg_MO = paste0(kegg_name_MO, ".png")
-write.table(kegg_MO_readable, file = file_name_kegg_MO, sep = "\t", quote = F, row.names = F, na = "")
 
-# head(kegg_MO)
-
-print(" --- KEGG pathway over-representation analysis on the extracted genes plots")
 
 # plot the results
 if (!is.null(kegg_HI)) {
