@@ -182,7 +182,7 @@ if(!is.null(kegg_HI)){
 kegg_MO = enrichKEGG(gene         = sgnfGenes_MO,
                      organism     = kegg_organism,
                      pvalueCutoff = 0.05)
-if(!is.null(kegg_HI))
+if(!is.null(kegg_MO))
 {
   kegg_MO_readable = kegg_MO
   kegg_MO_readable@result$geneID = makeReadable(kegg_MO@result$geneID, orig_keytype = species_keytype)
