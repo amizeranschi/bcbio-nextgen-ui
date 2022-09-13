@@ -8,10 +8,12 @@ my_args <- head(args)
 
 work_dir=my_args[1]
 setwd(work_dir)
-sgnfGenes_HI = readLines(file("HI_impact_genes.txt"))
-sgnfGenes_MO = readLines(file("MO_impact_genes.txt"))
 my_species = args[2]
 workflow_name = args[3]
+
+## read gene names from previously written text files
+sgnfGenes_HI = readLines(file("HI_impact_genes.txt"))
+sgnfGenes_MO = readLines(file("MO_impact_genes.txt"))
 
 # get database for the species using my_species to search AnnotationHub
 ah_species = AnnotationHub()
@@ -41,7 +43,7 @@ if (length(qu) > 0)
 } else 
 {
   meshdb_species = NULL
-  print("No OrgDb found for the specified organism in AnnotationHub! Exiting gene annotation.")
+  print("No MeSHDb found for the specified organism in AnnotationHub! Exiting gene annotation.")
   quit()
 }
 
@@ -324,7 +326,7 @@ if (length(qu) > 0) {
   write.table(mesh_MO, file = file_name_mesh_MO, sep = "\t", quote = F, row.names = F, na = "")
   
   # plot the results
-  if (!is.na(de_HI)) {
+  if (!is.na(mesh_HI)) {
     png(figure_name_mesh_HI, width = 600, height = 650)
     barplot(mesh_HI)
     dev.off()
@@ -332,7 +334,7 @@ if (length(qu) > 0) {
     print("Failed to return MeSH enrichment analysis results for the given list of HI significant significant genes!")
   }
   
-  if (!is.na(de_MO)) {
+  if (!is.na(mesh_MO)) {
     png(figure_name_mesh_MO, width = 600, height = 650)
     barplot(mesh_MO)
     dev.off()
