@@ -6,10 +6,12 @@ installed = lapply(packages, library, character.only = T)
 args = commandArgs(trailingOnly=TRUE)
 my_args <- head(args)
 
-sgnfGenes_HI = args[1]
-sgnfGenes_MO = args[2]
-my_species = args[3]
-workflow_name = args[4]
+work_dir=my_args[1]
+setwd(work_dir)
+sgnfGenes_HI = readLines(file("HI_impact_genes.txt"))
+sgnfGenes_MO = readLines(file("MO_impact_genes.txt"))
+my_species = args[2]
+workflow_name = args[3]
 
 # get database for the species using my_species to search AnnotationHub
 ah_species = AnnotationHub()
