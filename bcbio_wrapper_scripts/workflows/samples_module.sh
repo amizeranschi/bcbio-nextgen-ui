@@ -27,15 +27,17 @@ if [[ ${bcbio_download_samples} = "yes" ]]; then
    cnt=0
    ## download, rename and gzip
    echo " --- [$(date +"%F %R")] Downloading samples using sra-tools in ${bcbio_runs_input}."
-   echo " --- [$(date +"%F %R")] Renaming and bgzipping files."
+   #echo " --- [$(date +"%F %R")] Renaming and bgzipping files."
    
    ## configure SRA-tools' prefetch to download data in the current working directory
    vdb-config --prefetch-to-cwd
 
    for sample in ${sample_list[@]}
    do
+      echo " --- [$(date +"%F %R")] Downloading sample $((${cnt} + 1)) of ${count_samples}"
+      
       ## prefetch data from NCBI SRA
-      prefetch ${sra_id} --max-size u --progress
+      prefetch ${sra_id} --max-size u
       
       ## extract FASTQ files from the prefetched SRA data
       fasterq-dump --split-files -O . -t . ${sample}
