@@ -35,6 +35,6 @@ if [[ ! -d ${bcbio_install_path}/extra3 ]]; then
    
    ## install R packages 
    echo " --- [$(date +"%F %R")] Installing required R packages"
-   ${bcbio_install_path}/extra3/bin/Rscript --vanilla ${path_downstream_analysis}/install_R_packages.R
+   ${bcbio_install_path}/extra3/bin/Rscript --vanilla ${path_to_scripts}/downstreamAnalysis/install_R_packages.R
    
 fi
