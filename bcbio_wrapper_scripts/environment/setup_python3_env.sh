@@ -12,7 +12,7 @@ if [[ ! -d ${bcbio_install_path}/extra3 ]]; then
    bash ${path_to_scripts}/Miniconda3-*.sh -b -p ${bcbio_install_path}/extra3
    ln -s ${bcbio_install_path}/extra3/bin/conda ${bcbio_install_path}/extra3/bin/conda_extra3
 
-   ${bcbio_install_path}/extra3/bin/conda_extra3 install --yes -c conda-forge -c bioconda mamba
+   ${bcbio_install_path}/extra3/bin/conda_extra3 install --yes -c conda-forge -c bioconda "mamba>=0.27"
    
    ln -s ${bcbio_install_path}/extra3/bin/mamba ${bcbio_install_path}/extra3/bin/mamba_extra3
 
