@@ -21,7 +21,7 @@ if [[ ! -d ${bcbio_install_path}/extra3 ]]; then
 
 
    ## try to install all available CRAN / Bioconductor packages from conda
-#   /storage/test/bin/mamba_test install -c conda-forge -c bioconda gxx_linux-64 wget git bedops vcftools pyyaml perl-yaml perl-encode-locale "sra-tools>=2.11" perl-net-ssleay entrez-direct tassel beagle gcta \
+#   ${bcbio_install_path}/extra3/bin/mamba_extra3 install --yes -c conda-forge -c bioconda gxx_linux-64 wget git bedops vcftools pyyaml perl-yaml perl-encode-locale "sra-tools>=2.11" perl-net-ssleay entrez-direct tassel beagle gcta \
 #   "gdal>=2.0.1" plink "bcftools>=1.15" haploview kraken2 blast "ensembl-vep>=105" "perl-bioperl>=1.7.2" "r-base>=4.1" r-essentials r-xml r-knitr r-markdown r-rmarkdown r-shiny r-rcpp r-devtools r-reticulate \
 #   perl-bio-tools-run-alignment-tcoffee r-terra r-rgdal r-ragg r-ade4 r-aghmatrix bioconductor-annotationdbi bioconductor-annotationhub r-bglr r-candisc r-car bioconductor-chipseeker bioconductor-clusterprofiler \
 #   r-cmplot r-corrgram r-corrplot r-data.table bioconductor-deseq2 bioconductor-do.db r-doparallel bioconductor-dose r-dplyr r-dt r-emmeans bioconductor-enrichplot bioconductor-ensembldb bioconductor-ensemblvep \
@@ -31,7 +31,7 @@ if [[ ! -d ${bcbio_install_path}/extra3 ]]; then
 
 
    ## removed r-aghmatrix and r-ggroups because of dependency issues (as of 2022-11-09)
-#   /storage/test/bin/mamba_test install -c conda-forge -c bioconda gxx_linux-64 wget git bedops vcftools pyyaml perl-yaml perl-encode-locale "sra-tools>=2.11" perl-net-ssleay entrez-direct tassel beagle gcta \
+#   ${bcbio_install_path}/extra3/bin/mamba_extra3 install --yes -c conda-forge -c bioconda gxx_linux-64 wget git bedops vcftools pyyaml perl-yaml perl-encode-locale "sra-tools>=2.11" perl-net-ssleay entrez-direct tassel beagle gcta \
 #   "gdal>=2.0.1" plink "bcftools>=1.15" haploview kraken2 blast "ensembl-vep>=105" "perl-bioperl>=1.7.2" "r-base>=4.1" r-essentials r-xml r-knitr r-markdown r-rmarkdown r-shiny r-rcpp r-devtools r-reticulate \
 #   perl-bio-tools-run-alignment-tcoffee r-terra r-rgdal r-ragg r-ade4 bioconductor-annotationdbi bioconductor-annotationhub r-bglr r-candisc r-car bioconductor-chipseeker bioconductor-clusterprofiler \
 #   r-cmplot r-corrgram r-corrplot r-data.table bioconductor-deseq2 bioconductor-do.db r-doparallel bioconductor-dose r-dplyr r-dt r-emmeans bioconductor-enrichplot bioconductor-ensembldb bioconductor-ensemblvep \
