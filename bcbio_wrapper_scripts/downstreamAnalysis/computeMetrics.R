@@ -1,6 +1,6 @@
 
 # load the required packages
-packages = c("AnnotationHub", "AnnotationDbi", "MeSHDbi", "ggplot2", "clusterProfiler", "DOSE", "meshes", "ChIPseeker", "GOSemSim", "GOplot", "ReactomePA",  "VariantAnnotation", "pheatmap", "RColorBrewer",  "DESeq2", "enrichplot")
+packages = c("AnnotationHub", "AnnotationDbi", "MeSHDbi", "ggplot2", "clusterProfiler", "DOSE", "meshes", "ChIPseeker", "ReactomePA",  "VariantAnnotation", "pheatmap", "RColorBrewer",  "DESeq2", "enrichplot")
 installed = lapply(packages, library, character.only = T)
 
 args = commandArgs(trailingOnly=TRUE)
