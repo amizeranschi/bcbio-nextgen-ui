@@ -25,8 +25,8 @@ if [[ ${bcbio_existing_version} = "yes" ]]; then
    
    ## set the path with all the utils
    echo " --- [$(date +"%F %R")] Setting up the PATH"
-   #export PATH="${bcbio_install_path}/anaconda/bin:${bcbio_install_path}/tools/bin:${bcbio_install_path}/extra3/bin:${bcbio_install_path}/extra2/bin${PATH:+:${PATH}}"
-   export PATH="${bcbio_install_path}/extra3/bin:${bcbio_install_path}/extra2/bin${bcbio_install_path}/anaconda/bin:${bcbio_install_path}/tools/bin:${PATH:+:${PATH}}"
+   #export PATH="${bcbio_install_path}/anaconda/bin:${bcbio_install_path}/tools/bin:${bcbio_install_path}/extra/envs/py3/bin:${bcbio_install_path}/extra/envs/py2/bin${PATH:+:${PATH}}"
+   export PATH="${bcbio_install_path}/extra/envs/py3/bin:${bcbio_install_path}/extra/envs/py2/bin${bcbio_install_path}/anaconda/bin:${bcbio_install_path}/tools/bin:${PATH:+:${PATH}}"
    echo " --- [$(date +"%F %R")] The PATH is: ${PATH}"
 
    ## check if a genome is installed on the system
@@ -55,8 +55,8 @@ if [[ ${bcbio_existing_version} = "no" ]]; then
 
    ## set the path with all the utils
    echo " --- [$(date +"%F %R")] Setting the PATH variable"
-   #export PATH="${bcbio_install_path}/anaconda/bin:${bcbio_install_path}/tools/bin:${bcbio_install_path}/extra3/bin:${bcbio_install_path}/extra2/bin${PATH:+:${PATH}}"
-   export PATH="${bcbio_install_path}/extra3/bin:${bcbio_install_path}/extra2/bin${bcbio_install_path}/anaconda/bin:${bcbio_install_path}/tools/bin:${PATH:+:${PATH}}"
+   #export PATH="${bcbio_install_path}/anaconda/bin:${bcbio_install_path}/tools/bin:${bcbio_install_path}/extra/envs/py3/bin:${bcbio_install_path}/extra/envs/py2/bin${PATH:+:${PATH}}"
+   export PATH="${bcbio_install_path}/extra/envs/py3/bin:${bcbio_install_path}/extra/envs/py2/bin${bcbio_install_path}/anaconda/bin:${bcbio_install_path}/tools/bin:${PATH:+:${PATH}}"
    echo " --- [$(date +"%F %R")] The PATH is: ${PATH}"
    
    bash ${path_to_scripts}/environment/install_genome.sh
@@ -70,7 +70,7 @@ fi
 if [[ ${bcbio_annotated_species} = "yes" ]]; then
    if [[ ! -d ${bcbio_install_path}/genomes/${bcbio_species}/${bcbio_genome}/vep/${bcbio_vep_species}/${bcbio_ensembl_ver}_${bcbio_vep_assembly} ]]; then
       ## Configure VEP --- download cached data for the relevant species
-      ${bcbio_install_path}/extra3/bin/vep_install -s ${bcbio_vep_species} --NO_HTSLIB -a c -c \
+      ${bcbio_install_path}/extra/envs/py3/bin/vep_install -s ${bcbio_vep_species} --NO_HTSLIB -a c -c \
          ${bcbio_install_path}/genomes/${bcbio_species}/${bcbio_genome}/vep \
          --NO_UPDATE --VERSION ${bcbio_ensembl_ver} --ASSEMBLY ${bcbio_vep_assembly}
    fi
