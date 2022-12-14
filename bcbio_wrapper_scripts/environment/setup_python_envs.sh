@@ -6,7 +6,7 @@
 
 ## create a separate Python3 environment for aditional packages
 
-if [[ ! -d ${bcbio_install_path}/extra3 ]]; then
+if [[ ! -d ${bcbio_install_path}/extra ]]; then
    echo "--- [$(date +"%F %R")] Setting up a Python3 environment for utility packages"
 
    bash ${path_to_scripts}/Miniconda3-*.sh -b -p ${bcbio_install_path}/extra
