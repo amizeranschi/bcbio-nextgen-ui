@@ -7,7 +7,7 @@
 ## create a separate Python3 environment for aditional packages
 
 if [[ ! -d ${bcbio_install_path}/extra ]]; then
-   echo "--- [$(date +"%F %R")] Setting up a Python3 environment for utility packages"
+   echo "--- [$(date +"%F %R")] Setting up Python3 and Python2 environments for utility packages"
 
    bash ${path_to_scripts}/Miniconda3-*.sh -b -p ${bcbio_install_path}/extra
    ln -s ${bcbio_install_path}/extra/bin/conda ${bcbio_install_path}/extra/bin/conda_extra
@@ -21,9 +21,6 @@ if [[ ! -d ${bcbio_install_path}/extra ]]; then
    mamba_extra create --name py3 python=3.9 -y
    mamba_extra create --name py2 python=2.7.18 -y
    
-   echo " --- [$(date +"%F %R")] Setting up a Python2 environment for legacy utility packages"
-   bash ${path_to_scripts}/Miniconda2*.sh -b -p ${bcbio_install_path}/extra2
-   ln -s ${bcbio_install_path}/extra2/bin/conda ${bcbio_install_path}/extra2/bin/extra2
 
    ${bcbio_install_path}/extra/envs/py2/bin/pip install bcbio-monitor pytz python-dateutil
    ${bcbio_install_path}/extra/bin/extra_mamba install --name py2 --yes -c conda-forge -c bioconda faststructure pathoscope
