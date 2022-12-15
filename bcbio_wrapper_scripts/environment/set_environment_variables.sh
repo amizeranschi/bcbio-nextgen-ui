@@ -67,8 +67,7 @@ export bulk_rna_seq_yaml="https://raw.githubusercontent.com/bcbio/bcbio-nextgen/
 #export miniconda3="https://repo.anaconda.com/miniconda/Miniconda3-py37_4.12.0-Linux-x86_64.sh"
 #export miniconda3="https://repo.anaconda.com/miniconda/Miniconda3-py39_4.12.0-Linux-x86_64.sh"
 export miniconda3="https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh"
-
-export miniconda2="https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh"
+#export miniconda2="https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh"
 export install_script_bcbio="https://raw.githubusercontent.com/bcbio/bcbio-nextgen/master/scripts/bcbio_nextgen_install.py"
 
 #  GET UTILITARIES AND SCRIPTS
@@ -77,10 +76,10 @@ echo " --- [$(date +"%F %R")] Downloading utilitaries for bcbio_nexgen and minic
 
 if [ -x "$(command -v wget)" ]; then
     wget ${miniconda3}
-    wget ${miniconda2}
+#    wget ${miniconda2}
     wget ${install_script_bcbio}
 else
     curl -L -C - -O ${miniconda3}
-    curl -L -C - -O ${miniconda2}
+#    curl -L -C - -O ${miniconda2}
     curl -L -C - -O ${install_script_bcbio}
 fi
