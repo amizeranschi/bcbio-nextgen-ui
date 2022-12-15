@@ -11,8 +11,7 @@ fi
 cd ${bcbio_install_path}
 
 ## install or check the Python2 and Python3 environments
-bash ${path_to_scripts}/environment/setup_python2_env.sh
-bash ${path_to_scripts}/environment/setup_python3_env.sh
+bash ${path_to_scripts}/environment/setup_python_envs.sh
 
 ##########################################################################################################################################################################################
                                                                          # ALREADY INSTALLED VERSION OF BCBIO #
