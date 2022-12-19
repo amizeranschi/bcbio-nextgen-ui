@@ -19,7 +19,7 @@ check_install = function(packages)
 }
 
 ## Install and load the required packages:
-packages = c("ade4", "AGHmatrix", "AnnotationDbi", "AnnotationHub", "BGLR", "candisc", "car", "ChIPseeker", "clusterProfiler", "CMplot", "corrgram", "corrplot", "data.table", "DESeq2", "detectRUNS", "DO.db", "doParallel", "DOSE", "dplyr", "DT", "emmeans", "enrichplot", "ensembldb", "gdsfmt", "GENESIS", "GGally", "ggplot2", "ggrepel", "ggroups", "GOSemSim", "GPArotation", "gtools", "hierfstat", "lsmeans", "MeSHDbi", "meshes", "miscTools", "multcomp", "nnet", "orthopolynom", "outliers", "pcaMethods", "pheatmap", "plotly", "poolr", "psych", "qqman", "qvalue", "raster", "RColorBrewer", "ReactomePA", "readxl", "RegParallel", "rehh", "reshape2", "rgdal", "rlist", "rrBLUP", "rstatix", "SNPRelate", "snpStats", "sp", "stringr", "tidyr", "tidyverse", "VariantAnnotation", "vcfR", "vegan", "writexl")
+packages = c("ade4", "AGHmatrix", "AnnotationDbi", "AnnotationHub", "BGLR", "candisc", "car", "ChIPseeker", "clusterProfiler", "CMplot", "corrgram", "corrplot", "data.table", "DESeq2", "detectRUNS", "DO.db", "doParallel", "DOSE", "dplyr", "DT", "emmeans", "enrichplot", "ensembldb", "gdsfmt", "GENESIS", "GGally", "ggplot2", "ggrepel", "ggroups", "GOSemSim", "GPArotation", "gtools", "hierfstat", "lsmeans", "MeSHDbi", "meshes", "miscTools", "multcomp", "nnet", "orthopolynom", "outliers", "pcaMethods", "pheatmap", "plotly", "poolr", "psych", "qqman", "qvalue", "raster", "RColorBrewer", "ReactomePA", "readxl", "rehh", "reshape2", "rgdal", "rlist", "rrBLUP", "rstatix", "SNPRelate", "snpStats", "sp", "stringr", "tidyr", "tidyverse", "VariantAnnotation", "vcfR", "vegan", "writexl")
 
 
 check_install(packages)
