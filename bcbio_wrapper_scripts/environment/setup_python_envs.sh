@@ -33,7 +33,7 @@ if [[ ! -d ${bcbio_install_path}/extra ]]; then
    r-doparallel bioconductor-dose r-dplyr r-dt r-emmeans bioconductor-enrichplot bioconductor-ensembldb bioconductor-gdsfmt \
    bioconductor-genesis r-ggally r-ggplot2 r-ggrepel r-ggroups bioconductor-gosemsim r-gparotation r-gtools r-hierfstat r-lsmeans bioconductor-meshdbi \
    bioconductor-meshes r-misctools r-multcomp r-nnet r-orthopolynom r-outliers bioconductor-pcamethods r-pheatmap r-plotly r-psych r-qqman \
-   bioconductor-qvalue r-raster r-rcolorbrewer bioconductor-reactomepa r-readxl bioconductor-regparallel r-reshape2 r-rgdal r-rlist r-rrblup r-rstatix \
+   bioconductor-qvalue r-raster r-rcolorbrewer bioconductor-reactomepa r-readxl r-reshape2 r-rgdal r-rlist r-rrblup r-rstatix \
    bioconductor-snprelate bioconductor-snpstats r-sp r-stringr r-tidyr r-tidyverse bioconductor-variantannotation r-vcfr r-vegan r-writexl
    
    ## install the Encode::Locale perl module
