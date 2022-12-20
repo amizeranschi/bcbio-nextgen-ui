@@ -37,7 +37,7 @@ if [[ ${bcbio_download_samples} = "yes" ]]; then
       echo " --- [$(date +"%F %R")] Downloading sample $((${cnt} + 1)) of ${count_samples}"
       
       ## prefetch data from NCBI SRA
-      prefetch ${sra_id} --max-size u
+      prefetch ${sample} --max-size u
       
       ## extract FASTQ files from the prefetched SRA data
       fasterq-dump --split-files -O . -t . ${sample}
