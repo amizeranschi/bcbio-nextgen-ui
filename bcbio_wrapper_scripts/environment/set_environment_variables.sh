@@ -9,7 +9,7 @@ if [[ ${bcbio_existing_version} = "yes" ]]; then
 fi
 
 # path to all workflow analyses on the system
-export bcbio_runs="${HOME}/bcbio_runs/"
+export bcbio_runs="${bcbio_path_to_run_dir}"
 # path to the current workflow directory
 export workflow_name="workflow_${bcbio_workflow}"
 export bcbio_workflow_dir="${bcbio_runs}${workflow_name}"

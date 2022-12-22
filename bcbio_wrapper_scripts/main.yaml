@@ -15,6 +15,7 @@ ensembl_ver: 108
 workflow: variant_calling
 exclude_lcr: no
 download_samples: yes
+path_to_run_dir: /data/share/bcbio_runs
 path_to_samples_on_sys: /data/share/bcbio_runs/workflow_variant_calling/input
 # samples: SRR9041539 SRR9041540 SRR9041541 SRR9041542 SRR9041543 SRR9041544
 samples: SRR9041540 SRR9041541
