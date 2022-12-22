@@ -27,7 +27,7 @@ The directory structure of the wrapper:
 │   └── setup_python3_env.sh <br />
 ├── install_dependencies_interface.sh <br />
 ├── main.py <br />
-├── result.yaml <br />
+├── main.yaml <br />
 ├── utils <br />
 │   └── add_to_yaml.py <br />
 ├── web <br />
@@ -57,7 +57,7 @@ The directory structure of the wrapper:
 └── yaml_to_table.py <br />
 
 
-To run an anallysis it is required to configure the yaml configuration file infos.yaml.
+To run an analysis it is required to set up a yaml configuration file. See e.g. main.yaml.
 
 ### ***** CONFIGURATION OPTIONS *****
 
