@@ -1,7 +1,8 @@
-# bcbio_nextgen_usability_improvements
-Usability improvements for the Bcbio-nextgen data analysis pipeline: Thesis project on improving usability of the bcbio nextgen pipeline on various analysis workflows
+# bcbio-nextgen-ui
 
-The structure of the wrapper:
+Usability improvements for the Bcbio-nextgen data analysis pipeline.
+
+The directory structure of the wrapper:
 
 ├── bcbio_wrapper_scripts <br />
 ├── deploy.sh <br />
@@ -26,7 +27,7 @@ The structure of the wrapper:
 │   └── setup_python3_env.sh <br />
 ├── install_dependencies_interface.sh <br />
 ├── main.py <br />
-├── result.yaml <br />
+├── main.yaml <br />
 ├── utils <br />
 │   └── add_to_yaml.py <br />
 ├── web <br />
@@ -56,12 +57,11 @@ The structure of the wrapper:
 └── yaml_to_table.py <br />
 
 
+To run an analysis it is required to set up a yaml configuration file. See e.g. main.yaml.
 
-To run an anallysis it is required to configure the yaml configuration file infos.yaml.
+### ***** CONFIGURATION OPTIONS *****
 
- ### ***** CONFIGURATION STEPS *****
-
-* existing_version:       ----> choose to install bcbio from scratch or from an existing install <br />
+* existing_version:       ----> choose whether to install bcbio-nextgen from scratch (false) or to use an existing install (true) <br />
 * path_to_existing:       ----> the usage of an older installation of bcbio requires the path to the install <br />
 * development_branch:     ----> choose the development branch to upgrade and install bcbio to <br />
 * total_cores:            ----> number of cores to run bcbio with <br />
@@ -82,7 +82,8 @@ To run an anallysis it is required to configure the yaml configuration file info
 * workflow:               ----> name of the workflow <br />
                               convention available: <br />
                                         ** variant_calling for Variant calling and variant annotation <br />
-                                        ** atac_seq for ATAC seq workflow <br />
+                                        ** atac_seq for ATAC-seq or ChIP-seq workflow <br />
+                                        ** rna_seq for RNA-seq or ChIP-seq workflow <br />
 * variant_annotation:     ----> when running variant calling workflow, there is the choice of running variant annotation also <br />
 * exclude_lcr:            ----> when running variant calling workflow, there is the choice of performing exclusion of low complexity regions <br />
 * download_samples:       ----> choose if download samples or get them from local system <br />
@@ -94,6 +95,6 @@ To run an anallysis it is required to configure the yaml configuration file info
 * csv_file_path:          ----> the path toward the csv file for the analysis <br />
 
 
-RUN IN A SHELL LIKE THIS
+Can be executed like this:
 
-    $ bash deploy.sh <your_yaml_configuration_file>.yaml
+    $ bash deploy.sh <your_yaml_configuration_file>.yaml 2>&1 | tee -a deploy.log
