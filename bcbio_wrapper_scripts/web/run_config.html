@@ -288,7 +288,7 @@
 							Download Sample
 							<div class="tooltip">
 								<i class="fa fa-question-circle"></i>
-								<span class="tooltiptext tip-arrow-right" style="margin-left: -200px !important;">Choose if download samples or get them from local
+								<span class="tooltiptext tip-arrow-right" style="margin-left: -200px !important;">Choose whether to download samples or use them from local storage
 									system</span>
 							</div>
 						</label>
@@ -299,6 +299,18 @@
 						<div class="error" id="download_samples_err"></div>
 
 					</div>
+				</div>
+
+				<!-- Path To Dun Directory -->
+				<div id="path_to_run_dir_div">
+					<h4>Path To Sample On System<span class="required-asterisk"> *</span>
+						<div class="tooltip">
+							<i class="fa fa-question-circle"></i>
+							<span class="tooltiptext">The path to the directory with Bcbio-nextgen runs</span>
+						</div>
+					</h4>
+					<input type="text" id="path_to_run_dir" />
+					<div class="error" id="path_to_run_dir_err"></div>
 				</div>
 
 				<!-- Path To Sample On System -->
