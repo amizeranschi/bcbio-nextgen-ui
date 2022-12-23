@@ -3,7 +3,7 @@ path_to_existing: /data/share/bcbio-nextgen
 install_path: ''
 development_branch: skip
 total_cores: 128
-main_cores: 16
+main_cores: 32
 annotated_species: yes
 genome_fasta: ''
 transcriptome_gtf: ''
