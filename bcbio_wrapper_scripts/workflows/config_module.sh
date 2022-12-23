@@ -9,7 +9,7 @@ echo " --- [$(date +"%F %R")] Preparing configuration files for bcbio_nextgen in
 ## download a template yaml file, describing the analysis
 cd ${bcbio_runs_input}
 
-if [[ ${bcbio_workflow} == "variant_calling" ]]; then
+if [[ ${bcbio_workflow:?} == "variant_calling" ]]; then
    if [ -x "$(command -v wget)" ]; then
       rm -f gatk-variant.yaml
       wget ${variant_calling_yaml} -O gatk-variant.yaml
@@ -20,7 +20,7 @@ if [[ ${bcbio_workflow} == "variant_calling" ]]; then
    ## edit the settings in the illumina-rnaseq.yaml file, to make the analysis work for our files:
    echo " --- [$(date +"%F %R")] Configuring yaml template file for the variant calling workflow"
 
-   sed -i 's/genome_build: hg38/genome_build: '${bcbio_genome}/ gatk-variant.yaml
+   sed -i 's/genome_build: hg38/genome_build: '${bcbio_genome:?}/ gatk-variant.yaml
    sed -i "/your-arbitrary-batch-name$/a\    resources:" gatk-variant.yaml
    sed -i "/resources:$/a\      default:" gatk-variant.yaml
    sed -i "/default:$/a\        memory: 4G" gatk-variant.yaml
@@ -34,7 +34,7 @@ if [[ ${bcbio_workflow} == "variant_calling" ]]; then
    cp ${bcbio_csv_file_path} ${bcbio_runs_input}
 fi
 
-if [[ ${bcbio_workflow} == "atac_seq" ]]; then
+if [[ ${bcbio_workflow:?} == "atac_seq" ]]; then
    if [ -x "$(command -v wget)" ]; then
       rm -f atac-example.yaml
       wget --no-check-certificate ${atac_seq_yaml} -O atac-example.yaml
@@ -46,7 +46,7 @@ if [[ ${bcbio_workflow} == "atac_seq" ]]; then
    ## edit the settings in the illumina-rnaseq.yaml file, to make the analysis work for our files:
    echo " --- [$(date +"%F %R")] Configuring yaml template file for the ATAC-seq workflow"
 
-   sed -i 's/genome_build: hg38/genome_build: '${bcbio_genome}/ atac-example.yaml
+   sed -i 's/genome_build: hg38/genome_build: '${bcbio_genome:?}/ atac-example.yaml
    sed -i 's/aligner: bwaa/aligner: bowtie2/' atac-example.yaml
    # pip3 install pyyaml
    # python3 ${path_to_scripts}/add_to_yaml.py ${bcbio_runs_input}/atac-example.yaml
@@ -58,7 +58,7 @@ if [[ ${bcbio_workflow} == "atac_seq" ]]; then
    cp ${bcbio_csv_file_path} ${bcbio_runs_input}
 fi
 
-if [[ ${bcbio_workflow} == "bulk_rna_seq" ]]; then
+if [[ ${bcbio_workflow:?} == "bulk_rna_seq" ]]; then
    if [ -x "$(command -v wget)" ]; then
       rm -f bulk_rna.yaml
       wget --no-check-certificate ${bulk_rna_seq_yaml} -O bulk_rna.yaml
@@ -70,7 +70,7 @@ if [[ ${bcbio_workflow} == "bulk_rna_seq" ]]; then
    ## edit the settings in the rnaseq-seqc.yaml file, to make the analysis work for our files:
    echo " --- [$(date +"%F %R")] Configuring yaml template file for the Bulk RNA-seq workflow"
 
-   sed -i 's/genome_build: hg38/genome_build: '${bcbio_genome}/ bulk_rna.yaml
+   sed -i 's/genome_build: hg38/genome_build: '${bcbio_genome:?}/ bulk_rna.yaml
 
    # copy csv file from the location given in input to the config directory
    echo " --- [$(date +"%F %R")] Copying csv  file provided by the user for the Bulk RNA-seq workflow"

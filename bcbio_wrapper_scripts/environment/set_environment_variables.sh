@@ -4,23 +4,20 @@
                                             # VARIABLES USED INSIDE EACH WORKFLOW FOR EASE OF ACCESS #
 #####################################################################################################################################################
 
-if [[ ${bcbio_existing_version} = "yes" ]]; then
-    export bcbio_install_path="${bcbio_path_to_existing}"
+if [[ ${bcbio_existing_version:?} = "yes" ]]; then
+    export bcbio_install_path="${bcbio_path_to_existing:?}"
 fi
 
 ## path to all workflow analyses on the system
-export bcbio_runs="${bcbio_path_to_run_dir}"
+export bcbio_runs="${bcbio_path_to_run_dir:?}"
 ## path to the current workflow directory
-export workflow_name="workflow_${bcbio_workflow}"
+export workflow_name="workflow_${bcbio_workflow:?}"
 ## extract a label for the analysis from the CSV file name
-#export bcbio_exp_name=$(basename ${csv_file_path%.csv})
-export bcbio_exp_name=$(basename "${csv_file_path}" | cut -f 1 -d '.')   ## this allows for variable extensions to be eliminated, not only ".csv"
+export bcbio_exp_name=$(basename "${bcbio_csv_file_path:?}" | cut -f 1 -d '.')
 ## path to the current workflow directory
 export bcbio_workflow_dir="${bcbio_runs}/${bcbio_exp_name}"
 ## path to the input files and anlysis directory
 export bcbio_runs_input="${bcbio_runs}/${bcbio_exp_name}/input"
-## extraction of the name of the csv file to keep for the analysis flow name
-export action_name=$(echo ${bcbio_csv_file_path##*/} | cut -f 1 -d '.')
 
 
 ## create the directories
@@ -36,29 +33,29 @@ fi
 
 
 ## directory where bcbio genome is stored
-## seq_dir_genome="${bcbio_install_path}/genomes/${bcbio_species}/${bcbio_genome}/seq"
-export genome_dir="${bcbio_install_path}/genomes/${bcbio_species}/${bcbio_genome}"
+## seq_dir_genome="${bcbio_install_path:?}/genomes/${bcbio_species:?}/${bcbio_genome:?}/seq"
+export genome_dir="${bcbio_install_path:?}/genomes/${bcbio_species:?}/${bcbio_genome:?}"
 export gtf_file_location=" ${genome_dir}/rnaseq/ref-transcripts.gtf"
 
 ## directories for the analysis directory tree of bcbio
-export bcbio_runs_final="${bcbio_runs_input}/${action_name}/final"
-export bcbio_workflow_config="${bcbio_runs_input}/${action_name}/config"
-export bcbio_workflow_work="${bcbio_runs_input}/${action_name}/work"
+export bcbio_runs_final="${bcbio_runs_input}/${bcbio_exp_name}/final"
+export bcbio_workflow_config="${bcbio_runs_input}/${bcbio_exp_name}/config"
+export bcbio_workflow_work="${bcbio_runs_input}/${bcbio_exp_name}/work"
 
 ## Store current path to the scripts
 export path_to_scripts=$PWD
 export path_to_web="${path_to_scripts}/web"
-export path_downstream_analysis="${bcbio_runs_input}/${action_name}/downstreamAnalysis"
+export path_downstream_analysis="${bcbio_runs_input}/${bcbio_exp_name}/downstreamAnalysis"
 mkdir ${path_downstream_analysis}
 
 ## set variables for variant annotation and gene annotation in downstream analysis
-if [[ ${bcbio_workflow} == "variant_calling" ]]; then
-    vcf_file="${action_name}-small-var.vcf.gz"
+if [[ ${bcbio_workflow:?} == "variant_calling" ]]; then
+    vcf_file="${bcbio_exp_name}-small-var.vcf.gz"
     vcf_file_name=$(echo "${vcf_file}" | cut -f 1 -d '.')
 fi
 
-export counts_file="${bcbio_runs_final}/*${action_name}/counts/*.csv"
-export metadata_file="${bcbio_runs_final}/*${action_name}/metadata.csv"
+export counts_file="${bcbio_runs_final}/*${bcbio_exp_name}/counts/*.csv"
+export metadata_file="${bcbio_runs_final}/*${bcbio_exp_name}/metadata.csv"
 
 #####################################################################################################################################################
                                                      # URLS AND USEFUL TEMPLATES #

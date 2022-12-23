@@ -14,8 +14,8 @@ mkdir ${path_downstream_analysis}
 cd ${path_downstream_analysis}
 
 ## copy the joint VCF file with a proper name for variant annotation
-if [ -f ${bcbio_runs_final}/*_${action_name}/*-gatk-haplotype*.vcf.gz ]; then
-   cp -f  ${bcbio_runs_final}/*_${action_name}/*-gatk-haplotype*.vcf.gz ${action_name}-small-var.vcf.gz
+if [ -f ${bcbio_runs_final}/*_${bcbio_exp_name}/*-gatk-haplotype*.vcf.gz ]; then
+   cp -f  ${bcbio_runs_final}/*_${bcbio_exp_name}/*-gatk-haplotype*.vcf.gz ${bcbio_exp_name}-small-var.vcf.gz
 fi
     
 ## run small variants annotation if there is the case
