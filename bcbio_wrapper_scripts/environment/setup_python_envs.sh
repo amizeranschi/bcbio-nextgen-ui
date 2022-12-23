@@ -14,7 +14,7 @@ if [[ ! -d ${bcbio_install_path:?}/extra ]]; then
    
    ## create python2 and python3 environments
    
-   ${bcbio_install_path:?}/extra/bin/extra_mamba create --name py3 python=3.9 -y
+   ${bcbio_install_path:?}/extra/bin/extra_mamba create --name py3 python=3.10 -y
    ${bcbio_install_path:?}/extra/bin/extra_mamba create --name py2 python=2.7.18 -y
    
    echo "--- [$(date +"%F %R")] Installing packages in the Python2 environment"
