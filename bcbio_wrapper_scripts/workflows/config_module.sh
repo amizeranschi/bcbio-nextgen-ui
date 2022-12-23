@@ -21,13 +21,16 @@ if [[ ${bcbio_workflow} == "variant_calling" ]]; then
    echo " --- [$(date +"%F %R")] Configuring yaml template file for the variant calling workflow"
 
    sed -i 's/genome_build: hg38/genome_build: '${bcbio_genome}/ gatk-variant.yaml
-   sed -i 's/aligner: bwa/aligner: bowtie2/' gatk-variant.yaml
+   sed -i "/your-arbitrary-batch-name$/a\    resources:" gatk-variant.yaml
+   sed -i "/resources:$/a\      default:" gatk-variant.yaml
+   sed -i "/default:$/a\        memory: 4G" gatk-variant.yaml
+   sed -i "/memory: 4G$/a\        cores: ${bcbio_main_cores}" gatk-variant.yaml
+   sed -i "/cores: ${bcbio_main_cores}$/a\        jvm_opts: [\"-Xms750m\", \"-Xmx3500m\"]" gatk-variant.yaml
    sed -i 's/recalibrate: gatk/# recalibrate: gatk/' gatk-variant.yaml
    sed -i "/algorithm:$/a\      effects: false" gatk-variant.yaml
 
-   ## copy csv file from the location given in input to the config directory
-   
-   echo " --- [$(date +"%F %R")] Copying csv  file provided by the user for the variant calling workflow"
+   ## copy CSV file from the location given in input to the config directory
+   echo " --- [$(date +"%F %R")] Copying the CSV file provided by the user for the variant calling workflow"
    cp ${bcbio_csv_file_path} ${bcbio_runs_input}
 fi
 
