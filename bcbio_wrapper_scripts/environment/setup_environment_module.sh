@@ -74,4 +74,4 @@ echo " --- [$(date +"%F %R")] Creating analysis environment for ${bcbio_workflow
 ## Cleanup install scripts
 rm ${path_to_scripts}/bcbio_nextgen_install.py*
 rm ${path_to_scripts}/Miniconda3-*.sh*
-rm ${path_to_scripts}/Miniconda2-*.sh*
+#rm ${path_to_scripts}/Miniconda2-*.sh*
