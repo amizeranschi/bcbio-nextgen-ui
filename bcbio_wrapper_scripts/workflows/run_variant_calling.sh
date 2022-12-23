@@ -87,8 +87,8 @@ if [ ! -f ${bcbio_runs_final}/*_${action_name}/*-gatk-haplotype*.vcf.gz ]; then
     cd ${bcbio_workflow_work}
     # TODO cluster usage or not
 
-    echo " --- [$(date +"%F %R")] Running bcbio-nextgen locally, using ${bcbio_main_cores} CPU cores"
-    bcbio_nextgen.py ${bcbio_workflow_config}/${action_name}.yaml -n ${bcbio_main_cores}
+    echo " --- [$(date +"%F %R")] Running bcbio-nextgen locally, using ${bcbio_total_cores} CPU cores"
+    bcbio_nextgen.py ${bcbio_workflow_config}/${action_name}.yaml -n ${bcbio_total_cores}
 
 else
     echo " --- [$(date +"%F %R")] Skipping variant calling because the VCF file exists: "${bcbio_runs_final}/*_${action_name}/*-gatk-haplotype*.vcf.gz

@@ -12,7 +12,7 @@ if [[ ${bcbio_annotated_species} = "yes" ]]; then
     # TODO check the arguments
     echo " --- [$(date +"%F %R")] Installing genome ${bcbio_genome} in the ${bcbio_install_path}/genomes path"
     bcbio_nextgen.py upgrade -u skip --genomes ${bcbio_genome} --datatarget variation --datatarget rnaseq --datatarget smallrna \
-            --aligners bwa --aligners bowtie2 --aligners star --isolate --cores ${bcbio_total_cores}
+            --aligners bwa --aligners bowtie2 --aligners star --isolate --cores ${bcbio_total_cores} --mamba
 else
     ## install from custom genome, bcbio needs to have an already installed genome in order to install a custom genome
     echo " --- [$(date +"%F %R")] Installing Bcbio-nextgen with genome and transcriptome annotations for the sacCer3 reference"
