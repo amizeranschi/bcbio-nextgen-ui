@@ -52,12 +52,6 @@ if [[ ${bcbio_existing_version:?} = "no" ]]; then
    ## install bcbio and the genome
    bash ${path_to_scripts}/environment/install_bcbio_nextgen.sh
 
-   ## set the path with all the utils
-   echo " --- [$(date +"%F %R")] Setting the PATH variable"
-   #export PATH="${bcbio_install_path:?}/anaconda/bin:${bcbio_install_path:?}/tools/bin:${bcbio_install_path:?}/extra/envs/py3/bin:${bcbio_install_path:?}/extra/envs/py2/bin${PATH:+:${PATH}}"
-   export PATH="${bcbio_install_path:?}/extra/envs/py3/bin:${bcbio_install_path:?}/extra/envs/py2/bin${bcbio_install_path:?}/anaconda/bin:${bcbio_install_path:?}/tools/bin:${PATH:+:${PATH}}"
-   echo " --- [$(date +"%F %R")] The PATH is: ${PATH}"
-   
    bash ${path_to_scripts}/environment/install_genome.sh
 fi
 
