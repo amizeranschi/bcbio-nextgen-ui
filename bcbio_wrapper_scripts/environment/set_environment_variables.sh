@@ -5,7 +5,7 @@
 #####################################################################################################################################################
 
 if [[ ${bcbio_existing_version:?} = "yes" ]]; then
-    export bcbio_install_path="${bcbio_path_to_existing:?}"
+    export bcbio_install_path="${bcbio_install_path:?}"
 fi
 
 ## path to all workflow analyses on the system

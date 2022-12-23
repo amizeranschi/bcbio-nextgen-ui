@@ -62,7 +62,7 @@ To run an analysis it is required to set up a yaml configuration file. See e.g. 
 ### ***** CONFIGURATION OPTIONS *****
 
 * existing_version:       ----> choose whether to install bcbio-nextgen from scratch (false) or to use an existing install (true) <br />
-* path_to_existing:       ----> the usage of an older installation of bcbio requires the path to the install <br />
+* install_path:       ----> the usage of an older installation of bcbio requires the path to the install <br />
 * development_branch:     ----> choose the development branch to upgrade and install bcbio to <br />
 * total_cores:            ----> number of cores to run bcbio with <br />
 * main_cores:             ----> number of cores to run bcbio with <br />

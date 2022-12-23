@@ -1,5 +1,5 @@
 existing_version: yes
-path_to_existing: /data/share/bcbio-nextgen
+install_path: /data/share/bcbio-nextgen
 install_path: ''
 ##  TO-DO:  development_branch: isn't currently used anywhere in the scripts. Have a look at Bcbio's install command
 development_branch: skip

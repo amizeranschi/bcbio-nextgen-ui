@@ -30,7 +30,7 @@ function hideSpinner() {
 /*
 	For example: existing_version - yes 
 					hide - install_path field
-					show - path_to_existing
+					show - install_path
 */
 function displayFieldOnCheckBox(id, onTrueFields, onFalseFields) {
 	// Get the checkbox

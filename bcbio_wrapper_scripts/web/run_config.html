@@ -31,7 +31,7 @@
 				<!-- Existing Version -->
 				<div class="field">
 					<input class="switch-input" type="checkbox" id="existing_version"
-						onclick="displayFieldOnCheckBox('existing_version', ['path_to_existing_div'], ['install_path_div'])" />
+						onclick="displayFieldOnCheckBox('existing_version', ['install_path_div'])" />
 					<label for="existing_version">
 						Existing Version
 						<div class="tooltip">
@@ -47,30 +47,16 @@
 					<div class="error" id="existing_version_err"></div>
 				</div>
 
-				<!-- Path To Existing -->
-				<div id="path_to_existing_div" style="display: none;">
-					<label for="path_to_existing">Path To Existing<span class="required-asterisk"> *</span>
-						<div class="tooltip">
-							<i class="fa fa-question-circle"></i>
-							<span class="tooltiptext">The usage of an older installation of <b>Bcbio-nextgen</b> requires the
-								path
-								to the install</span>
-						</div>
-					</label>
-					<input type="text" id="path_to_existing" />
-					<div class="error" id="path_to_existing_err"></div>
-				</div>
-
-				<!-- Installation Path -->
-				<div id="install_path_div">
-					<h4>Installation Path<span class="required-asterisk"> *</span>
+				<!-- Bcbio Installation Path -->
+				<div id="install_path_div" style="display: none;">
+					<label for="install_path">Path To Bcbio Install<span class="required-asterisk"> *</span>
 						<div class="tooltip">
 							<i class="fa fa-question-circle"></i>
 							<span class="tooltiptext">For the packages installed, paths that exceed 80 characters can
 								not be
 								processed</span>
 						</div>
-					</h4>
+					</label>
 					<input type="text" id="install_path" />
 					<div class="error" id="install_path_err"></div>
 				</div>
