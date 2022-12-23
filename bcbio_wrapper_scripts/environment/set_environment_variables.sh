@@ -12,9 +12,12 @@ fi
 export bcbio_runs="${bcbio_path_to_run_dir}"
 # path to the current workflow directory
 export workflow_name="workflow_${bcbio_workflow}"
-export bcbio_workflow_dir="${bcbio_runs}/${workflow_name}"
+# extract a label for the analysis from the CSV file name
+export bcbio_exp_name=$(basename ${csv_file_path%.csv})
+# path to the current workflow directory
+export bcbio_workflow_dir="${bcbio_runs}/${bcbio_exp_name}"
 # path to the input files and anlysis directory
-export bcbio_runs_input="${bcbio_runs}/${workflow_name}/input"
+export bcbio_runs_input="${bcbio_runs}/${bcbio_exp_name}/input"
 # extraction of the name of the csv file to keep for the analysis flow name
 export action_name=$(echo ${bcbio_csv_file_path##*/} | cut -f 1 -d '.')
 
