@@ -8,22 +8,22 @@ if [[ ${bcbio_existing_version} = "yes" ]]; then
     export bcbio_install_path="${bcbio_path_to_existing}"
 fi
 
-# path to all workflow analyses on the system
+## path to all workflow analyses on the system
 export bcbio_runs="${bcbio_path_to_run_dir}"
-# path to the current workflow directory
+## path to the current workflow directory
 export workflow_name="workflow_${bcbio_workflow}"
-# extract a label for the analysis from the CSV file name
+## extract a label for the analysis from the CSV file name
 #export bcbio_exp_name=$(basename ${csv_file_path%.csv})
 export bcbio_exp_name=$(basename "${csv_file_path}" | cut -f 1 -d '.')   ## this allows for variable extensions to be eliminated, not only ".csv"
-# path to the current workflow directory
+## path to the current workflow directory
 export bcbio_workflow_dir="${bcbio_runs}/${bcbio_exp_name}"
-# path to the input files and anlysis directory
+## path to the input files and anlysis directory
 export bcbio_runs_input="${bcbio_runs}/${bcbio_exp_name}/input"
-# extraction of the name of the csv file to keep for the analysis flow name
+## extraction of the name of the csv file to keep for the analysis flow name
 export action_name=$(echo ${bcbio_csv_file_path##*/} | cut -f 1 -d '.')
 
 
-# create the directories
+## create the directories
 if [ ! -d ${bcbio_runs} ]; then
     mkdir ${bcbio_runs}
 fi
@@ -35,12 +35,12 @@ if [ ! -d ${bcbio_runs_input} ]; then
 fi
 
 
-# directory where bcbio genome is stored
-# seq_dir_genome="${bcbio_install_path}/genomes/${bcbio_species}/${bcbio_genome}/seq"
+## directory where bcbio genome is stored
+## seq_dir_genome="${bcbio_install_path}/genomes/${bcbio_species}/${bcbio_genome}/seq"
 export genome_dir="${bcbio_install_path}/genomes/${bcbio_species}/${bcbio_genome}"
 export gtf_file_location=" ${genome_dir}/rnaseq/ref-transcripts.gtf"
 
-# directories for the analysis directory tree of bcbio
+## directories for the analysis directory tree of bcbio
 export bcbio_runs_final="${bcbio_runs_input}/${action_name}/final"
 export bcbio_workflow_config="${bcbio_runs_input}/${action_name}/config"
 export bcbio_workflow_work="${bcbio_runs_input}/${action_name}/work"
@@ -51,7 +51,7 @@ export path_to_web="${path_to_scripts}/web"
 export path_downstream_analysis="${bcbio_runs_input}/${action_name}/downstreamAnalysis"
 mkdir ${path_downstream_analysis}
 
-# set variables for variant annotation and gene annotation in downstream analysis
+## set variables for variant annotation and gene annotation in downstream analysis
 if [[ ${bcbio_workflow} == "variant_calling" ]]; then
     vcf_file="${action_name}-small-var.vcf.gz"
     vcf_file_name=$(echo "${vcf_file}" | cut -f 1 -d '.')
@@ -74,16 +74,16 @@ export miniconda3="https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x
 #export miniconda2="https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh"
 export install_script_bcbio="https://raw.githubusercontent.com/bcbio/bcbio-nextgen/master/scripts/bcbio_nextgen_install.py"
 
-#  GET UTILITARIES AND SCRIPTS
+##  GET UTILITIES AND SCRIPTS
 ## check if wget is available. if not, use curl instead
 echo " --- [$(date +"%F %R")] Downloading utilitaries for bcbio_nexgen and miniconda installation"
 
 if [ -x "$(command -v wget)" ]; then
     wget ${miniconda3}
-#    wget ${miniconda2}
+    #wget ${miniconda2}
     wget ${install_script_bcbio}
 else
     curl -L -C - -O ${miniconda3}
-#    curl -L -C - -O ${miniconda2}
+    #curl -L -C - -O ${miniconda2}
     curl -L -C - -O ${install_script_bcbio}
 fi
