@@ -13,7 +13,8 @@ export bcbio_runs="${bcbio_path_to_run_dir}"
 # path to the current workflow directory
 export workflow_name="workflow_${bcbio_workflow}"
 # extract a label for the analysis from the CSV file name
-export bcbio_exp_name=$(basename ${csv_file_path%.csv})
+#export bcbio_exp_name=$(basename ${csv_file_path%.csv})
+export bcbio_exp_name=$(basename "${csv_file_path}" | cut -f 1 -d '.')   ## this allows for variable extensions to be eliminated, not only ".csv"
 # path to the current workflow directory
 export bcbio_workflow_dir="${bcbio_runs}/${bcbio_exp_name}"
 # path to the input files and anlysis directory
