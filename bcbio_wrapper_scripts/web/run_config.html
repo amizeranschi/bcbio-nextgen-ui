@@ -9,7 +9,7 @@
 <body style="overflow-x: hidden;">
 	<div class="testbox">
 		<form id="form">
-			<h1>BCBIO Generate / Load configuration file</h1>
+			<h1>Bcbio-nextgen Generate / Load configuration file</h1>
 			<div class="description">
 				<span>
 					<!-- <p>
@@ -26,17 +26,17 @@
 			</div>
 			<div class="container-box">
 
-				<h3 class="sub-title">BCBIO Installation Details</h3>
+				<h3 class="sub-title">Bcbio-nextgen Installation Details</h3>
 
 				<!-- Existing Version -->
 				<div class="field">
 					<input class="switch-input" type="checkbox" id="existing_version"
-						onclick="displayFieldOnCheckBox('existing_version', ['path_to_existing_div'], ['install_path_div'])" />
+						onclick="displayFieldOnCheckBox('existing_version', ['install_path_div'])" />
 					<label for="existing_version">
 						Existing Version
 						<div class="tooltip">
 							<i class="fa fa-question-circle"></i>
-							<span class="tooltiptext">Choose to install <b>BCBIO</b> from scratch or from an existing
+							<span class="tooltiptext">Choose to install <b>Bcbio-nextgen</b> from scratch or from an existing
 								install</span>
 						</div>
 					</label>
@@ -47,30 +47,16 @@
 					<div class="error" id="existing_version_err"></div>
 				</div>
 
-				<!-- Path To Existing -->
-				<div id="path_to_existing_div" style="display: none;">
-					<label for="path_to_existing">Path To Existing<span class="required-asterisk"> *</span>
-						<div class="tooltip">
-							<i class="fa fa-question-circle"></i>
-							<span class="tooltiptext">The usage of an older installation of <b>BCBIO</b> requires the
-								path
-								to the install</span>
-						</div>
-					</label>
-					<input type="text" id="path_to_existing" />
-					<div class="error" id="path_to_existing_err"></div>
-				</div>
-
-				<!-- Installation Path -->
-				<div id="install_path_div">
-					<h4>Installation Path<span class="required-asterisk"> *</span>
+				<!-- Bcbio Installation Path -->
+				<div id="install_path_div" style="display: none;">
+					<label for="install_path">Path To Bcbio Install<span class="required-asterisk"> *</span>
 						<div class="tooltip">
 							<i class="fa fa-question-circle"></i>
 							<span class="tooltiptext">For the packages installed, paths that exceed 80 characters can
 								not be
 								processed</span>
 						</div>
-					</h4>
+					</label>
 					<input type="text" id="install_path" />
 					<div class="error" id="install_path_err"></div>
 				</div>
@@ -80,7 +66,7 @@
 					Development Branch<span class="required-asterisk"> *</span>
 					<div class="tooltip">
 						<i class="fa fa-question-circle"></i>
-						<span class="tooltiptext">Choose the development branch to upgrade and install <b>BCBIO</b>
+						<span class="tooltiptext">Choose the development branch to upgrade and install <b>Bcbio-nextgen</b>
 							to</span>
 					</div>
 				</h4>
@@ -91,7 +77,7 @@
 				<div class="error" id="development_branch_err"></div>
 
 				<!-- Number of cores -->
-				<h4>Number of cores to run <b>BCBIO</b> with<span class="required-asterisk"> *</span></h4>
+				<h4>Total vs. single number of cores to run <b>Bcbio-nextgen</b> jobs<span class="required-asterisk"> *</span></h4>
 				<div class="title-block">
 					<div style="width: 100%;">
 						<input class="" type="number" id="total_cores" placeholder="Total Cores" />
@@ -117,7 +103,7 @@
 						<div class="tooltip">
 							<i class="fa fa-question-circle"></i>
 							<span class="tooltiptext">choose if the analysis will run on an existing genome in
-								<b>BCBIO</b> or a custom genome</span>
+								<b>Bcbio-nextgen</b> or a custom genome</span>
 						</div>
 					</label>
 					<label for="annotated_species" class="switch">

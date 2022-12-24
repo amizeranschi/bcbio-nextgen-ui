@@ -40,7 +40,7 @@ source environment/set_environment_variables.sh
 
 bash environment/setup_environment_module.sh
 
-export PATH="${bcbio_install_path}/extra/envs/py3/bin:${bcbio_install_path}/extra/envs/py2/bin:${bcbio_install_path}/extra/bin:${bcbio_install_path}/anaconda/bin:${bcbio_install_path}/tools/bin:${PATH:+:${PATH}}"
+export PATH="${bcbio_install_path:?}/extra/envs/py3/bin:${bcbio_install_path:?}/extra/envs/py2/bin:${bcbio_install_path:?}/extra/bin:${bcbio_install_path:?}/anaconda/bin:${bcbio_install_path:?}/tools/bin:${PATH:+:${PATH}}"
 echo " --- [$(date +"%F %R")] The PATH IS: ${PATH}"
 
 ##########################################################################################################################################################################################
@@ -56,15 +56,15 @@ bash ${path_to_scripts}/workflows/samples_module.sh
 bash ${path_to_scripts}/workflows/config_module.sh 
 
 ## RUN WORKFLOW
-if [[ ${bcbio_workflow} == "variant_calling" ]]; then
+if [[ ${bcbio_workflow:?} == "variant_calling" ]]; then
    bash  ${path_to_scripts}/workflows/run_variant_calling.sh
 fi
 
-if [[ ${bcbio_workflow} == "atac_seq" ]]; then
+if [[ ${bcbio_workflow:?} == "atac_seq" ]]; then
    bash  ${path_to_scripts}/workflows/run_atac_seq.sh
 fi
 
-if [[ ${bcbio_workflow} == "bulk_rna_seq" ]]; then
+if [[ ${bcbio_workflow:?} == "bulk_rna_seq" ]]; then
     bash  ${path_to_scripts}/workflows/run_bulk_rna_seq.sh
 fi
 
@@ -73,28 +73,28 @@ fi
 ##########################################################################################################################################################################################
 
 ## Run downstream analysis for variant calling: variant annotation and gene annotation
-if [[ ${bcbio_workflow} == "variant_calling" ]]; then
+if [[ ${bcbio_workflow:?} == "variant_calling" ]]; then
     echo " --- [$(date +"%F %R")] Starting downstream analysis for Variant Calling workflow, see output in: ${path_downstream_analysis}"
     bash ${path_to_scripts}/downstreamAnalysis/variant_annotation.sh
     # perform gene annotation on the results from variant annotation
     Rscript --vanilla ${path_to_scripts}/downstreamAnalysis/gene_annotation_variant_calling.R ${path_downstream_analysis} ${path_downstream_analysis}/${vcf_file_name}-vep.table ${bcbio_vep_species} ${gtf_file_location} ${path_to_scripts}
-    python3 create_json_downstream_page.py ${bcbio_workflow} ${path_downstream_analysis}
+    python3 create_json_downstream_page.py ${bcbio_workflow:?} ${path_downstream_analysis}
 fi
 
 ## Run downstream analysis for atac_seq
-if [[ ${bcbio_workflow} == "atac_seq" ]]; then
+if [[ ${bcbio_workflow:?} == "atac_seq" ]]; then
     # to do add path to peaks file
     echo " --- [$(date +"%F %R")] Starting downstream analysis for ATAC-seq/ChIP-seq workflow, see output in: ${path_downstream_analysis}"
     Rscript --vanilla ${path_to_scripts}/downstreamAnalysis/chIP_seq-downstreamAnalysis.R ${path_downstream_analysis} ${bcbio_vep_species} ${gtf_file_location} ${path_to_scripts}
     ## below is not yet implemented for atac_seq
-    #python3 create_json_downstream_page.py ${bcbio_workflow} ${path_downstream_analysis}
+    #python3 create_json_downstream_page.py ${bcbio_workflow:?} ${path_downstream_analysis}
 fi
 
 ## Run downstream analysis for bulk_rna_seq
-if [[ ${bcbio_workflow} == "bulk_rna_seq" ]]; then
+if [[ ${bcbio_workflow:?} == "bulk_rna_seq" ]]; then
     echo " --- [$(date +"%F %R")] Starting downstream analysis for Bulk RNA-seq workflow, see output in: ${path_downstream_analysis}"
     Rscript --vanilla ${path_to_scripts}/downstreamAnalysis/bulk_rna_seq-downstream_analysis.R ${path_downstream_analysis} ${counts_file} ${metadata_file} ${bcbio_vep_species} ${gtf_file_location} ${path_to_scripts}
-    python3 create_json_downstream_page.py ${bcbio_workflow} ${path_downstream_analysis}
+    python3 create_json_downstream_page.py ${bcbio_workflow:?} ${path_downstream_analysis}
 fi
 
 #mv ${path_downstream_analysis}/*.txt ${dowstreamResultsWorkflow}

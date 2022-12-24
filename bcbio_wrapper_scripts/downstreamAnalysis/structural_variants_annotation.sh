@@ -35,10 +35,10 @@ if [ `ls -1 ${bcbio_runs_final}/*/*-manta.vcf.gz 2>/dev/null | wc -l ` -gt 0 ]; 
     ## merge the VCF files with bcftools (the VCF files must be gzipped and indexed):
     file_size=$(wc -c < vcf_files.list)
     if (( "$file_size" > "0" )); then
-        bcftools merge -Ov --file-list vcf_files.list > ${action_name}-struct-var.vcf
+        bcftools merge -Ov --file-list vcf_files.list > ${bcbio_exp_name}-struct-var.vcf
         ## reorder the samples according to the sample-order file
-        bcftools view -Ov --force-samples -S ${bcbio_runs_input}/${action_name}/${action_name}-samples.txt ${action_name}-struct-var.vcf > ${action_name}-struct-var-sorted.vcf
-        mv ${action_name}-struct-var-sorted.vcf ${action_name}-struct-var.vcf
+        bcftools view -Ov --force-samples -S ${bcbio_runs_input}/${bcbio_exp_name}/${bcbio_exp_name}-samples.txt ${bcbio_exp_name}-struct-var.vcf > ${bcbio_exp_name}-struct-var-sorted.vcf
+        mv ${bcbio_exp_name}-struct-var-sorted.vcf ${bcbio_exp_name}-struct-var.vcf
     fi
         
     ## remove the single-sample VCF files and indexes
@@ -58,20 +58,20 @@ done
 
 ## process structural variants if these have been (successfully) called:
 ## check the file size (in bytes) of the file testingVC-struct-var.vcf
-if [ -f "${action_name}-struct-var.vcf" ]; then
-    file_size=$(wc -c < ${action_name}-struct-var.vcf)
+if [ -f "${bcbio_exp_name}-struct-var.vcf" ]; then
+    file_size=$(wc -c < ${bcbio_exp_name}-struct-var.vcf)
 else
     file_size=0
 fi
 
 if (( "$file_size" > "0" )); then
-    vcf_file=${action_name}-struct-var.vcf
+    vcf_file=${bcbio_exp_name}-struct-var.vcf
     ## extract the file name without the extension
     vcf_file_name=$(echo "${vcf_file}" | cut -f 1 -d '.')
     ## filter out variants that do not PASS the filters
     bcftools view -Ov -f .,PASS ${vcf_file_name}.vcf > ${vcf_file_name}-fil.vcf
     mv ${vcf_file_name}-fil.vcf ${vcf_file_name}.vcf
-    bcftools view -Ov --force-samples -S ${bcbio_runs_input}/${action_name}/${action_name}-samples.txt ${vcf_file_name}.vcf > ${vcf_file_name}-ordered.vcf
+    bcftools view -Ov --force-samples -S ${bcbio_runs_input}/${bcbio_exp_name}/${bcbio_exp_name}-samples.txt ${vcf_file_name}.vcf > ${vcf_file_name}-ordered.vcf
     rm -f ${vcf_file_name}.vcf
     mv ${vcf_file_name}-ordered.vcf ${vcf_file_name}.vcf
     ## create stats for each VCF file
@@ -85,7 +85,7 @@ if (( "$file_size" > "0" )); then
         # vep --fork 4 --tab --pick --no_stats --biotype --check_existing --distance 1000000 --symbol --species ${bcbio_vep_species} --cache --dir_cache ${genome_dir}/vep --input_file ${vcf_file_name}.vcf --output_file ${vcf_file_name}-vep.table --force_overwrite --offline --max_sv_size 1000000000
         
         echo " --- [$(date +"%F %R")] Running VEP with the official cache for the species: ${bcbio_vep_species}, version ${bcbio_ensembl_ver}"
-        ${bcbio_install_path}/extra/envs/py3/bin/vep --fork 4 --tab --pick --biotype --check_existing --distance 1000000 --symbol --species $(echo "$bcbio_vep_species" | awk '{print tolower($0)}') --cache --dir_cache ${genome_dir}/vep --input_file ${vcf_file_name}.vcf --output_file ${vcf_file_name}-vep.table --force_overwrite --stats_file ${vcf_file_name}-vep.stats --stats_text --offline --max_sv_size 1000000000
+        ${bcbio_install_path:?}/extra/envs/py3/bin/vep --fork 4 --tab --pick --biotype --check_existing --distance 1000000 --symbol --species $(echo "$bcbio_vep_species" | awk '{print tolower($0)}') --cache --dir_cache ${genome_dir}/vep --input_file ${vcf_file_name}.vcf --output_file ${vcf_file_name}-vep.table --force_overwrite --stats_file ${vcf_file_name}-vep.stats --stats_text --offline --max_sv_size 1000000000
         echo " --- [$(date +"%F %R")] Variant consequences were written to the file: ${vcf_file_name}-vep.table"
         
     else
@@ -108,17 +108,17 @@ if (( "$file_size" > "0" )); then
         ## remove BND variants because VEP can't handle them (as of June 2020): https://github.com/Ensembl/ensembl-vep/issues/782#issuecomment-644031020
         sed "/SVTYPE=BND/d" ${vcf_file_name}.vcf > ${vcf_file_name}-no-BND.vcf
         ## run VEP with custom annotations from the GTF file
-        # vep --fork 4 --vcf --biotype --check_existing --distance 1000000 --symbol --fasta ${genome_dir}/seq/${bcbio_genome}.fa --custom ${genome_dir}/rnaseq/ref-transcripts.gtf,ref-transcripts,gtf,overlap,0 --input_file ${vcf_file_name}-no-BND.vcf --output_file ${vcf_file_name}-no-BND-vep.vcf --force_overwrite --stats_file ${vcf_file_name}-no-BND-vep.stats --stats_text --offline --max_sv_size 1000000000
+        # vep --fork 4 --vcf --biotype --check_existing --distance 1000000 --symbol --fasta ${genome_dir}/seq/${bcbio_genome:?}.fa --custom ${genome_dir}/rnaseq/ref-transcripts.gtf,ref-transcripts,gtf,overlap,0 --input_file ${vcf_file_name}-no-BND.vcf --output_file ${vcf_file_name}-no-BND-vep.vcf --force_overwrite --stats_file ${vcf_file_name}-no-BND-vep.stats --stats_text --offline --max_sv_size 1000000000
         ## run VEP again and output a tab-separated file with only the most severe consequence per variant, skipping stats generation this time
-        # vep --fork 4 --tab --pick --no_stats --biotype --check_existing --distance 1000000 --symbol --fasta ${genome_dir}/seq/${bcbio_genome}.fa --custom ${genome_dir}/rnaseq/ref-transcripts.gtf,ref-transcripts,gtf,overlap,0 --input_file ${vcf_file_name}-no-BND.vcf --output_file ${vcf_file_name}-no-BND-vep.table --force_overwrite --offline --max_sv_size 1000000000
+        # vep --fork 4 --tab --pick --no_stats --biotype --check_existing --distance 1000000 --symbol --fasta ${genome_dir}/seq/${bcbio_genome:?}.fa --custom ${genome_dir}/rnaseq/ref-transcripts.gtf,ref-transcripts,gtf,overlap,0 --input_file ${vcf_file_name}-no-BND.vcf --output_file ${vcf_file_name}-no-BND-vep.table --force_overwrite --offline --max_sv_size 1000000000
         
         echo " --- [$(date +"%F %R")] Running VEP with custom annotations from the GTF file: ${genome_dir}/rnaseq/ref-transcripts.gtf"
-        ${bcbio_install_path}/extra/envs/py3/bin/vep --fork 4 --tab --pick --biotype --check_existing --distance 1000000 --symbol --fasta ${genome_dir}/seq/${bcbio_genome}.fa --custom ${genome_dir}/rnaseq/ref-transcripts.gtf,ref-transcripts,gtf,overlap,0 --input_file ${vcf_file_name}-no-BND.vcf --output_file ${vcf_file_name}-vep.table --force_overwrite --stats_file ${vcf_file_name}-vep.stats --stats_text --offline --max_sv_size 1000000000
+        ${bcbio_install_path:?}/extra/envs/py3/bin/vep --fork 4 --tab --pick --biotype --check_existing --distance 1000000 --symbol --fasta ${genome_dir}/seq/${bcbio_genome:?}.fa --custom ${genome_dir}/rnaseq/ref-transcripts.gtf,ref-transcripts,gtf,overlap,0 --input_file ${vcf_file_name}-no-BND.vcf --output_file ${vcf_file_name}-vep.table --force_overwrite --stats_file ${vcf_file_name}-vep.stats --stats_text --offline --max_sv_size 1000000000
         echo " --- [$(date +"%F %R")] Variant consequences were written to the file: ${vcf_file_name}-vep.table"
     fi
     ## extract relevant columns (GT and PR,SR) from a VCF file into tab-separated files
-    gatk VariantsToTable -R ${genome_dir}/seq/${bcbio_genome}.fa -V ${vcf_file_name}.vcf -F CHROM -F POS -F ID -F REF -F ALT -GF GT -O ${vcf_file_name}-GT.table
+    gatk VariantsToTable -R ${genome_dir}/seq/${bcbio_genome:?}.fa -V ${vcf_file_name}.vcf -F CHROM -F POS -F ID -F REF -F ALT -GF GT -O ${vcf_file_name}-GT.table
 else
     echo " --- [$(date +"%F %R")] Structural variants have not been called, or there was an error while calling them."
-    rm -f ${action_name}-struct-var.vcf
+    rm -f ${bcbio_exp_name}-struct-var.vcf
 fi
