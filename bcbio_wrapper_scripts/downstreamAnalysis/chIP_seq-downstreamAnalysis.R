@@ -40,8 +40,24 @@ str(peaks)
 ## create a coverage plot using the R package 
 ChIPseeker::covplot(peaks, weightCol="V5")
 
+# create a custom Transcript database based on the GTF file from Bcbio's genome
+# create a file name for the TxDB file, which is an SQLite DB, by appending the
+# extension ".sqlite" to gtf_location
+txdb_file = paste0(gtf_location, ".sqlite")
+
+# use gtf_location to create an SQLite file called txdb_file, if the latter not
+# exist already
+if(!file.exists(txdb_file))
+{
+  txdb_gtf = GenomicFeatures::makeTxDbFromGFF(gtf_location, organism = my_species)
+  AnnotationDbi::saveDb(txdb_gtf, txdb_file)
+}
+
+# create a TxDB object from txdb_file that will later be used as a instance
+my_txdb = loadDb(txdb_file)
+
 ## annotate peaks
-peakAnno = ChIPseeker::annotatePeak(peaks, tssRegion = c(-3000, 3000), TxDb = txdb)
+peakAnno = ChIPseeker::annotatePeak(peaks, tssRegion = c(-3000, 3000), TxDb = my_txdb)
 peakAnno
 
 ## visualize genomic annotations of peaks
