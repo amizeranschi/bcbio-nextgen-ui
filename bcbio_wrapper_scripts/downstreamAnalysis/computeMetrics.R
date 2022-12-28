@@ -83,11 +83,9 @@ makeReadable = function(geneIDs, orig_keytype)
   {
     return(character(0))
   }
-  ## convert ORFs to GENENAMEs, for yeast
-  # genenames = lapply(geneIDs, function(x) { AnnotationDbi::mapIds(org.Sc.sgd.db, keys = unlist(strsplit(x, split = "/")), keytype="ORF", column = "GENENAME", multiVals = "first") })
   
   ## convert ORFs or ENTREZIDs to COMMON gene names
-  genenames = lapply(geneIDs, function(x) { AnnotationDbi::mapIds(orgdb_species, keys = unlist(strsplit(x, split = "/")), keytype = orig_keytype, column = "COMMON", multiVals = "first") })
+  genenames = lapply(geneIDs, function(x) { suppressMessages( AnnotationDbi::mapIds(orgdb_species, keys = unlist(strsplit(x, split = "/")), keytype = orig_keytype, column = "COMMON", multiVals = "first") ) })
   
   ## replace NA values with original SYMBOL
   for(someiter in 1:length(genenames))
