@@ -2,7 +2,7 @@ existing_version: yes
 install_path: /home/ubuntu/bcbio-nextgen
 ##  TO-DO:  the variables development_branch and bcbio_development_branch aren't currently used anywhere in the scripts. Have a look at Bcbio's install command
 development_branch: skip
-total_cores: 128
+total_cores: 64
 main_cores: 32
 annotated_species: yes
 genome_fasta: ''
