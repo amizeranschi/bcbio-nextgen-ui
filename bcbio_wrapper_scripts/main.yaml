@@ -1,5 +1,5 @@
 existing_version: yes
-install_path: /data/share/bcbio-nextgen
+install_path: /home/ubuntu/bcbio-nextgen
 ##  TO-DO:  the variables development_branch and bcbio_development_branch aren't currently used anywhere in the scripts. Have a look at Bcbio's install command
 development_branch: skip
 total_cores: 128
@@ -15,8 +15,8 @@ ensembl_ver: 108
 workflow: variant_calling
 exclude_lcr: no
 download_samples: yes
-path_to_run_dir: /data/share/bcbio-runs
-path_to_samples_on_sys: /data/share/bcbio-runs/variant-calling-yeast/input
+path_to_run_dir: /home/ubuntu/bcbio-runs
+path_to_samples_on_sys: /home/ubuntu/bcbio-runs/variant-calling-yeast/input
 # samples: SRR9041539 SRR9041540 SRR9041541 SRR9041542 SRR9041543 SRR9041544
 # samples_fastq: S3-R1 S3-R2 P1-R1 P1-R2 S1-R1 S1-R2 S2-R1 S2-R2 P2-R1 P2-R2 P3-R1 P3-R2
 samples: SRR9041540 SRR9041541
@@ -24,4 +24,4 @@ samples_fastq: P1-R1 P1-R2 S1-R1 S1-R2
 # samples: SRR5482575 SRR5482576 SRR5482577 SRR5482578 SRR5482579 SRR5482580
 # samples_fastq: AE1-R1 AE1-R2 AE2-R1 AE2-R2 AE3-R1 AE3-R2 RT1-R1 RT1-R2 RT2-R1 RT2-R2 RT3-R1 RT3-R2
 # samples_fastq: 500-I-Rep1 500-I-Rep2 500-I-Rep3
-csv_file_path: /data/share/bcbio-nextgen-ui/variant-calling.csv
+csv_file_path: /home/ubuntu/bcbio-nextgen-ui/variant-calling.csv
