@@ -25,7 +25,7 @@ if [[ ! -d ${bcbio_install_path:?}/extra ]]; then
    echo "--- [$(date +"%F %R")] Installing packages in the Python3 environment"
    
    ${bcbio_install_path:?}/extra/bin/extra_mamba install --name py3 --yes -c conda-forge -c bioconda kraken2 krakenuniq blast spades masurca quast \
-   flye shasta medaka repeatmodeler repeatmasker gxx_linux-64 wget git bedops vcftools pyyaml perl-yaml tectonic gnuplot \
+   flye shasta repeatmodeler repeatmasker gxx_linux-64 wget git bedops vcftools pyyaml perl-yaml tectonic gnuplot \
    perl-encode-locale "sra-tools>=2.11" perl-net-ssleay entrez-direct tassel beagle gcta "gdal>=2.0.1" plink "bcftools>=1.15" haploview \
    "ensembl-vep>=105" "perl-bioperl>=1.7.2" "r-base>=4.2" r-essentials r-xml r-knitr r-markdown r-rmarkdown r-shiny r-rcpp r-devtools r-reticulate \
    perl-bio-tools-run-alignment-tcoffee r-terra r-rgdal r-ragg r-ade4 r-aghmatrix bioconductor-ahmeshdbs bioconductor-annotationdbi bioconductor-annotationhub r-bedr \
