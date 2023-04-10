@@ -65,7 +65,7 @@ if [[ ${bcbio_annotated_species} = "yes" ]]; then
       ## Configure VEP --- download cached data for the relevant species
       ${bcbio_install_path:?}/extra/envs/py3/bin/vep_install -s ${bcbio_vep_species} --NO_HTSLIB -a c -c \
          ${bcbio_install_path:?}/genomes/${bcbio_species:?}/${bcbio_genome:?}/vep \
-         --NO_UPDATE --VERSION ${bcbio_ensembl_ver} --ASSEMBLY ${bcbio_vep_assembly}
+         --NO_UPDATE --CACHE_VERSION ${bcbio_ensembl_ver} --ASSEMBLY ${bcbio_vep_assembly}
    fi
 fi
 
