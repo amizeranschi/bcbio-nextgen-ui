@@ -29,12 +29,12 @@ installed = lapply(packages, library, character.only = TRUE)
 ## if needed, install the argyle package from Github sources
 if(!require(argyle))
 {
-  if(!require(devtools)){install.packages("devtools")}
-  library(devtools)
+  if(!require(remotes)){install.packages("remotes")}
+  library(remotes)
   
   ## allow R to look for pacakges in both CRAN and Bioconductor
   setRepositories(ind = 1:2)
-  devtools::install_github("andrewparkermorgan/argyle", force = T, upgrade = F)
+  remotes::install_github("andrewparkermorgan/argyle", force = T, upgrade = F)
   library(argyle)
 }
 
@@ -42,12 +42,12 @@ if(!require(argyle))
 ## if needed, install the IntAssoPlot package from Github sources
 if(!require(IntAssoPlot))
 {
-  if(!require(devtools)){install.packages("devtools")}
-  library(devtools)
+  if(!require(remotes)){install.packages("remotes")}
+  library(remotes)
   
   ## allow R to look for pacakges in both CRAN and Bioconductor
   setRepositories(ind = 1:2)
-  devtools::install_github("whweve/IntAssoPlot", force = T, upgrade = F)
+  remotes::install_github("whweve/IntAssoPlot", force = T, upgrade = F)
   library(IntAssoPlot)
 }
 
@@ -55,12 +55,12 @@ if(!require(IntAssoPlot))
 ## if needed, install the DRP package from Github sources
 if(!require(DRP))
 {
-  if(!require(devtools)){install.packages("devtools")}
-  library(devtools)
+  if(!require(remotes)){install.packages("remotes")}
+  library(remotes)
   
   ## allow R to look for pacakges in both CRAN and Bioconductor
   setRepositories(ind = 1:2)
-  devtools::install_github("camult/DRP", force = T, upgrade = F)
+  remotes::install_github("camult/DRP", force = T, upgrade = F)
   library(DRP)
 }
 
@@ -68,12 +68,12 @@ if(!require(DRP))
 ## if needed, install the lassosum package from Github sources
 if(!require(lassosum))
 {
-  if(!require(devtools)){install.packages("devtools")}
-  library(devtools)
+  if(!require(remotes)){install.packages("remotes")}
+  library(remotes)
   
   ## allow R to look for pacakges in both CRAN and Bioconductor
   setRepositories(ind = 1:2)
-  devtools::install_github("tshmak/lassosum", force = T, upgrade = F)
+  remotes::install_github("tshmak/lassosum", force = T, upgrade = F)
   library(lassosum)
 }
 
@@ -81,12 +81,12 @@ if(!require(lassosum))
 ## if needed, install the bigsnpr package from Github sources
 if(!require(bigsnpr))
 {
-  if(!require(devtools)){install.packages("devtools")}
-  library(devtools)
+  if(!require(remotes)){install.packages("remotes")}
+  library(remotes)
   
   ## allow R to look for pacakges in both CRAN and Bioconductor
   setRepositories(ind = 1:2)
-  devtools::install_github("privefl/bigsnpr", force = T, upgrade = F)
+  remotes::install_github("privefl/bigsnpr", force = T, upgrade = F)
   library(bigsnpr)
 }
 
@@ -94,13 +94,13 @@ if(!require(bigsnpr))
 ## if needed, install the synbreed package from Github sources
 if(!require(synbreed))
 {
-  if(!require(devtools)){install.packages("devtools")}
-  library(devtools)
+  if(!require(remotes)){install.packages("remotes")}
+  library(remotes)
   
   ## allow R to look for pacakges in both CRAN and Bioconductor
   setRepositories(ind = 1:2)
-  devtools::install_url("https://cran.r-project.org/src/contrib/Archive/regress/regress_1.3-15.tar.gz")
-  devtools::install_url("https://cran.r-project.org/src/contrib/Archive/synbreed/synbreed_0.12-9.tar.gz")
+  remotes::install_url("https://cran.r-project.org/src/contrib/Archive/regress/regress_1.3-15.tar.gz")
+  remotes::install_url("https://cran.r-project.org/src/contrib/Archive/synbreed/synbreed_0.12-9.tar.gz")
   library(synbreed)
 }
 
@@ -108,25 +108,27 @@ if(!require(synbreed))
 ## if needed, install the synbreedData package from Github sources
 if(!require(synbreedData))
 {
-  if(!require(devtools)){install.packages("devtools")}
-  library(devtools)
+  if(!require(remotes)){install.packages("remotes")}
+  library(remotes)
   
   ## allow R to look for pacakges in both CRAN and Bioconductor
   setRepositories(ind = 1:2)
-  devtools::install_url("https://cran.r-project.org/src/contrib/Archive/synbreedData/synbreedData_1.5.tar.gz")
+  remotes::install_url("https://cran.r-project.org/src/contrib/Archive/synbreedData/synbreedData_1.5.tar.gz")
   library(synbreedData)
 }
 
 
-## if needed, install the GAPIT3 package from Github sources
-if(!require(GAPIT3))
-{
-  if(!require(devtools)){install.packages("devtools")}
-  library(devtools)
+## if needed, install the DRP package from Github sources
+if(!require(GAPIT)){
+  if(!require(remotes)){install.packages("remotes")}
+  library(remotes)
   
   ## allow R to look for pacakges in both CRAN and Bioconductor
   setRepositories(ind = 1:2)
-  devtools::install_github("jiabowang/GAPIT3", force = T, upgrade = F)
-  library(GAPIT3)
+  if(!require(LDheatmap)){
+    install.packages("https://cran.r-project.org/src/contrib/Archive/LDheatmap/LDheatmap_1.0-6.tar.gz")
+  }
+  remotes::install_github("jiabowang/GAPIT@GAPIT3.4", upgrade = "never")
+  library(GAPIT)
 }
 
